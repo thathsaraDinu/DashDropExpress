@@ -1,6 +1,7 @@
 import "./AppMain.css";
 import MainMenu from "./MainMenu";
 import "./index.css";
+import "./components/DeliveryManagement/Appdelivery.css"
 
 function App() {
   const scrollToSection = () => {

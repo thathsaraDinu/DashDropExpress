@@ -5,6 +5,7 @@ const cors = require("cors");
 const port = 3001;
 const host = "localhost";
 const router = require("./CustomerManagement/router");
+const router2 = require("./DeliveryManagement/router")
 
 app.use(express.json());
 app.use(cors());
@@ -28,3 +29,4 @@ const server = app.listen(port, host, () => {
 });
 
 app.use("/api", router);
+app.use("/api", router2);

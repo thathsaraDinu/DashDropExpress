@@ -7,9 +7,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Users from "./components/CustomerManagement/Users";
 import TheForm from "./components/CustomerManagement/TheForm";
 import TheUpdateForm from "./components/CustomerManagement/TheUpdateForm";
-
+ 
 
 import MainMenu from "./MainMenu";
+import Userform from "./components/DeliveryManagement/userform";
+import DriverDelivery from "./components/DeliveryManagement/Driver";
+import DriverTable from "./components/DeliveryManagement/DriverTable";
+import UserDelivery from "./components/DeliveryManagement/customers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,7 +23,12 @@ root.render(
       <Route path="/TheForm" element={<TheForm />} />
       <Route path="/Users" element={<Users />} />
       <Route path="/TheUpdateForm/:id" element={<TheUpdateForm />} />
-      <Route path="/MainMenu" element={<MainMenu/>}/>
+      <Route path="/MainMenu" element={<MainMenu />} />
+
+      <Route path="/deliveryuserform" element={<Userform />} />
+      <Route path="/userdelivery" element={<UserDelivery />} />
+      <Route path="/driverTable" element={<DriverTable />} />
+      <Route path="/driverdelivery" element={<DriverDelivery />} />
     </Routes>
   </BrowserRouter>
 );
