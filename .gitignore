@@ -1,0 +1,17 @@
+# Ignore logs and other generated files
+logs/
+build/
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore npm/yarn lock files
+package-lock.json
+yarn.lock
+node_modules
+# Ignore node_modules
+frontEnd/node_modules/
+backEnd/node_modules/

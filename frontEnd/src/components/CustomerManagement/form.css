@@ -1,0 +1,12 @@
+.cont{
+    margin-left: 550px;
+
+}
+@media (max-width: 1200px) {
+  .imgform {
+    display: none;
+  }
+  .cont{
+    margin-left: 0;
+  }
+}

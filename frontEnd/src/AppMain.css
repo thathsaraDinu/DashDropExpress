@@ -1,0 +1,156 @@
+.App-header {
+  position: absolute;
+  z-index: 1;
+  margin-top: 100px;
+  margin-left: 40px;
+}
+.App {
+  position: relative;
+  height: 400px;
+  min-height: 100vh;
+
+  color: white;
+  overflow: hidden;
+}
+.App::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Adjust the last value (0.5) for darkness */
+  z-index: -1;
+}
+.App img {
+  position: absolute;
+  min-height: 100vh;
+  object-fit: cover; /* Apply object-fit: cover to the img tag */
+  width: 100%;
+  top: 0;
+
+  z-index: -2;
+}
+.App-body-1,
+.App-body-2 {
+  margin: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.App-body-1-text,
+.App-body-2-text {
+  width: 500px;
+}
+
+.App-body-1-img img,
+.App-body-2-img img {
+  width: 500px;
+  height: auto;
+}
+
+.bttn1 {
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: white;
+  border-color: white;
+}
+.menuetc {
+  display: flex;
+  position: absolute;
+  right: 0;
+
+  @media (max-width: 800px) {
+    position: relative;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.menumain {
+  position: fixed;
+  align-items: center;
+  display: flex;
+  margin-right: 0;
+
+  @media (max-width: 800px) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.bttn1:hover {
+  color: #fff;
+  background-color: #030637;
+  border-color: #030637;
+  transition: all 0.5s ease;
+}
+
+.App-body-3-main,
+.App-body-4-main {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+.App-body-3-section:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
+}
+.App-body-3-section,
+.App-body-4-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.App-body-4-section {
+  width: 400px;
+  height: 500px;
+}
+
+.App-body-3-section img {
+  width: 100px;
+}
+.App-body-4-topic {
+  margin-left: 100px;
+}
+.App-body-3,
+.App-body-4 {
+  margin-top: 80px;
+}
