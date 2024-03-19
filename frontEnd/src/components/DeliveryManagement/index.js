@@ -6,17 +6,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DriverTable from './DriverTable';
-import Users from './customers';
-import Driver from './Driver';
+import UserDelivery from './customers';
+
+import DriverDelivery from './Driver';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/users" element={<Users />} />
-      <Route path="/driverTable" element={<DriverTable />} />
-      <Route path="/driver" element={<Driver />} />
+      
+      
     </Routes>
   </BrowserRouter>
 );

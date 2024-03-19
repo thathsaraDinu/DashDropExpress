@@ -20,12 +20,13 @@ const DriverTable = ({ rows }) => {
 
   return (
     <div>
-     <h1 className="driver">Assign order Details Page for Drivers</h1>
+     <h1 className="driver pt-20">Assign order Details Page for Drivers</h1>
 
-      <TableContainer component={Paper}>
+      <TableContainer
+      sx={{ backgroundColor: "rgba(0,0,255,0.3)"}} component={Paper}>
         <Table
           sx={{
-            backgroundColor: "rgba(0,0,255,0.3)",
+            
             border: "3px solid #000000",
           }}
         >

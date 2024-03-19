@@ -1,19 +1,4 @@
-.App {
-  text-align: center;
-}
 
-.App-header {
-  background-image: url("./Images/pic8.jpg");
-  background-repeat:no-repeat ;
-  background-size: cover;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-  font-size: calc(15px + 2vmin);
-  color: #000000;
-  font-family:monospace;
-}
 
 .users-button{
   font-size: 25px;
@@ -178,7 +163,7 @@
 }
 
 .driver{
-  color: white;
+  color: black;
   margin-left: 300px;
   font-size: 50px;
 }

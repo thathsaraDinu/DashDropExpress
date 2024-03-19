@@ -10,7 +10,7 @@ function MainMenu() {
   };
 
   return (
-    <div className=" ">
+    <div className="mainmenu">
       <nav className="w-full z-20 bg-primary menumain px-4 py-2 text-primary">
         <img
           src="dashdrop-express-high-resolution-logo-transparent.png"
@@ -45,7 +45,7 @@ function MainMenu() {
 
           <li>
             <Link
-              to="!#"
+              to="/userdelivery"
               className="transition-all duration-500 ease-in-out flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-ternary"
             >
               <span>Order Delivery</span>

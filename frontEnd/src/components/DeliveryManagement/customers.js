@@ -5,8 +5,10 @@ import UsersTable from "./usersTable";
 import Axios from "axios"; 
 import { useEffect, useState } from "react";
 import './users.css';
+import MainMenu from "../../MainMenu";
 
-const Users = () => {
+
+const UserDelivery = () => {
    const [users, setUsers] = useState([]);
    const [submitted, setSubmitted] = useState(false);
    const [selectedUser, setSelectedUser] = useState([]);
@@ -17,7 +19,7 @@ const Users = () => {
    }, []);
 
    const getUsers = () => {
-      Axios.get('http://localhost:3001/api/users')
+      Axios.get('http://localhost:3001/api/delivery')
       .then(response => {
          setUsers(response.data.response || []);
       })
@@ -39,7 +41,7 @@ const Users = () => {
          date:data.date,
       }
 
-      Axios.post('http://localhost:3001/api/createuser', payload)
+      Axios.post('http://localhost:3001/api/createdelivery', payload)
       .then(() => {
          getUsers();
          setSubmitted(false);
@@ -63,7 +65,7 @@ const Users = () => {
          date:data.date,
       }
 
-      Axios.post('http://localhost:3001/api/updateuser', payload)
+      Axios.post('http://localhost:3001/api/updatedelivery', payload)
       .then(() => {
          getUsers();
          setSubmitted(false);
@@ -76,7 +78,7 @@ const Users = () => {
 
    const deleteUser = (data) => {
      
-      Axios.post('http://localhost:3001/api/deleteuser', data)
+      Axios.post('http://localhost:3001/api/deletedelivery', data)
       .then(() => {
          getUsers();
       })
@@ -86,32 +88,41 @@ const Users = () => {
    }
 
    return (
-      <div className="body1">
-         <img className="image1"  src="/pexels-cottonbro-studio-4604599.jpg" alt="background"></img>
-         <Box 
-            sx={{
-               width: 'calc(100% - 100px)',
-               margin: 'auto',
-            }}
-         >   
-            <Userform
-               addUser={addUser}
-               updateUser={updateUser}
-               submitted={submitted}
-               data={selectedUser}
-               isEdit={isEdit}
-            />
-            <UsersTable 
-               rows={users}
-               selectedUser={data => {
-                  setSelectedUser(data);
-                  setIsEdit(true);
-               }}
-               deleteUser={data => window.confirm('Are you Sure?') && deleteUser(data)}
-            />
+     <div>
+       <MainMenu></MainMenu>
+       <div className="body1 pt-10">
+         <img
+           className="image1"
+           src="/pic8.jpg"
+           alt="background"
+         ></img>
+         <Box
+           sx={{
+             width: "calc(100% - 100px)",
+             margin: "auto",
+           }}
+         >
+           <Userform
+             addUser={addUser}
+             updateUser={updateUser}
+             submitted={submitted}
+             data={selectedUser}
+             isEdit={isEdit}
+           />
+           <UsersTable
+             rows={users}
+             selectedUser={(data) => {
+               setSelectedUser(data);
+               setIsEdit(true);
+             }}
+             deleteUser={(data) =>
+               window.confirm("Are you Sure?") && deleteUser(data)
+             }
+           />
          </Box>
-      </div>
+       </div>
+     </div>
    );
 };
 
-export default Users;
+export default UserDelivery;

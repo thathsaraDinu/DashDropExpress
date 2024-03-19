@@ -6,8 +6,9 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import "./users.css";
 import DriverTable from "./DriverTable";
+import MainMenu from "../../MainMenu";
 
-const Driver = () => {
+const DriverDelivery = () => {
   const [users, setUsers] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [selectedUser, setSelectedUser] = useState([]);
@@ -18,7 +19,7 @@ const Driver = () => {
   }, []);
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/api/users")
+    Axios.get("http://localhost:3001/api/delivery")
       .then((response) => {
         setUsers(response.data.response || []);
       })
@@ -40,7 +41,7 @@ const Driver = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/createuser", payload)
+    Axios.post("http://localhost:3001/api/createdelivery", payload)
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -64,7 +65,7 @@ const Driver = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/updateuser", payload)
+    Axios.post("http://localhost:3001/api/updatedelivery", payload)
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -76,7 +77,7 @@ const Driver = () => {
   };
 
   const deleteUser = (data) => {
-    Axios.post("http://localhost:3001/api/deleteuser", data)
+    Axios.post("http://localhost:3001/api/deletedelivery", data)
       .then(() => {
         getUsers();
       })
@@ -86,26 +87,25 @@ const Driver = () => {
   };
 
   return (
-    <div className="body1">
-      <img
-        className="image2"
-        src="/pexels-cottonbro-studio-4604599.jpg"
-        alt="background"
-      ></img>
-      <Box
-        sx={{
-          width: "calc(100% - 100px)",
-          margin: "auto",
-        }}
-      >
-       
-        <DriverTable
-          rows={users}
-          
-        />
-      </Box>
+    <div>
+      <MainMenu></MainMenu>
+      <div className="body1">
+        <img
+          className="image2"
+          src="/pic8.jpg"
+          alt="background"
+        ></img>
+        <Box
+          sx={{
+            width: "calc(100% - 100px)",
+            margin: "auto",
+          }}
+        >
+          <DriverTable rows={users} />
+        </Box>
+      </div>
     </div>
   );
 };
 
-export default Driver;
+export default DriverDelivery;

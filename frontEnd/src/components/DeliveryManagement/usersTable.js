@@ -15,10 +15,13 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
   const navigate = useNavigate();
   return (
     <div>
-      <TableContainer component={Paper}>
+      <TableContainer
+        sx={{ backgroundColor: "rgba(0,0,255,0.3)" }}
+        component={Paper}
+      >
         <Table
           sx={{
-            backgroundColor: "rgba(0,0,255,0.3)",
+            
             border: "3px solid #000000",
           }}
         >
@@ -230,7 +233,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
         </Table>
       </TableContainer>
 
-      <button className="user1" onClick={() => navigate("/driver")}>
+      <button className="user1" onClick={() => navigate("/driverdelivery")}>
         View Driver's Page
       </button>
     </div>
