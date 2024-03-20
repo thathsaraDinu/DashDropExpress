@@ -9,8 +9,8 @@ const TheForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [NIC, setNIC] = useState("");
-  const [city, setCity] = useState("");
+  const [password, setPassword] = useState("");
+  const [confpassword, setConfpassword] = useState("");
   const [comPreff, setComPreff] = useState("");
   const navigate = useNavigate();
 
@@ -22,8 +22,8 @@ const TheForm = () => {
         phoneNumber,
         email,
         address,
-        NIC,
-        city,
+        password,
+        confpassword,
         comPreff,
       })
       .then((result) => {
@@ -34,7 +34,7 @@ const TheForm = () => {
   };
   return (
     <div
-      className="bg-white"
+      
       style={{
         display: "flex",
         flexDirection: "column",
@@ -47,9 +47,11 @@ const TheForm = () => {
             style={{
               position: "absolute",
               left: "0",
-              width: "550px",
+              top: "0",
+              width: "100%",
+              zIndex: "0",
             }}
-            src="/pexels-tima-miroshnichenko-6169659.jpg"
+            src="/pexels-pavel-danilyuk-6407556.jpg"
             class="brightness-50 object-cover"
             alt=""
           ></img>
@@ -59,13 +61,14 @@ const TheForm = () => {
               left: "40px",
               position: "absolute",
 
-              zIndex: "10",
+              zIndex: "1",
               fontStyle: "italy",
             }}
-            className="italic text-3xl font-serif text-primary"
+            className="sloganregister italic text-4xl font-serif text-primary"
           >
-            Set sail with StellarShip Courier! <br></br>Register now <br />
-            swift and stellar deliveries
+            Set sail with StellarShip Courier! <br></br>Register now <br></br>
+            <br />
+            Swift and Stellar deliveries
           </div>
         </div>
         <div
@@ -75,119 +78,139 @@ const TheForm = () => {
             alignItems: "center",
           }}
         >
-          <h1
-            className="text-4xl "
-            style={{ fontFamily: "Times New Roman, serif", marginTop: "80px" }}
-          >
-            Add User
-          </h1>
           <form
             onSubmit={Submit}
             style={{
               width: "500px",
               display: "flex",
+              color: "black",
               flexDirection: "column",
               alignItems: "center",
-              marginTop: "20px",
+              marginTop: "100px",
+              backgroundColor: "rgba(255,255,255,0.8)",
+              zIndex: "2",
             }}
             className="bg-gray-100 p-8 w-full max-w-lg rounded-md  border border-gray-500"
           >
+            <h1
+              className="text-4xl "
+              style={{
+                fontFamily: "serif",
+                marginTop: "0px",
+                marginBottom: "40px",
+                fontWeight: "800",
+              }}
+            >
+              Sign Up
+            </h1>
             <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+              <label
+                htmlFor="fullName"
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+              >
+                Full Name
+              </label>
               <input
                 required
                 name="fullName"
                 type="text"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                placeholder="Full Name"
+                class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black  hover:border-gray-400 py-2 px-2 py-2"
+                placeholder="Enter your full name"
                 id="fullName"
                 onChange={(e) => setFullName(e.target.value)}
               />
             </div>
             <div className="flex flex-wrap w-full -mx-3 mb-6">
               <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  htmlFor="phoneNumber"
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+                >
+                  Phone Number
+                </label>
                 <input
                   required
                   type="tel"
-                  placeholder="Phone Number"
+                  placeholder="Valid Phone Number"
                   name="phoneNumber"
                   pattern="\d{10}"
                   title="Please enter a valid 10-digit phone number."
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                   id="phoneNumber"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </div>
               <div className="w-full md:w-1/2 px-3">
+                <label
+                  htmlFor="email"
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+                >
+                  Email
+                </label>
                 <input
                   required
-                  placeholder="Email"
+                  placeholder="Valid Email"
                   name="email"
                   type="email"
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+              <label
+                htmlFor="address"
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+              >
+                Address
+              </label>
               <input
                 required
                 name="address"
                 type="text"
-                placeholder="Address"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                placeholder="Enter your Address"
+                class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                 id="address"
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
             <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+              <label
+                htmlFor="password"
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+              >
+                Password
+              </label>
               <input
                 required
-                name="address2"
-                type="text"
-                placeholder="Bill Address"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                id="inputAddress2"
-                onChange={(e) => setNIC(e.target.value)}
+                name="password"
+                type="password"
+                placeholder="Enter a Strong Password"
+                class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="flex flex-wrap w-full -mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <input
-                  required
-                  name="city"
-                  type="text"
-                  placeholder="City"
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                  id="inputCity"
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </div>
-              <div className="w-full md:w-1/2 px-3">
-                <div>
-                  <select
-                    id="comPreff"
-                    onChange={(e) => setComPreff(e.target.value)}
-                    name="comPreff"
-                    defaultValue={""}
-                    class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
-                  >
-                    <option className="text-gray-400">Choose</option>
-                    <option value={"SMS"}>SMS</option>
-                    <option value={"Email"}>Email</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+
+            <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
+              <label
+                htmlFor="confpassword"
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+              >
+                Confirm Password
+              </label>
+              <input
+                required
+                name="confpassword"
+                type="password"
+                placeholder="Re-enter the Password"
+                class="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+                id="confpassword"
+                onChange={(e) => setConfpassword(e.target.value)}
+              />
             </div>
+
             <div className="col-12">
               <div className="form-check">
                 <input
