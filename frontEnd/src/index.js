@@ -4,9 +4,9 @@ import "./output.css";
 import App from "./AppMain";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Users from "./components/CustomerManagement/Users";
-import TheForm from "./components/CustomerManagement/TheForm";
-import TheUpdateForm from "./components/CustomerManagement/TheUpdateForm";
+import Users from "./components/UserManagement/Users";
+import TheForm from "./components/UserManagement/TheForm";
+import TheUpdateForm from "./components/UserManagement/TheUpdateForm";
  
 
 import MainMenu from "./MainMenu";
