@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const port = 3001;
 const host = "localhost";
-const router = require("./UserManagement/router");
+const router = require("./CustomerManagement/router");
 const router2 = require("./DeliveryManagement/router")
 
 app.use(express.json());

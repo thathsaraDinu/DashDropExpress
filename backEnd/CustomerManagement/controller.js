@@ -23,8 +23,8 @@ const addUser = (req, res, next) => {
     phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     address: req.body.address,
-    password: req.body.password,
-    confpassword: req.body.confpassword,
+    NIC: req.body.NIC,
+    city: req.body.city,
     comPreff: req.body.comPreff,
   });
 
@@ -47,8 +47,8 @@ const updateUser = (req, res) => {
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       address: req.body.address,
-      password: req.body.password,
-      confpassword: req.body.confpassword,
+      NIC: req.body.NIC,
+      city: req.body.city,
       comPreff: req.body.comPreff,
     }
   )

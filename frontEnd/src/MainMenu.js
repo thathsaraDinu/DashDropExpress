@@ -10,7 +10,7 @@ function MainMenu() {
   };
 
   return (
-    <div className="z-1000">
+    <div className="mainmenu">
       <nav className="w-full z-20 bg-primary menumain px-4 py-2 text-primary">
         <img
           src="dashdrop-express-high-resolution-logo-transparent.png"
@@ -39,7 +39,7 @@ function MainMenu() {
               to="!#"
               className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
             >
-              <span>Packages</span>
+              <span>Product Tracking</span>
             </Link>
           </li>
 
@@ -48,7 +48,7 @@ function MainMenu() {
               to="/userdelivery"
               className="transition-all duration-500 ease-in-out flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-ternary"
             >
-              <span>Deliveries</span>
+              <span>Order Delivery</span>
             </Link>
           </li>
 
