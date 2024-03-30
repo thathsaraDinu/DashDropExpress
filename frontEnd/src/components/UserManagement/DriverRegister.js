@@ -42,7 +42,7 @@ const DriverRegister = () => {
     >
       <MainMenu />
       <div className="cont">
-        <div class="imgform ">
+        <div className="imgform ">
           <img
             style={{
               position: "absolute",
@@ -50,7 +50,7 @@ const DriverRegister = () => {
               width: "550px",
             }}
             src="/pexels-tima-miroshnichenko-6169659.jpg"
-            class="brightness-50 object-cover"
+            className="brightness-50 object-cover"
             alt=""
           ></img>
           <div
@@ -92,19 +92,19 @@ const DriverRegister = () => {
             }}
             className="bg-gray-100 p-8 w-full max-w-lg rounded-md  border border-gray-500"
           >
-            <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+            <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
               <input
                 required
                 name="fullName"
                 type="text"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                 placeholder="Full Name"
                 id="fullName"
                 onChange={(e) => setFullName(e.target.value)}
               />
             </div>
             <div className="flex flex-wrap w-full -mx-3 mb-6">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <input
                   required
                   type="tel"
@@ -112,7 +112,7 @@ const DriverRegister = () => {
                   name="phoneNumber"
                   pattern="\d{10}"
                   title="Please enter a valid 10-digit phone number."
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                   id="phoneNumber"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
@@ -123,30 +123,30 @@ const DriverRegister = () => {
                   placeholder="Email"
                   name="email"
                   type="email"
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
-            <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+            <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
               <input
                 required
                 name="address"
                 type="text"
                 placeholder="Address"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                 id="address"
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
-            <div class="flex flex-wrap -mx-3 mb-6 w-full px-3">
+            <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
               <input
                 required
                 name="address2"
                 type="text"
                 placeholder="Bill Address"
-                class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                 id="inputAddress2"
                 onChange={(e) => setNIC(e.target.value)}
               />
@@ -158,7 +158,7 @@ const DriverRegister = () => {
                   name="city"
                   type="text"
                   placeholder="City"
-                  class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                  className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                   id="inputCity"
                   onChange={(e) => setCity(e.target.value)}
                 />
@@ -170,15 +170,15 @@ const DriverRegister = () => {
                     onChange={(e) => setComPreff(e.target.value)}
                     name="comPreff"
                     defaultValue={""}
-                    class="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
+                    className="transition-all duration-500 ease-in-out placeholder-gray-400 appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-black"
                   >
                     <option className="text-gray-400">Choose</option>
                     <option value={"SMS"}>SMS</option>
                     <option value={"Email"}>Email</option>
                   </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
-                      class="fill-current h-4 w-4"
+                      className="fill-current h-4 w-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                     >
@@ -206,7 +206,7 @@ const DriverRegister = () => {
             <div className="col-12">
               <button
                 type="submit"
-                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
               >
                 Add User
               </button>
@@ -220,7 +220,7 @@ const DriverRegister = () => {
           >
             <Link
               to={`/Users`}
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               type="button"
             >
               User List

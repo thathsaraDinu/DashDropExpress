@@ -2,15 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  fullName: String,
-  phoneNumber: String,
-  address: String,
-  email: String,
-  password: String,
-  confpassword: String,
-  
+  fullName: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  email: { type: String, unique: true, required: true }, // Add unique constraint to email field
+  address: { type: String, required: true },
+  usertype: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
-const User = mongoose.model("User", userSchema);
+const Usermod = mongoose.model("User", userSchema);
 
-module.exports = User;
+module.exports = Usermod;

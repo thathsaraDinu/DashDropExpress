@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import MainMenu from "../../MainMenu";
+import { jwtDecode } from "jwt-decode";
 
 const Users = () => {
   const [user, setUsers] = useState([]);
@@ -20,6 +21,19 @@ const Users = () => {
         console.error("Axios Error : ", error);
       });
   }, []);
+
+
+  /////////////import this to append the login section
+  const [usertypetoken, setUserType] = useState("");
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token); // Corrected function call
+
+      setUserType(decodedToken.usertypetoken);
+    }
+  }, [token]);
+  ////////////////////////////////////////////////////
 
   const handleDelete = (id) => {
     axios
@@ -44,120 +58,173 @@ const Users = () => {
 
   return (
     <div>
-      <MainMenu />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingLeft: "30px",
-          paddingRight: "30px",
-          transition: "margin-left 0.5s",
-        }}
-      >
-        <img
-          style={{
-            position: "absolute",
-            left: "0",
-            top: "0",
-            width: "100%",
-            zIndex: "0",
-          }}
-          src="/pexels-pavel-danilyuk-6407556.jpg"
-          class="brightness-50 object-cover h-full"
-          alt=""
-        ></img>
-        <br></br>
-        <h1
-          className="text-3xl"
-          style={{ textAlign: "center", marginTop: "80px" }}
-        >
-          Customers{" "}
-        </h1>
-        <table
-          class="z-10 overflow-x-auto mx-5 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-          style={{ marginTop: "50px" }}
-        >
-          <thead class="text-xs  uppercase  bg-gray-700 text-gray-200">
-            <tr>
-              <th scope="col" class="px-6 py-3">
-                Full Name
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Phone Number
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Address
-              </th>
-
-              <th scope="col" class="px-6 py-3">
-                UserType
-              </th>
-
-              <th scope="col" class="px-6 py-3">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {user.map((users) => (
-              <tr
-                class="text-secondary dark:text-primary odd:bg-gray-50 odd:dark:bg-gray-900 even:bg-gray-200 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                key={users._id}
+      {usertypetoken === "Admin" ? (
+        <div>
+          <MainMenu />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingLeft: "30px",
+              paddingRight: "30px",
+              transition: "margin-left 0.5s",
+              backgroundColor: "#333333",
+            }}
+          >
+            <img
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "0",
+                width: "100%",
+                zIndex: "0",
+              }}
+              src="/pexels-pavel-danilyuk-6407556.jpg"
+              className="brightness-50 object-cover"
+              alt=""
+            ></img>
+            <br></br>
+            <div
+              className="z-10 w-full"
+              style={{ marginLeft: "30px", marginRight: "40px" }}
+            >
+              <h1
+                className="text-4xl text-primary"
+                style={{ textAlign: "center", marginTop: "80px" }}
               >
-                <td class="px-6 py-4">{users.fullName}</td>
-                <td class="px-6 py-4">{users.phoneNumber}</td>
-                <td class="px-6 py-4">{users.email}</td>
-                <td class="px-6 py-4">{users.address}</td>
-
-                <td class="px-6 py-4">{users.usertype}</td>
-
-                <td
-                  style={{
-                    display: "flex",
-                    marginTop: "7px",
-                    marginBottom: "0px",
-                  }}
-                >
-                  <Link
-                    to={`/TheUpdateForm/${users._id}`}
-                    style={{ marginLeft: "5px" }}
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                Users
+              </h1>
+              <div className="flex justify-end">
+                <form className="max-w-md float-right">
+                  <label
+                    htmlFor="default-search"
+                    className="mb-2 text-sm font-medium text-gray-900 sr-only"
                   >
-                    Update
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleDeleteConfirmation(users._id);
-                    }}
-                    style={{ marginLeft: "5px" }}
-                    type="button"
-                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <br></br>
+                    Search
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                      <svg
+                        className="w-4 h-4 text-gray-500"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      type="search"
+                      id="default-search"
+                      className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+                      placeholder="Search Users"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <table
+              className="z-10 overflow-x-auto mx-5 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              style={{ marginTop: "50px" }}
+            >
+              <thead className="text-xs  uppercase  bg-gray-700 text-gray-200">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Full Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Phone Number
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Email
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Address
+                  </th>
 
-        <Link
-          variant="contained"
-          color="success"
-          type="button"
-          to={"/TheForm"}
-          class="z-20 focus:outline-none text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:ring-green-300 text-base rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
-        >
-          Add
-        </Link>
-      </div>
+                  <th scope="col" className="px-6 py-3">
+                    UserType
+                  </th>
+
+                  <th scope="col" className="px-6 py-3">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.map((users) => (
+                  <tr
+                    className="text-secondary  odd:bg-gray-50  even:bg-gray-200  border-b "
+                    key={users._id}
+                  >
+                    <td className="px-6 py-4">{users.fullName}</td>
+                    <td className="px-6 py-4">{users.phoneNumber}</td>
+                    <td className="px-6 py-4">{users.email}</td>
+                    <td className="px-6 py-4">{users.address}</td>
+                    <td className="px-6 py-4">{users.usertype}</td>
+
+                    <td
+                      style={{
+                        display: "flex",
+                        marginTop: "7px",
+                        marginBottom: "0px",
+                      }}
+                    >
+                      <Link
+                        to={`/TheUpdateForm/${users._id}`}
+                        style={{ marginLeft: "5px" }}
+                        type="button"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Update
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleDeleteConfirmation(users._id);
+                        }}
+                        style={{ marginLeft: "5px" }}
+                        type="button"
+                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <br></br>
+
+            <Link
+              variant="contained"
+              color="success"
+              type="button"
+              to={"/usertypeselect"}
+              className="z-20 focus:outline-none text-white bg-green-700 hover:bg-green-800 ring-2 ring-white focus:ring-4 focus:ring-green-300 text-base rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
+            >
+              Add
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div>You need to be an admin to access this page</div>
+      )}
     </div>
   );
 };

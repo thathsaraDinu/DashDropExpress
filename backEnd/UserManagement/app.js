@@ -27,6 +27,12 @@ app.post("/createuser", (req, res) => {
   });
 });
 
+app.post("/loginuser", (req, res)=>{
+  controller.loginUser(req.body, (callback) =>{
+    res.send(callback);
+  })
+})
+
 // API
 app.put("/updateuser/:id", (req, res) => {
   controller.updateUser(req.body, (callback) => {
