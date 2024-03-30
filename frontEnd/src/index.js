@@ -7,12 +7,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Users from "./components/UserManagement/Users";
 import TheForm from "./components/UserManagement/TheForm";
 import TheUpdateForm from "./components/UserManagement/TheUpdateForm";
- 
-
 import MainMenu from "./MainMenu";
-
 import UserTypeSelect from "./components/UserManagement/UserTypeSelect";
 import Login from "./components/Login";
+
+
+
+import DriverTable from "./components/DeliveryManagement/DriverTable";
+import UserDelivery from "./components/DeliveryManagement/customers";
+import UsersTable from "./components/DeliveryManagement/usersTable";
+import DriverDelivery from "./components/DeliveryManagement/Driver";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,10 +27,16 @@ root.render(
       <Route path="/Users" element={<Users />} />
       <Route path="/TheUpdateForm/:id" element={<TheUpdateForm />} />
       <Route path="/MainMenu" element={<MainMenu />} />
-      <Route path="/loginuser" element={<Login/>}/>
-      <Route path="/usertypeselect" element={<UserTypeSelect/>}/>
+      <Route path="/loginuser" element={<Login />} />
+      <Route path="/usertypeselect" element={<UserTypeSelect />} />
 
-
+      <Route
+        path="/driverdelivery"
+        element={<DriverDelivery></DriverDelivery>}
+      />
+      <Route path="/drivertable" element={<DriverTable></DriverTable>} />
+      <Route path="/userdelivery" element={<UserDelivery></UserDelivery>} />
+      <Route path="/userstable" element={<UsersTable></UsersTable>} />
     </Routes>
   </BrowserRouter>
 );

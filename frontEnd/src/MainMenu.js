@@ -68,7 +68,7 @@ function MainMenu() {
 
             <li>
               <Link
-                to="#"
+                to="/userdelivery"
                 className="transition-all duration-500 ease-in-out flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-ternary"
               >
                 <span>Deliveries</span>
@@ -266,7 +266,7 @@ function MainMenu() {
             </li>
           </ul>
         </nav>
-      ): token && usertypetoken === "Driver" ? (
+      ) : token && usertypetoken === "Driver" ? (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
             src="dashdrop-express-high-resolution-logo-transparent.png"
@@ -300,9 +300,7 @@ function MainMenu() {
               </Link>
             </li>
 
-            <li>
-              
-            </li>
+            <li></li>
 
             <li>
               <button
@@ -348,8 +346,7 @@ function MainMenu() {
                       My Vehicles
                     </Link>
                   </li>
-                  
-                  
+
                   <li>
                     <Link
                       to="!#"
@@ -364,7 +361,7 @@ function MainMenu() {
             </li>
           </ul>
         </nav>
-      ): (
+      ) : (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
             src="dashdrop-express-high-resolution-logo-transparent.png"
