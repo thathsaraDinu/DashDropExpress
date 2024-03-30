@@ -1,0 +1,161 @@
+.users-button {
+  font-size: 25px;
+  font-weight: 900;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: blue;
+  cursor: pointer;
+  width: 25%;
+  margin-left: 950px;
+  border: 2px solid #000000;
+}
+
+.users-button:hover {
+  background-color: green;
+}
+
+.user {
+  font-size: 25px;
+  font-weight: 900;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: blue;
+  cursor: pointer;
+  width: 20%;
+  margin-left: 350px;
+  border: 2px solid #000000;
+  margin-top: 40px;
+  z-index: 100;
+}
+
+.user:hover {
+  background-color: green;
+}
+
+.user1 {
+  font-size: 25px;
+  font-weight: 900;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: blue;
+  cursor: pointer;
+  width: 30%;
+  margin-left: 80px;
+  border: 2px solid #000000;
+  margin-top: 60px;
+}
+
+.user1:hover {
+  background-color: green;
+}
+
+.btn1 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: auto;
+  background-color: blue;
+  border: 3px solid #000000;
+}
+
+.btn2 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: 10px;
+  background-color: green;
+  border: 3px solid #000000;
+}
+
+.btn1:hover {
+  background-color: yellow;
+}
+
+.btn2:hover {
+  background-color: yellow;
+}
+
+.btn3 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: auto;
+  background-color: blue;
+  border: 3px solid #000000;
+}
+
+.btn4 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 180px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: 10px;
+  background-color: green;
+  border: 3px solid #000000;
+}
+
+.btn5 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: 5px;
+  background-color: blue;
+  border: 3px solid #000000;
+}
+
+.btn6 {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 25px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 25px;
+  margin-top: 10px;
+  background-color: green;
+  border: 3px solid #000000;
+}
+
+.btn3:hover {
+  background-color: yellow;
+}
+
+.btn4:hover {
+  background-color: red;
+}
+
+.btn5:hover {
+  background-color: yellow;
+}
+
+.btn6:hover {
+  background-color: red;
+}
+
+.driver {
+  color: black;
+  margin-left: 300px;
+  font-size: 50px;
+}

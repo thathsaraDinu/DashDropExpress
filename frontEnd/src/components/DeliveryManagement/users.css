@@ -1,0 +1,23 @@
+.body1{
+    position: relative;
+    height:400px;
+}
+
+.image1{
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+}
+
+.image2 {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+    height: 800px;
+}
+
+
