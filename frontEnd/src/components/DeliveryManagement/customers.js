@@ -89,7 +89,7 @@ const UserDelivery = () => {
 
    return (
      <div>
-       <MainMenu></MainMenu>
+       
        <div className="body1 pt-10">
          <img
            className="image1"

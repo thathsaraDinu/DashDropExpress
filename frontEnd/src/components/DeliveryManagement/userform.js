@@ -39,7 +39,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
 
   return (
     <div>
-      
+      <MainMenu></MainMenu>
       <form
         onSubmit={() =>
           isEdit
