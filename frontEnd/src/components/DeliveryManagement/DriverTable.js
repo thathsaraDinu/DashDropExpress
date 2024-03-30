@@ -6,7 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  colors,
+  
 } from "@mui/material";
 
 const DriverTable = ({ rows }) => {
@@ -23,7 +23,7 @@ const DriverTable = ({ rows }) => {
       <h1 className="driver pt-20">Assign order Details Page for Drivers</h1>
 
       <TableContainer
-        sx={{ backgroundColor: "rgba(192,192,192,0.3)" }}
+        sx={{ backgroundColor: "rgba(192,192,192,0.8)" }}
         component={Paper}
       >
         <Table

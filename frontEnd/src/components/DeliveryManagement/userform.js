@@ -1,14 +1,11 @@
-
-import { Container, Grid, Input, Link, Typography, colors } from "@mui/material";
+import { Grid, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import MainMenu from "../../MainMenu";
-
 
 const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
-  const [id, setId] = useState();
-  const [did, setDid] = useState();
-  const [d_name, setDname] = useState();
-  const [c_name, setCname] = useState();
+  const [id, setId] = useState("");
+  const [did, setDid] = useState("");
+  const [d_name, setDname] = useState("");
+  const [c_name, setCname] = useState("");
   const [address, setAddress] = useState("");
   const [instruction, setInstruction] = useState("");
   const [date, setDate] = useState("");
@@ -39,7 +36,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
 
   return (
     <div>
-      <MainMenu></MainMenu>
       <form
         onSubmit={() =>
           isEdit
@@ -56,17 +52,15 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
         }
       >
         <Grid
-          Container
-          spacing={2}
           sx={{
-            backgroundColor: "rgba(192,192,192,0.3)",
+            backgroundColor: "rgba(192,192,192,0.8)",
             border: "3px solid #000000",
             marginBottom: "50px",
             marginLeft: "280px",
             display: "block",
+            marginTop: "100px",
             width: "900px",
             height: "600px",
-           
           }}
         >
           <Grid item xs={12}>
@@ -308,12 +302,12 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
-              value={date}
+              value={date.split("T")[0]}
               onChange={(e) => setDate(e.target.value)}
             />
           </Grid>
 
-          <button type="submit" className="user">
+          <button type="submit" className="user z-1000">
             {isEdit ? "Update" : "Add"}
           </button>
         </Grid>

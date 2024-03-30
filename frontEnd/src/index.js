@@ -12,7 +12,7 @@ import UserTypeSelect from "./components/UserManagement/UserTypeSelect";
 import Login from "./components/Login";
 
 
-import "./components/DeliveryManagement/index";
+
 import DriverTable from "./components/DeliveryManagement/DriverTable";
 import UserDelivery from "./components/DeliveryManagement/customers";
 import UsersTable from "./components/DeliveryManagement/usersTable";

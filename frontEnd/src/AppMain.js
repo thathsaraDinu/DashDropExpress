@@ -1,4 +1,5 @@
 import "./AppMain.css";
+import "./components/DeliveryManagement/Appdelivery.css"
 import MainMenu from "./MainMenu";
 import "./index.css";
 import { useEffect, useState } from "react";

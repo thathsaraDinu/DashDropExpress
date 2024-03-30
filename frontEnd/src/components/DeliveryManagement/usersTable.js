@@ -6,9 +6,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  colors,
+  
 } from "@mui/material";
-import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 
 const UsersTable = ({ rows, selectedUser, deleteUser }) => {
@@ -16,7 +16,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
   return (
     <div>
       <TableContainer
-        sx={{ backgroundColor: "rgba(192,192,192,0.3)" }}
+        sx={{ backgroundColor: "rgba(192,192,192,0.8)" }}
         component={Paper}
       >
         <Table
@@ -239,4 +239,3 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
   );
 };
 export default UsersTable;
-

@@ -1,7 +1,7 @@
-
 const Delivery1 = require("./model");
 
 const getUsers = (req, res, next) => {
+  console.log("show")
   Delivery1.find()
     .then((response) => {
       res.json({ response });
@@ -12,6 +12,7 @@ const getUsers = (req, res, next) => {
 };
 
 const addUser = (req, res, next) => {
+  console.log("created");
   const user = new Delivery1({
     id: req.body.id,
     did: req.body.did,
@@ -38,11 +39,22 @@ const updateUser = (req, res, next) => {
   const d_name = req.body.d_name;
   const c_name = req.body.c_name;
   const address = req.body.address;
-  const instruction =  req.body.instruction;
+  const instruction = req.body.instruction;
   const date = req.body.date;
- 
 
-  Delivery1.updateOne({ id: id }, { $set: {did: did, d_name: d_name, c_name: c_name, address: address, instruction: instruction, date: date}})
+  Delivery1.updateOne(
+    { id: id },
+    {
+      $set: {
+        did: did,
+        d_name: d_name,
+        c_name: c_name,
+        address: address,
+        instruction: instruction,
+        date: date,
+      },
+    }
+  )
     .then((response) => {
       res.json({ response });
     })
@@ -67,4 +79,3 @@ exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
-
