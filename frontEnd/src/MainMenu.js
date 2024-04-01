@@ -166,6 +166,14 @@ function MainMenu() {
                 <span>Home</span>
               </Link>
             </li>
+            <li className="relative parent">
+              <Link
+                to="!#"
+                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
+              >
+                <span>My Profile</span>
+              </Link>
+            </li>
             <li>
               <Link
                 to="!#"
