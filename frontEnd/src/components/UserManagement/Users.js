@@ -22,7 +22,6 @@ const Users = () => {
       });
   }, []);
 
-
   /////////////import this to append the login section
   const [usertypetoken, setUserType] = useState("");
   const token = localStorage.getItem("token");
@@ -97,7 +96,7 @@ const Users = () => {
                 Users
               </h1>
               <div className="flex justify-end">
-                <form className="max-w-md float-right">
+                <form className="w-80 float-right">
                   <label
                     htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only"
