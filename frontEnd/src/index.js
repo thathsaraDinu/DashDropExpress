@@ -17,7 +17,8 @@ import DriverTable from "./components/DeliveryManagement/DriverTable";
 import UserDelivery from "./components/DeliveryManagement/customers";
 import UsersTable from "./components/DeliveryManagement/usersTable";
 import DriverDelivery from "./components/DeliveryManagement/Driver";
-
+import FooterMain from "./FooterMain";
+import Thetestform from "./components/thetestform";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -29,7 +30,8 @@ root.render(
       <Route path="/MainMenu" element={<MainMenu />} />
       <Route path="/loginuser" element={<Login />} />
       <Route path="/usertypeselect" element={<UserTypeSelect />} />
-
+      <Route path="/FooterMain" element={<FooterMain></FooterMain>} />
+      <Route path="/thetestform" element={<Thetestform></Thetestform>} />
       <Route
         path="/driverdelivery"
         element={<DriverDelivery></DriverDelivery>}

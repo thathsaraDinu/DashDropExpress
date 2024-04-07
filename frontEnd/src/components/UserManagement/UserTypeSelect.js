@@ -3,6 +3,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 const UserTypeSelect = () => {
   return (
@@ -12,41 +13,34 @@ const UserTypeSelect = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
 
+          position: "relative",
           paddingLeft: "30px",
           paddingRight: "30px",
+          paddingBottom: "30px",
           transition: "margin-left 0.5s",
+          paddingTop: "100px",
+          backgroundSize: "cover",
+          backgroundImage: "url('/pexels-arthouse-studio-4338020.jpg')",
         }}
+        className="backgroundimage"
       >
-        <img
-          style={{
-            position: "absolute",
-            left: "0",
-            top: "0",
-            width: "100%",
-            zIndex: "0",
-          }}
-          src="/pexels-pavel-danilyuk-6407556.jpg"
-          className="brightness-50 object-cover h-full"
-          alt=""
-        ></img>
         <br></br>
-        <div className="z-10 w-full mb-3" style={{}}>
+        <div className="z-10 w-full mb-3 " style={{}}>
           <h1
             className="font-bold text-3xl text-primary"
-            style={{ textAlign: "center", marginTop: "80px" }}
+            style={{ textAlign: "center", marginTop: "" }}
           >
             Select The User Type
           </h1>
         </div>
 
         <br></br>
-        <div className="flex justify-center">
+        <div className="flex justify-center flex-wrap">
           <Link
             variant="contained"
             to={"/TheForm?usertype=Customer"}
-            className="usertypes z-10 text-black text-center bg-selectuser p-4 m-5 pb-100"
+            className="usertypes flex-1 z-10 text-black text-center bg-selectuser p-4 m-5 pb-100"
           >
             <div className="font-bold text-3xl ">Customer</div>
             <br></br>
@@ -61,7 +55,7 @@ const UserTypeSelect = () => {
           <Link
             variant="contained"
             to={"/TheForm?usertype=Driver"}
-            className="usertypes z-10 text-black  text-center bg-selectuser2 p-4 m-5 pb-100"
+            className="usertypes flex-1 z-10 text-black  text-center bg-selectuser2 p-4 m-5 pb-100"
           >
             <div className="text-3xl font-bold">Driver</div>
             <br></br>
@@ -79,7 +73,7 @@ const UserTypeSelect = () => {
           <Link
             variant="contained"
             to={"/TheForm?usertype=Admin"}
-            className="usertypes z-10 text-black text-center bg-blue-300 p-4 m-5 pb-100"
+            className="usertypes flex-1 z-10 text-black text-center bg-blue-300 p-4 m-5 pb-100"
           >
             <div className="font-bold text-3xl ">Admin</div>
             <br></br>
@@ -92,6 +86,9 @@ const UserTypeSelect = () => {
             </div>
           </Link>
         </div>
+      </div>
+      <div className="">
+        <FooterMain></FooterMain>
       </div>
     </div>
   );

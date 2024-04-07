@@ -1,9 +1,10 @@
 import "./AppMain.css";
-import "./components/DeliveryManagement/Appdelivery.css"
+import "./components/DeliveryManagement/Appdelivery.css";
 import MainMenu from "./MainMenu";
 import "./index.css";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import FooterMain from "./FooterMain";
 
 function App() {
   ////////import this to append the login section
@@ -36,21 +37,30 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className="mb-10">
         <MainMenu />
-        <div className="App">
+        <div className="Appmain">
           {token && usertypetoken === "Admin" ? (
-            <img src="/stanley-dai-73OZYNjVoNI-unsplash.jpg" alt="Background" />
+            <img
+              className=""
+              src="/pexels-efecan-efe-7900689.jpg"
+              alt="Background"
+            />
           ) : token && usertypetoken === "Customer" ? (
-            <img src="/pexels-mikhail-nilov-6613916.jpg" alt="Background" />
+            <img
+              className=""
+              src="/pexels-david-peterson-1076429.jpg"
+              alt="Background"
+            />
           ) : token && usertypetoken === "Driver" ? (
             <img
+              className=""
               src="/pexels-rdne-stock-project-7363190.jpg"
               alt="Background"
             />
           ) : (
             <img
-              src="/pexels-tima-miroshnichenko-6169137.jpg"
+              src="/pexels-khwanchai-phanthong-4175032.jpg"
               alt="Background"
             />
           )}
@@ -59,14 +69,14 @@ function App() {
             <header className="App-headermain1">
               <h1
                 style={{ fontFamily: "Georgia, serif" }}
-                className="text-shadow-lg text-7xl text-blue-300"
+                className="text-shadow-lg text-7xl text-blue-300 pl-5"
               >
                 DashDrop Express
               </h1>
               <br></br>
               <br></br>
               <h1 className="text-4xl flex ">Welcome back {usersname}!</h1>
-              {usertypetoken ? (
+              {usertypetoken === "Admin" || usertypetoken === "Driver" ? (
                 <span className="text-2xl text-green-500">
                   {usertypetoken} Account
                 </span>
@@ -170,7 +180,37 @@ function App() {
             </h5>
           </div>
         </div>
-        <div className="App-body-3">
+        <div
+          className="relative mission pt-5 pb-10 "
+          style={{
+            minHeight: "400px",
+            width: "100%",
+            objectFit: "cover",
+            zIndex: "-2",
+          }}
+        >
+          <img
+            src="/pexels-tara-winstead-7666429.jpg"
+            className="brightness-50 absolute  "
+            style={{
+              height: "100%",
+              width: "100%",
+              objectFit: "cover",
+              zIndex: "-2",
+            }}
+          ></img>
+          <div className="z-10 text-primary flex flex-col justify-center items-center pt-10 ">
+            <div className="text-5xl ">Our Mission</div>
+            <div className="text-2xl text-center pt-20 pl-20 pr-20">
+              Empowering seamless and efficient deliveries, DashDrop Courier
+              Service is dedicated to simplifying logistics and enhancing
+              customer satisfaction through reliable and swift transportation
+              solutions
+            </div>
+          </div>
+        </div>
+        <div className="App-body-3 ">
+          <div className="App-body-4-topic text-3xl">You Can Deliver</div>
           <div className="App-body-3-main">
             <div className="App-body-3-section">
               <img src="/icons8-hamburger-100.png" alt="section3img"></img>
@@ -240,6 +280,7 @@ function App() {
           </div>
         </div>
       </div>
+      <FooterMain></FooterMain>
     </div>
   );
 }

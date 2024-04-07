@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
 import { jwtDecode } from "jwt-decode";
+import FooterMain from "../../FooterMain";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
@@ -72,28 +73,22 @@ const TheUpdateForm = () => {
       });
   };
   return (
+    ///pexels-francesco-ungaro-2325446.jpg
     <div>
       {token ? (
         <div>
           <MainMenu />
-          <img
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "0",
-              width: "100%",
-              zIndex: "0",
-            }}
-            src="/pexels-pavel-danilyuk-6407556.jpg"
-            className="brightness-50 object-cover "
-            alt=""
-          ></img>
+
           <div
             style={{
+              position: "relative",
+              backgroundImage: "url('/pexels-francesco-ungaro-2325446.jpg')",
+              backgroundSize: "cover",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
+            className="backgroundimage pb-10"
           >
             <form
               onSubmit={Update}
@@ -230,6 +225,7 @@ const TheUpdateForm = () => {
             <br></br>
             <hr />
           </div>
+          <FooterMain></FooterMain>
         </div>
       ) : (
         <div>You need to login to the website to access this page</div>

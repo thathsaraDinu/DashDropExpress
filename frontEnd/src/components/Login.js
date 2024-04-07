@@ -54,7 +54,7 @@ function Login() {
             width: "100%",
             zIndex: "0",
           }}
-          src="/pexels-pixabay-531880.jpg"
+          src="/pexels-maxime-francis-2246476.jpg"
           className="brightness-50 object-cover h-full"
           alt=""
         ></img>
@@ -63,9 +63,9 @@ function Login() {
           <form
             action="POST"
             onSubmit={submit}
-            class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
+            class="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
           >
-            <h1 className="text-center font-size-19 font-bold pb-10">Login</h1>
+            <h1 className="text-center text-xl font-bold pb-10">Login</h1>
             <div class="mb-4">
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
