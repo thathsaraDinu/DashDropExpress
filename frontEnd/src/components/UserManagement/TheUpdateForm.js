@@ -103,7 +103,9 @@ const TheUpdateForm = () => {
               }}
               className="p-8  rounded-md  border border-gray-500"
             >
-              <h2 className="text-3xl pb-10 ">Update User</h2>
+              <h2 style={{ fontFamily: "tajawal" , fontWeight:"500"}} className="text-3xl pb-10 ">
+                Update User
+              </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="fullName"

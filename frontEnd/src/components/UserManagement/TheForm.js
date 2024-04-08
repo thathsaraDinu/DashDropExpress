@@ -121,10 +121,10 @@ const TheForm = () => {
               <h1
                 className="text-3xl "
                 style={{
-                  fontFamily: "serif",
+                  fontFamily: "tajawal",
                   marginTop: "0px",
                   marginBottom: "40px",
-                  fontWeight: "800",
+                  fontWeight: "500",
                 }}
               >
                 Create an account - {usertype}

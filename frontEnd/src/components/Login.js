@@ -44,7 +44,7 @@ function Login() {
   return (
     <div>
       <MainMenu></MainMenu>
-      <div className="login flex flex-col items-center logincenter">
+      <div className="login flex flex-col items-center logincenter ">
         <img
           style={{
             position: "absolute",
@@ -62,7 +62,7 @@ function Login() {
           <form
             action="POST"
             onSubmit={submit}
-            className="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
+            className="bg-white bg-opacity-80 shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
           >
             <h1 className="text-center text-xl font-bold pb-10">Login</h1>
             <div className="mb-4">

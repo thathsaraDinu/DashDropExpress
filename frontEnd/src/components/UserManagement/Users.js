@@ -83,8 +83,13 @@ const Users = () => {
                 }}
               >
                 <h1
-                  className="text-4xl text-primary mb-5"
-                  style={{ textAlign: "center", marginTop: "80px" }}
+                  className="text-3xl text-primary mb-5"
+                  style={{
+                    textAlign: "center",
+                    marginTop: "80px",
+                    fontFamily: "Jost, sans-serif",
+                    fontWeight: "500",
+                  }}
                 >
                   Users
                 </h1>
@@ -123,7 +128,6 @@ const Users = () => {
                         onChange={(e) => setSearch(e.target.value)}
                         required
                       />
-                      
                     </div>
                   </div>
                 </div>
