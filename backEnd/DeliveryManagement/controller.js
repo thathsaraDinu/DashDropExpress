@@ -1,7 +1,7 @@
 const Delivery1 = require("./model");
 
 const getUsers = (req, res, next) => {
-  console.log("show")
+  
   Delivery1.find()
     .then((response) => {
       res.json({ response });
@@ -12,7 +12,7 @@ const getUsers = (req, res, next) => {
 };
 
 const addUser = (req, res, next) => {
-  console.log("created");
+  
   const user = new Delivery1({
     id: req.body.id,
     did: req.body.did,

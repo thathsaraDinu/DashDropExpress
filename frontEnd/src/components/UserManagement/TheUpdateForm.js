@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
-import { jwtDecode } from "jwt-decode";
+
+import FooterMain from "../../FooterMain";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
@@ -17,13 +18,13 @@ const TheUpdateForm = () => {
   const navigate = useNavigate();
 
   /////////////import this to append the login section
-  const [usertypetoken, setUserType] = useState("");
+  
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      const decodedToken = jwtDecode(token); // Corrected function call
+      
 
-      setUserType(decodedToken.usertypetoken);
+      
     }
   }, [token]);
   ////////////////////////////////////////////////////
@@ -72,28 +73,22 @@ const TheUpdateForm = () => {
       });
   };
   return (
+    ///pexels-francesco-ungaro-2325446.jpg
     <div>
       {token ? (
         <div>
           <MainMenu />
-          <img
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "0",
-              width: "100%",
-              zIndex: "0",
-            }}
-            src="/pexels-pavel-danilyuk-6407556.jpg"
-            className="brightness-50 object-cover "
-            alt=""
-          ></img>
+
           <div
             style={{
+              position: "relative",
+              backgroundImage: "url('/pexels-francesco-ungaro-2325446.jpg')",
+              backgroundSize: "cover",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
+            className="backgroundimage pb-10"
           >
             <form
               onSubmit={Update}
@@ -108,7 +103,9 @@ const TheUpdateForm = () => {
               }}
               className="p-8  rounded-md  border border-gray-500"
             >
-              <h2 className="text-3xl pb-10 ">Update User</h2>
+              <h2 style={{ fontFamily: "tajawal" , fontWeight:"500"}} className="text-3xl pb-10 ">
+                Update User
+              </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="fullName"
@@ -221,7 +218,7 @@ const TheUpdateForm = () => {
               <div className="col-12">
                 <button
                   type="submit"
-                  className="appearance-none w-full block border-b border-grey outline-none focus:border-black hover:border-blue-800 py-2 px-2"
+                  className=" z-20 focus:outline-none text-white bg-green-700 hover:bg-green-800 ring-2 ring-white focus:ring-4 focus:ring-green-300 text-base rounded-lg text-sm px-5 py-2.5 me-2 mb-10 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
                 >
                   Update User
                 </button>
@@ -230,6 +227,7 @@ const TheUpdateForm = () => {
             <br></br>
             <hr />
           </div>
+          <FooterMain></FooterMain>
         </div>
       ) : (
         <div>You need to login to the website to access this page</div>

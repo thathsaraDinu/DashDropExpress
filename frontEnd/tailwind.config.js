@@ -4,13 +4,13 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        primary: "#0F004A", // Change 'primary' to your preferred class name
+        primary: "#0F004A", // Change 'primary' to your preferred className name
         secondary: "#030637", // Add or modify other colors as needed
         ternary: "#720455",
         color4: "#3C0753",
         color5: "#720455",
-        selectuser: "rgba(123, 112, 255, 0.9)",
-        selectuser2: "rgba(203, 119, 255, 0.9)",
+       
+        selectuser: "rgba(200, 200, 255, 0.6)",
         color7: "#7d73ff",
       },
       textColor: {
