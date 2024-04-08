@@ -9,7 +9,7 @@ function FooterMain() {
 
   return (
     <div className="  z-10">
-      <head>
+      <div>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -20,8 +20,8 @@ function FooterMain() {
           href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap"
           rel="stylesheet"
         />
-      </head>
-      <body className="bodyfooter">
+      </div>
+      <div className="bodyfooter">
         <footer>
           <div className="footer">
             <div className="row">
@@ -69,7 +69,7 @@ function FooterMain() {
             </div>
           </div>
         </footer>
-      </body>
+      </div>
     </div>
   );
 }

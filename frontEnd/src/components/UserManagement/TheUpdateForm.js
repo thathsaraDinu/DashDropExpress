@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
-import { jwtDecode } from "jwt-decode";
+
 import FooterMain from "../../FooterMain";
 
 const TheUpdateForm = () => {
@@ -18,13 +18,13 @@ const TheUpdateForm = () => {
   const navigate = useNavigate();
 
   /////////////import this to append the login section
-  const [usertypetoken, setUserType] = useState("");
+  
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      const decodedToken = jwtDecode(token); // Corrected function call
+      
 
-      setUserType(decodedToken.usertypetoken);
+      
     }
   }, [token]);
   ////////////////////////////////////////////////////
@@ -216,7 +216,7 @@ const TheUpdateForm = () => {
               <div className="col-12">
                 <button
                   type="submit"
-                  className="appearance-none w-full block border-b border-grey outline-none focus:border-black hover:border-blue-800 py-2 px-2"
+                  className=" z-20 focus:outline-none text-white bg-green-700 hover:bg-green-800 ring-2 ring-white focus:ring-4 focus:ring-green-300 text-base rounded-lg text-sm px-5 py-2.5 me-2 mb-10 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
                 >
                   Update User
                 </button>

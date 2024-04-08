@@ -75,7 +75,7 @@ const TheForm = () => {
     const user1 = searchParams.get("usertype");
     if (user1) setUserType(user1);
     else setUserType("Customer");
-    console.log("User Type:", user1);
+    
     // Use paramName as needed
   }, [location]);
 
@@ -89,7 +89,7 @@ const TheForm = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            
+
             backgroundImage: "url('/pexels-francesco-ungaro-2325446.jpg')",
             backgroundSize: "cover",
           }}
@@ -219,6 +219,8 @@ const TheForm = () => {
                   placeholder="Enter a Strong Password"
                   className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                   id="password"
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                  title="Password must be at least 6 characters with at least one number, one uppercase and one lower case"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />

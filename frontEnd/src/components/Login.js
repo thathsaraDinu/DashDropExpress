@@ -23,7 +23,6 @@ function Login() {
             const token = res.data.token;
             localStorage.setItem("token", token);
             navigate("/", { state: { name: res.data.user.fullName } });
-            console.log(res.response);
             
           } else if (res.data.message === "User not found") {
             alert("User have not sign up");
@@ -59,22 +58,22 @@ function Login() {
           alt=""
         ></img>
 
-        <div class="z-10 w-full max-w-xs">
+        <div className="z-10 w-full max-w-xs">
           <form
             action="POST"
             onSubmit={submit}
-            class="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
+            className="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
           >
             <h1 className="text-center text-xl font-bold pb-10">Login</h1>
-            <div class="mb-4">
+            <div className="mb-4">
               <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="username"
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="username"
               >
                 Email
               </label>
               <input
-                class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
                 onChange={(e) => {
@@ -84,15 +83,15 @@ function Login() {
                 value={email}
               />
             </div>
-            <div class="mb-6">
+            <div className="mb-6">
               <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="password"
               >
                 Password
               </label>
               <input
-                class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 onChange={(e) => {
@@ -102,9 +101,9 @@ function Login() {
                 value={password}
               />
             </div>
-            <div class="flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Sign In

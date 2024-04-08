@@ -29,7 +29,8 @@
 }
 
 .descriptionhome {
-  width: 600px;
+  max-width: 600px;
+  margin-right: 10px;
   font-size: large;
 }
 .Appmain::before {

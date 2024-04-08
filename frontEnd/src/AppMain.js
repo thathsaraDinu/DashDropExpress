@@ -10,6 +10,7 @@ function App() {
   ////////import this to append the login section
   const [usersname, setUsersName] = useState("");
   const [usertypetoken, setUserTypeToken] = useState("");
+
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
@@ -31,7 +32,7 @@ function App() {
     }
   };
 
-  console.log(usersname);
+  
 
   // Initialize state for storing the usersname
 
@@ -106,9 +107,7 @@ function App() {
               <br></br>
               <p className="descriptionhome">
                 Welcome to DashDrop Courier Service, your premier choice for
-                reliable and efficient parcel delivery. Our dedicated team is
-                committed to ensuring your packages reach their destination
-                swiftly and securely. With advanced tracking technology and a
+                reliable and efficient parcel delivery. With advanced tracking technology and a
                 focus on customer satisfaction, we guarantee a seamless delivery
                 experience every time.
               </p>
@@ -126,7 +125,7 @@ function App() {
           )}
           <br></br>
           <div
-            className="arrowdown z=100 flex flex-row justify-center"
+            className="arrowdown  z-100 flex flex-row justify-center"
             onClick={scrollToSection}
           >
             <svg
@@ -198,6 +197,7 @@ function App() {
               objectFit: "cover",
               zIndex: "-2",
             }}
+            alt="missionImg"
           ></img>
           <div className="z-10 text-primary flex flex-col justify-center items-center pt-10 ">
             <div className="text-5xl ">Our Mission</div>
