@@ -22,6 +22,7 @@ function App() {
   }, [token]);
   //////////////////////////////////////////
 
+  //////a small function to scroll to a certain point of page
   const scrollToSection = () => {
     // Replace 'sectionId' with the ID of the section you want to scroll to
     const section = document.getElementById("sectionId");
@@ -32,8 +33,6 @@ function App() {
       });
     }
   };
-
-  // Initialize state for storing the usersname
 
   return (
     <div>
@@ -134,8 +133,13 @@ function App() {
                     )}
                   </div>
                   <Link
-                  to ={usertypetoken === "Customer" ? ("#"): usertypetoken === "Admin" ?("#"): "#"}
-                      
+                    to={
+                      usertypetoken === "Customer"
+                        ? "#"
+                        : usertypetoken === "Admin"
+                        ? "#"
+                        : "#"
+                    }
                     className="box-border mt-5 relative z-30 inline-flex items-center justify-center w-auto px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-indigo-600 rounded-md cursor-pointer group ring-offset-2 ring-1 ring-indigo-300 ring-offset-indigo-200 hover:ring-offset-indigo-500 ease focus:outline-none"
                   >
                     <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
@@ -154,8 +158,12 @@ function App() {
                           strokeWidth="2"
                           d="M13 10V3L4 14h7v7l9-11h-7z"
                         ></path>
-                      </svg>{usertypetoken === "Customer" ? ("Place an Order"): usertypetoken === "Admin" ?("Get Started"): "My Deliveries"}
-                      
+                      </svg>
+                      {usertypetoken === "Customer"
+                        ? "Place an Order"
+                        : usertypetoken === "Admin"
+                        ? "Get Started"
+                        : "My Deliveries"}
                     </span>
                   </Link>
                 </div>

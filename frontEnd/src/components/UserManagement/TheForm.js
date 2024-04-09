@@ -24,20 +24,22 @@ const TheForm = () => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      const decodedToken = jwtDecode(token); 
+      const decodedToken = jwtDecode(token);
 
       setUserTypeToken(decodedToken.usertypetoken);
     }
   }, [token]);
   //////////////////////////////////////////////////////
 
+  //////password visibility timout
   useEffect((e) => {
     const timer = setTimeout(() => {
-      setTogglePasswordView(false); 
-    }, 2000); 
-    return () => clearTimeout(timer); 
-  })
+      setTogglePasswordView(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  });
 
+  ////////submit function
   const Submit = (e) => {
     e.preventDefault();
     if (password !== confpassword) {
@@ -45,7 +47,6 @@ const TheForm = () => {
       setConfPassword("");
       return; // Stop execution if passwords don't match
     }
-
     axios
       .post("http://localhost:3001/api/createuser", {
         fullName,
@@ -79,12 +80,12 @@ const TheForm = () => {
 
   const location = useLocation();
 
+  /////get usertype from the url
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const user1 = searchParams.get("usertype");
     if (user1) setUserType(user1);
     else setUserType("Customer");
-    
   }, [location]);
 
   return (
@@ -112,7 +113,6 @@ const TheForm = () => {
             className="registerform"
           >
             <form
-              
               onSubmit={Submit}
               style={{
                 display: "flex",
@@ -232,7 +232,6 @@ const TheForm = () => {
                     title="Password must be at least 6 characters with at least one number, one uppercase and one lower case"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-
                   />
                   <svg
                     style={{
