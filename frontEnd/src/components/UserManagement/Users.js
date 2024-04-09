@@ -14,6 +14,7 @@ const Users = () => {
   const [user, setUsers] = useState([]);
   const [search, setSearch] = useState("");
 
+  ///////////get users to show
   useEffect(() => {
     Axios.get("http://localhost:3001/api/users")
       .then((response) => {
@@ -36,6 +37,7 @@ const Users = () => {
   }, [token]);
   ////////////////////////////////////////////////////
 
+  //////delete function
   const handleDelete = (id) => {
     axios
       .delete("http://localhost:3001/api/deleteuser/" + id)
@@ -46,6 +48,7 @@ const Users = () => {
       .catch((err) => console.log(err));
   };
 
+  ////////confirm alert for deletion
   function handleDeleteConfirmation(userId) {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
 

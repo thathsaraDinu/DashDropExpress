@@ -28,6 +28,7 @@ const TheUpdateForm = () => {
   }, [token]);
   ////////////////////////////////////////////////////
 
+  /////get the user information before updating function
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getuserbyid/" + id)
@@ -42,6 +43,7 @@ const TheUpdateForm = () => {
       .catch((error) => console.error("Axios Error : ", error));
   }, [id]);
 
+  /////////////update function on submit
   const Update = (e) => {
     e.preventDefault();
 
@@ -50,7 +52,6 @@ const TheUpdateForm = () => {
       setConfPassword("");
       return; // Stop execution if passwords don't match
     }
-
     axios
       .put("http://localhost:3001/api/updateuser/" + id, {
         fullName,
@@ -72,15 +73,15 @@ const TheUpdateForm = () => {
       });
   };
 
-   useEffect((e) => {
-     const timer = setTimeout(() => {
-       setTogglePasswordView(false);
-     }, 2000);
-     return () => clearTimeout(timer);
-   });
-   
+  ////////timout function for password visibility
+  useEffect((e) => {
+    const timer = setTimeout(() => {
+      setTogglePasswordView(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  });
+
   return (
-    ///pexels-francesco-ungaro-2325446.jpg
     <div>
       {token ? (
         <div>
@@ -99,7 +100,6 @@ const TheUpdateForm = () => {
           >
             <form
               onSubmit={Update}
-              
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -108,7 +108,6 @@ const TheUpdateForm = () => {
                 width: "550px",
                 zIndex: "1",
                 backgroundColor: "rgba(255,255,255,0.8)",
-                
               }}
               className="p-8  rounded-md  border border-gray-500"
             >

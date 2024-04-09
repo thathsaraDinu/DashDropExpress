@@ -6,10 +6,10 @@ import { jwtDecode } from "jwt-decode";
 function MainMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  ///////function for toggle the dropdown menu item
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
 
   /////////////import this to append the login section
   const [usertypetoken, setUserType] = useState("");
@@ -22,6 +22,7 @@ function MainMenu() {
   }, [token]);
   ////////////////////////////////////////////////////
 
+  //////logout function
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
     if (confirmLogout) {

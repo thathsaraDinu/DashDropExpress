@@ -3,10 +3,6 @@ import "./AppMain.css";
 import { Link } from "react-router-dom";
 
 function FooterMain() {
-  
-
-  
-
   return (
     <div className="  z-10">
       <div>
@@ -74,6 +70,3 @@ function FooterMain() {
   );
 }
 export default FooterMain;
-
-
-

@@ -5,11 +5,11 @@ import MainMenu from "../MainMenu";
 
 function Login() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [togglepasswordview, setTogglePasswordView] = useState(false);
 
+  ///////submit function
   async function submit(e) {
     e.preventDefault();
 
@@ -41,15 +41,15 @@ function Login() {
     }
   }
 
-  useEffect(() =>{
+  ////function for password visibility toggling
+  useEffect(() => {
     const toggleview = document.getElementById("passwordtoggle");
     const toggleview2 = document.getElementById("passwordtoggle2");
-  
-    if(togglepasswordview === true){
+
+    if (togglepasswordview === true) {
       toggleview.classList.add("hidden");
       toggleview2.classList.remove("hidden");
-    }
-    else {
+    } else {
       toggleview.classList.remove("hidden");
       toggleview2.classList.add("hidden");
     }
@@ -59,7 +59,7 @@ function Login() {
     }, 2000); // Change this value according to your requirement (in milliseconds)
 
     return () => clearTimeout(timer);
-  },[togglepasswordview])
+  }, [togglepasswordview]);
 
   return (
     <div>

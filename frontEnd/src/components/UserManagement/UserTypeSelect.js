@@ -13,7 +13,6 @@ const UserTypeSelect = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-
           position: "relative",
           paddingLeft: "30px",
           paddingRight: "30px",
