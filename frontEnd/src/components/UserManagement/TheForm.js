@@ -16,18 +16,27 @@ const TheForm = () => {
   const [usertype, setUserType] = useState("");
   const navigate = useNavigate();
 
+  const [togglepasswordview, setTogglePasswordView] = useState(false);
+
   ////////import this to append the login section//////
 
   const [usertypetoken, setUserTypeToken] = useState("");
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      const decodedToken = jwtDecode(token); // Corrected function call
+      const decodedToken = jwtDecode(token); 
 
       setUserTypeToken(decodedToken.usertypetoken);
     }
   }, [token]);
   //////////////////////////////////////////////////////
+
+  useEffect((e) => {
+    const timer = setTimeout(() => {
+      setTogglePasswordView(false); 
+    }, 2000); 
+    return () => clearTimeout(timer); 
+  })
 
   const Submit = (e) => {
     e.preventDefault();
@@ -76,11 +85,9 @@ const TheForm = () => {
     if (user1) setUserType(user1);
     else setUserType("Customer");
     
-    // Use paramName as needed
   }, [location]);
 
   return (
-    //src="/pexels-francesco-ungaro-2325446.jpg"
     <div>
       <MainMenu />
       <div className="cont" style={{ backgroundColor: "#333333" }}>
@@ -105,6 +112,7 @@ const TheForm = () => {
             className="registerform"
           >
             <form
+              autocomplete="off"
               onSubmit={Submit}
               style={{
                 display: "flex",
@@ -212,18 +220,68 @@ const TheForm = () => {
                 >
                   Password
                 </label>
-                <input
-                  required
-                  name="password"
-                  type="password"
-                  placeholder="Enter a Strong Password"
-                  className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
-                  id="password"
-                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
-                  title="Password must be at least 6 characters with at least one number, one uppercase and one lower case"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
+                <div className="relative w-full">
+                  <input
+                    required
+                    name="password"
+                    type={togglepasswordview ? "text" : "password"}
+                    placeholder="Enter a Strong Password"
+                    className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+                    id="password"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                    title="Password must be at least 6 characters with at least one number, one uppercase and one lower case"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    autoComplete="new-password"
+                  />
+                  <svg
+                    style={{
+                      zIndex: "10",
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    id="passwordtoggle"
+                    className={`password-toggle-icon w-6 h-6 ${
+                      togglepasswordview ? "hidden" : ""
+                    }`}
+                    onClick={(e) => setTogglePasswordView(true)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                    />
+                  </svg>
+                  <svg
+                    style={{
+                      zIndex: "20",
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    id="passwordtoggle2"
+                    className={`password-toggle-icon2 w-6 h-6 ${
+                      togglepasswordview ? "" : "hidden"
+                    }`}
+                    onClick={(e) => setTogglePasswordView(false)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
+                </div>
               </div>
 
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">

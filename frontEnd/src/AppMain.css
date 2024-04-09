@@ -149,6 +149,14 @@
     flex-direction: column;
   }
 }
+.password-toggle-icon2,
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
 .menumain {
   position: fixed;
