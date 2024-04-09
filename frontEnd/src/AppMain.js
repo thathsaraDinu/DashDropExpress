@@ -5,6 +5,7 @@ import "./index.css";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import FooterMain from "./FooterMain";
+import { Link } from "react-router-dom";
 
 function App() {
   ////////import this to append the login section
@@ -66,55 +67,99 @@ function App() {
 
           {token ? (
             <header className="App-headermain1">
+              <div className="w-full flex flex-col justify-end items-end pr-5 ">
+                <h1
+                  style={{
+                    fontFamily: "Jost, sans-serif",
+                    fontWeight: "400",
+                    fontStyle: "normal",
+                  }}
+                  className="text-2xl"
+                >
+                  <span
+                    style={{
+                      fontFamily: "Jost, sans-serif",
+                      fontWeight: "500",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    {usersname}
+                  </span>
+                </h1>{" "}
+                {usertypetoken === "Admin" || usertypetoken === "Driver" ? (
+                  <span
+                    style={{
+                      fontFamily: "Tajawal, sans-serif",
+                      fontWeight: "500",
+                    }}
+                    className="text-2xl text-blue-200 pl-10"
+                  >
+                    {usertypetoken} Account
+                  </span>
+                ) : (
+                  ""
+                )}
+              </div>
               <h1
-                style={{ fontFamily: "Tajawal , serif", fontWeight: "500" }}
-                className="text-shadow-lg text-7xl text-white pl-5"
+                style={{
+                  fontFamily: "Tajawal , serif",
+                  fontWeight: "600",
+                  paddingTop: "50px",
+                }}
+                className="text-shadow-lg text-7xl text-white pl-10 pb-10"
               >
                 DashDrop Express
               </h1>
-              <br></br>
-              <br></br>
-              <h1
-                style={{
-                  fontFamily: "Jost, sans-serif",
-                  fontWeight: "400",
-                  fontStyle: "normal",
-                }}
-                className="text-2xl"
-              >
-                Welcome back <span></span>
-                <span
-                  style={{
-                    fontFamily: "Jost, sans-serif",
-                    fontWeight: "500",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {usersname}!
-                </span>
-              </h1>
-              {usertypetoken === "Admin" || usertypetoken === "Driver" ? (
-                <span
-                  style={{
-                    fontFamily: "Tajawal, sans-serif",
-                    fontWeight: "500",
-                  }}
-                  className="text-2xl text-blue-400"
-                >
-                  {usertypetoken} Account
-                </span>
-              ) : (
-                ""
-              )}{" "}
-              <br></br>
+
               <div
                 style={{
                   zIndex: "10",
                   width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
+                  fontFamily: "jost",
                 }}
-              ></div>
+              >
+                <div className="text-3xl text-left pl-10 pb-2">
+                  Unlock Seamless Delivery Solutions
+                </div>
+                <div className="text-xl text-left pl-10">
+                  Simplify Your Logistics with DashDrop Express
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-3xl text-center pt-5 pb-5">
+                    Welcome back{" "}
+                    {usertypetoken === "Admin" ? (
+                      usertypetoken
+                    ) : (
+                      <span>Our valued {usertypetoken}</span>
+                    )}
+                  </div>
+                  <Link
+                  to ={usertypetoken === "Customer" ? ("#"): usertypetoken === "Admin" ?("#"): "#"}
+                      
+                    className="box-border mt-5 relative z-30 inline-flex items-center justify-center w-auto px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-indigo-600 rounded-md cursor-pointer group ring-offset-2 ring-1 ring-indigo-300 ring-offset-indigo-200 hover:ring-offset-indigo-500 ease focus:outline-none"
+                  >
+                    <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+                    <span className="absolute top-0 left-0 w-20 h-8 -mt-1 -ml-12 transition-all duration-300 ease-out transform -rotate-45 -translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+                    <span className="relative z-20 flex items-center text-sm">
+                      <svg
+                        className="relative w-5 h-5 mr-2 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        ></path>
+                      </svg>{usertypetoken === "Customer" ? ("Place an Order"): usertypetoken === "Admin" ?("Get Started"): "My Deliveries"}
+                      
+                    </span>
+                  </Link>
+                </div>
+              </div>
             </header>
           ) : (
             <header className="App-headermain2">
@@ -122,7 +167,7 @@ function App() {
                 style={{
                   marginRight: "50px",
                   fontFamily: "tajawal, serif",
-                  fontWeight: "500",
+                  fontWeight: "600",
                 }}
                 className="text-shadow-lg text-7xl text-white"
               >
@@ -146,6 +191,32 @@ function App() {
               </p>
 
               <br></br>
+              <div>
+                <Link
+                  to="/TheForm"
+                  className="box-border  mt-5 relative z-30 inline-flex items-center justify-center w-auto px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-indigo-600 rounded-md cursor-pointer group ring-offset-2 ring-1 ring-indigo-300 ring-offset-indigo-200 hover:ring-offset-indigo-500 ease focus:outline-none"
+                >
+                  <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+                  <span className="absolute top-0 left-0 w-20 h-8 -mt-1 -ml-12 transition-all duration-300 ease-out transform -rotate-45 -translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+                  <span className="relative z-20 flex items-center text-sm">
+                    <svg
+                      className="relative w-5 h-5 mr-2 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      ></path>
+                    </svg>
+                    Get Started
+                  </span>
+                </Link>
+              </div>
               <div
                 style={{
                   zIndex: "10",
@@ -156,9 +227,10 @@ function App() {
               ></div>
             </header>
           )}
+
           <br></br>
           <div
-            className="arrowdown  z-100 flex flex-row justify-center"
+            className="  z-100 flex flex-row justify-center"
             onClick={scrollToSection}
           >
             <svg
@@ -167,7 +239,7 @@ function App() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-10 h-10"
+              className="arrowdown w-10 h-10"
             >
               <path
                 strokeLinecap="round"

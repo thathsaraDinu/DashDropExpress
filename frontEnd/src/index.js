@@ -31,7 +31,7 @@ root.render(
       <Route path="/loginuser" element={<Login />} />
       <Route path="/usertypeselect" element={<UserTypeSelect />} />
       <Route path="/FooterMain" element={<FooterMain></FooterMain>} />
-      <Route path="/thetestform" element={<Thetestform></Thetestform>} />
+      
       <Route
         path="/driverdelivery"
         element={<DriverDelivery></DriverDelivery>}

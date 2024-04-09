@@ -112,7 +112,7 @@ const TheForm = () => {
             className="registerform"
           >
             <form
-              autocomplete="off"
+              
               onSubmit={Submit}
               style={{
                 display: "flex",
@@ -205,7 +205,7 @@ const TheForm = () => {
                 <input
                   required
                   name="address"
-                  type="text"
+                  type="address"
                   placeholder="Enter the Address"
                   className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                   id="address"
@@ -232,7 +232,7 @@ const TheForm = () => {
                     title="Password must be at least 6 characters with at least one number, one uppercase and one lower case"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    autoComplete="new-password"
+
                   />
                   <svg
                     style={{
