@@ -6,6 +6,7 @@ const port = 3001;
 const host = "localhost";
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
+
 const { MONGODB_URI } = require("./config");
 
 app.use(express.json());
@@ -29,3 +30,4 @@ const server = app.listen(port, host, () => {
 
 app.use("/api", router);
 app.use("/api", router1);
+
