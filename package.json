@@ -9,7 +9,6 @@
   "scripts": {
     "install-all": "npm install --prefix frontend && npm install --prefix backend",
     "start": "start npm run start-frontend & start npm run start-backend",
-
     "start-frontend": "npm start --prefix frontend",
     "start-backend": "npm start --prefix backend",
     "test": "npm-run-all --parallel test-frontend test-backend",
@@ -29,7 +28,6 @@
     "react-scripts": "5.0.1",
     "serve": "^14.2.1",
     "web-vitals": "^2.1.4"
-    
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
