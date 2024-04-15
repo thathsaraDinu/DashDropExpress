@@ -17,7 +17,7 @@ app.get("/delivery", (req, res) => {
   controller.getUsers((callback) => {
     res.send(callback);
   });
-});
+}); 
 
 // API
 app.post("/createdelivery", (req, res) => {
