@@ -17,6 +17,11 @@ import UsersTable from "./components/DeliveryManagement/usersTable";
 import DriverDelivery from "./components/DeliveryManagement/Driver";
 import FooterMain from "./FooterMain";
 import MyProfile from "./components/UserManagement/MyProfile";
+import DriversFeedback from "./components/Starratings/DriversFeedback";
+import StarRatings from "./components/Starratings/StarRatings";
+import UpdateStarRatings from "./components/Starratings/UpdateStarRatings";
+import Driversfeedbackupdate from "./components/Starratings/Driversfeedbackupdate";
+import FeedbackTable from "./components/Starratings/feedbacktable";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -39,6 +44,12 @@ root.render(
       <Route path="/drivertable" element={<DriverTable></DriverTable>} />
       <Route path="/userdelivery" element={<UserDelivery></UserDelivery>} />
       <Route path="/userstable" element={<UsersTable></UsersTable>} />
+
+      <Route path='/driversfeedback' element={<DriversFeedback />} />
+   <Route path='/starratings' element={<StarRatings />} />
+   <Route path='/UpdateStarRatings/:id' element={<UpdateStarRatings/>} />
+   <Route path='/Driversfeedbackupdate/:id' element={<Driversfeedbackupdate/>} />
+   <Route path='/feedbacktable' element={<FeedbackTable />} />
     </Routes>
   </BrowserRouter>
 );
