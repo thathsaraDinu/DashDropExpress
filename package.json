@@ -37,7 +37,6 @@
     "serve": "^14.2.1",
     "web-vitals": "^2.1.4",
     "react-icons": "^5.1.0"
-    
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1"
