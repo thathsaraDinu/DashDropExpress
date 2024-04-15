@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
 
@@ -72,6 +72,14 @@ const TheUpdateForm = () => {
         setEmail("");
       });
   };
+const location = useLocation();
+  const [updatetype, setUpdateType] = useState("");
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const user1 = searchParams.get("usertype");
+    if (user1) setUpdateType(user1);
+    else setUpdateType("Customer");
+  }, [location]);
 
   ////////timout function for password visibility
   useEffect((e) => {
@@ -115,7 +123,7 @@ const TheUpdateForm = () => {
                 style={{ fontFamily: "tajawal", fontWeight: "500" }}
                 className="text-3xl pb-10 "
               >
-                Update User
+                Update User - {updatetype}
               </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label

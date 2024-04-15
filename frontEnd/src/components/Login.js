@@ -8,11 +8,58 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [togglepasswordview, setTogglePasswordView] = useState(false);
+  const [existingUsername, setExistingUsername] = useState("");
+  const [existingusertype, setExistingUserType] = useState("");
+  const [existingemail, setExistingEmail] = useState("");
+  const [showOTPForm, setShowOTPForm] = useState(false);
+  const [waitmessage, setWaitMessage] = useState(false);
+  const [otp, setOTP] = useState("");
 
+  async function submitotp(e) {
+    e.preventDefault();
+    const otpmod = otp.replaceAll(/\s/g, "");
+    try {
+      console.log(existingUsername, existingemail, existingusertype);
+      axios
+        .post("http://localhost:3001/api/verifyOTP", {
+          existingUsername,
+          existingemail,
+          existingusertype,
+          otpmod,
+        })
+
+        .then((res) => {
+          const token = res.data.token;
+          localStorage.setItem("token", token);
+          alert(res.data.message);
+          navigate("/");
+        })
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.message) {
+            alert(err.response.data.message);
+            if (err.response.status === 400 || err.response.status === 403) {
+              setOTP("");
+            } else {
+              window.location.reload();
+            }
+          }
+        });
+    } catch (e) {
+      console.log(e);
+      alert("error occured");
+    }
+  }
   ///////submit function
   async function submit(e) {
     e.preventDefault();
+    const tokencheck = localStorage.getItem("token");
+    if (tokencheck) {
+      setEmail("");
+      setPassword("");
+      return alert("Please logout from the currently logged in account first");
+    }
 
+    setWaitMessage(true);
     try {
       await axios
         .post("http://localhost:3001/api/loginuser", {
@@ -20,19 +67,17 @@ function Login() {
           password,
         })
         .then((res) => {
-          if (res.data.message === "exist") {
-            const token = res.data.token;
-            localStorage.setItem("token", token);
-            navigate("/", { state: { name: res.data.user.fullName } });
-          } else if (res.data.message === "User not found") {
-            alert("User have not sign up");
-          } else if (res.data.message === "Incorrect password") {
-            alert("Incorrect Password");
-          }
+          setShowOTPForm(true);
+          setExistingEmail(res.data.user.email);
+          setExistingUsername(res.data.user.fullName);
+          setExistingUserType(res.data.user.usertype);
+          alert(res.data.msgotp);
+          setWaitMessage(false);
         })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.message)
+            alert(err.response.data.message);
+          setWaitMessage(false);
           setEmail("");
           setPassword("");
         });
@@ -78,7 +123,7 @@ function Login() {
             width: "100%",
             zIndex: "0",
           }}
-          src="/pexels-maxime-francis-2246476.jpg"
+          src="/paul-earle-wVjd0eWNqI8-unsplash.jpg"
           className="brightness-50 object-cover h-full"
           alt=""
         ></img>
@@ -87,17 +132,24 @@ function Login() {
           <form
             action="POST"
             onSubmit={submit}
-            className="bg-white bg-opacity-80 shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4"
+            className="bg-white bg-opacity-80 shadow-md rounded-2xl px-8 pt-6 pb-5 mb-4"
           >
-            <h1 className="text-center text-xl font-bold pb-10">Login</h1>
+            <h1
+              style={{ fontFamily: "Jost", fontWeight: "600" }}
+              className="text-center text-2xl pb-8"
+            >
+              Login
+            </h1>
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                style={{ fontFamily: "Jost", fontWeight: "500" }}
+                className="block text-gray-700  font-bold mb-2"
                 htmlFor="username"
               >
                 Email
               </label>
               <input
+                style={{ fontFamily: "Jost", fontWeight: "500" }}
                 className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
@@ -112,13 +164,15 @@ function Login() {
               {" "}
               {/* Added flex and items-center to make the SVG and input inline */}
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                style={{ fontFamily: "jost", fontWeight: "500" }}
+                className="block text-gray-700  font-bold mb-2"
                 htmlFor="password"
               >
                 Password
               </label>
               <div className="relative ">
                 <input
+                  style={{ fontFamily: "jost", fontWeight: "500" }}
                   className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700   leading-tight focus:outline-none focus:shadow-outline"
                   id="password"
                   type={togglepasswordview ? "text" : "password"}
@@ -175,9 +229,27 @@ function Login() {
                 </svg>
               </div>
             </div>
+            <div
+              style={{
+                color: "green",
+                fontFamily: "jost",
+                fontWeight: "500",
+                textAlign: "center",
+                paddingBottom: "8px",
+              }}
+              className={waitmessage ? "" : "hidden"}
+            >
+              Please wait
+            </div>
+            <div
+              style={{
+                display: showOTPForm ? "none" : "flex",
 
-            <div className="flex items-center justify-center">
+                justifyContent: "center",
+              }}
+            >
               <button
+                style={{ fontFamily: "jost", fontWeight: "600" }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
@@ -185,8 +257,47 @@ function Login() {
               </button>
             </div>
           </form>
+          <form
+            style={{
+              fontFamily: "jost",
+              fontWeight: "600",
+              display: showOTPForm ? "block" : "none",
+              marginBottom: "4rem", // Adjust the value as needed
+            }}
+            className="bg-white p-5 rounded-2xl"
+          >
+            <label className="block text-gray-700   mb-2" htmlFor="otp">
+              Enter the OTP. <span>(Check your email)</span>
+            </label>
+            <input
+              className="shadow appearance-none mb-5 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="otp"
+              type="text"
+              onChange={(e) => {
+                setOTP(e.target.value);
+              }}
+              placeholder="OTP"
+              value={otp}
+            />
+            <div className="otpsubmit flex items-center justify-center">
+              <button
+                style={{ fontFamily: "jost", fontWeight: "600" }}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={submitotp}
+              >
+                Verify
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="z-10 text-center text-primary">
+        <div
+          style={{
+            fontFamily: "jost",
+            fontWeight: "500",
+            display: showOTPForm ? "none" : "",
+          }}
+          className="z-10 text-center text-primary"
+        >
           <br />
           <p>OR</p>
           <br />

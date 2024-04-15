@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const userSchemamodel = new Schema({
   fullName: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   email: { type: String, unique: true, required: true }, // Add unique constraint to email field
@@ -10,6 +10,6 @@ const userSchema = new Schema({
   password: { type: String, required: true },
 });
 
-const Usermod = mongoose.model("User", userSchema);
+const Usermod = mongoose.model("User", userSchemamodel);
 
 module.exports = Usermod;

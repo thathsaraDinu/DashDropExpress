@@ -16,6 +16,7 @@ import UserDelivery from "./components/DeliveryManagement/customers";
 import UsersTable from "./components/DeliveryManagement/usersTable";
 import DriverDelivery from "./components/DeliveryManagement/Driver";
 import FooterMain from "./FooterMain";
+import MyProfile from "./components/UserManagement/MyProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -29,6 +30,7 @@ root.render(
       <Route path="/loginuser" element={<Login />} />
       <Route path="/usertypeselect" element={<UserTypeSelect />} />
       <Route path="/FooterMain" element={<FooterMain></FooterMain>} />
+      <Route path="/myprofile" element={<MyProfile></MyProfile>} />
 
       <Route
         path="/driverdelivery"

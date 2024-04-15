@@ -47,4 +47,11 @@ app.delete("/deleteuser/:id", (req, res) => {
   });
 });
 
+// API
+app.post("/verifyOTP", (req, res) => {
+  controller.verifyOTP(req.body, (callback) => {
+    res.send(callback);
+  });
+});
+
 module.exports = app;

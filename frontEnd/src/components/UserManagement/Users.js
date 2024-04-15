@@ -11,8 +11,9 @@ import { jwtDecode } from "jwt-decode";
 import FooterMain from "../../FooterMain";
 
 const Users = () => {
-  const [user, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+ 
 
   ///////////get users to show
   useEffect(() => {
@@ -59,6 +60,7 @@ const Users = () => {
       // User chose not to delete, handle accordingly
     }
   }
+ 
 
   return (
     <div>
@@ -127,7 +129,7 @@ const Users = () => {
                         type="search"
                         id="default-search"
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-                        placeholder="Search Users"
+                        placeholder="Search Full Name"
                         onChange={(e) => setSearch(e.target.value)}
                         required
                       />
@@ -192,22 +194,22 @@ const Users = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {user
-                        .filter((users) => {
+                      {users
+                        .filter((user) => {
                           return search.toLowerCase() === ""
-                            ? users
-                            : users.fullName.toLowerCase().includes(search);
+                            ? user
+                            : user.fullName.toLowerCase().includes(search);
                         })
-                        .map((users) => (
+                        .map((user) => (
                           <tr
                             className="text-secondary  odd:bg-gray-50  even:bg-gray-200  border-b "
-                            key={users._id}
+                            key={user._id}
                           >
-                            <td className="px-6 py-4">{users.fullName}</td>
-                            <td className="px-6 py-4">{users.phoneNumber}</td>
-                            <td className="px-6 py-4">{users.email}</td>
-                            <td className="px-6 py-4">{users.address}</td>
-                            <td className="px-6 py-4">{users.usertype}</td>
+                            <td className="px-6 py-4">{user.fullName}</td>
+                            <td className="px-6 py-4">{user.phoneNumber}</td>
+                            <td className="px-6 py-4">{user.email}</td>
+                            <td className="px-6 py-4">{user.address}</td>
+                            <td className="px-6 py-4">{user.usertype}</td>
 
                             <td
                               style={{
@@ -217,7 +219,7 @@ const Users = () => {
                               }}
                             >
                               <Link
-                                to={`/TheUpdateForm/${users._id}`}
+                                to={`/TheUpdateForm/${user._id}?usertype=${user.usertype}`}
                                 style={{ marginLeft: "5px" }}
                                 type="button"
                                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
@@ -226,7 +228,7 @@ const Users = () => {
                               </Link>
                               <button
                                 onClick={() => {
-                                  handleDeleteConfirmation(users._id);
+                                  handleDeleteConfirmation(user._id);
                                 }}
                                 style={{ marginLeft: "5px" }}
                                 type="button"
