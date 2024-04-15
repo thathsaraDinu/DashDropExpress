@@ -1,8 +1,22 @@
 const User = require("./model");
+const OTP = require("./modelotp");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 
+const smtppass = "ffry ydgu obfa ugzf";
+const smtpemail = "thathsaradinuwan@gmail.com";
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: "465",
+  secure: true,
+  auth: {
+    user: smtpemail,
+    pass: smtppass,
+  },
+});
 const getUsers = (req, res, next) => {
   User.find()
     .then((response) => {
@@ -13,14 +27,12 @@ const getUsers = (req, res, next) => {
     });
 };
 
-
 const getUserById = (req, res) => {
   const id = req.params.id;
   User.findById({ _id: id })
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 };
-
 
 const addUser = async (req, res, next) => {
   try {
@@ -60,7 +72,6 @@ const addUser = async (req, res, next) => {
       .json({ message: "An error occurred while adding the user" });
   }
 };
-
 
 const updateUser = async (req, res) => {
   const { fullName, phoneNumber, email, address, usertype, password } =
@@ -107,7 +118,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -115,7 +125,7 @@ const loginUser = async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      return res.status(404).json({ message: "User not found" }); // 404 Not Found
+      return res.status(404).json({ message: "User has not registered" }); // 404 Not Found
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -124,20 +134,19 @@ const loginUser = async (req, res) => {
     );
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Incorrect password" }); // 401 Unauthorized
+      return res.status(401).json({ message: "Incorrect password or email" }); // 401 Unauthorized
     }
 
-    const token = jwt.sign(
-      { usertypetoken: existingUser.usertype, username: existingUser.fullName },
-      JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
-    );
-    console.log(existingUser.usertype);
-    return res
-      .status(200)
-      .json({ token, message: "exist", user: existingUser }); // 200 OK
+    const msgotp = await sendOtpVerificationEmail(email);
+    if (msgotp === "The OTP has sent to your email") {
+      return res
+        .status(200)
+        .json({ msgotp, message: "passmatch", user: existingUser });
+      // 200 OK
+    } else {
+      return res.status(500).json({ msgotp });
+      // 500
+    }
   } catch (error) {
     console.error("Error logging in:", error);
     return res
@@ -145,7 +154,6 @@ const loginUser = async (req, res) => {
       .json({ message: "An error occurred while logging in" }); // 500 Internal Server Error
   }
 };
-
 
 const deleteUser = (req, res, next) => {
   const id = req.params.id;
@@ -159,9 +167,111 @@ const deleteUser = (req, res, next) => {
     });
 };
 
+const sendOtpVerificationEmail = async (email) => {
+  try {
+    const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
+    console.log(otp);
+    const mailOptions = {
+      from: smtpemail,
+      to: email,
+      subject: "Verify Your Email",
+      html: `<p>Enter <b>${otp}</b> in the app to verify your email address.</p>
+      <p> This code expires in <b>1 hour</b></p>`,
+    };
+    await OTP.deleteMany({ email: email });
+    const newotp = new OTP({
+      email: email,
+      otp: otp,
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 3600000,
+    });
+
+    const savedotp = await newotp.save();
+    await transporter.sendMail(mailOptions);
+
+    return "The OTP has sent to your email";
+  } catch (error) {
+    console.log(error);
+    return "Error sending OTP";
+  }
+};
+
+const verifyOTP = async (req, res) => {
+  try {
+    let { existingUsername, existingemail, existingusertype, otpmod } =
+      req.body;
+    console.log(existingUsername);
+    console.log(existingemail, existingusertype, otpmod);
+
+    if (!existingemail || !otpmod) {
+      console.log("checkpoint1");
+      return res
+        .status(400)
+        .json({ message: "Empty otp details are not allowed" });
+    } else {
+      console.log("checkpoint2");
+      const otpverify = await OTP.find({ email: existingemail });
+      if (otpverify.length <= 0) {
+        console.log("checkpoint3");
+        return res.status(404).json({
+          message:
+            "Account record does not exist or has been verified already. please sign up or log in",
+        });
+      } else {
+        console.log("checkpoint4");
+        const { expiresAt } = otpverify[0];
+        const hashedotp = otpverify[0].otp;
+
+        if (expiresAt < Date.now()) {
+          console.log("checkpoint5");
+          await OTP.deleteMany({ email: existingemail });
+          return res
+            .status(410)
+            .json({ message: "Code has expired. Please request again." });
+        } else {
+          console.log("checkpoint6");
+          const validotp = otpmod === otpverify[0].otp;
+
+          if (!validotp) {
+            console.log("checkpoint7", validotp, otpmod, otpverify[0].otp);
+            return res
+              .status(403)
+              .json({ message: "Invalid code passed. Check your inbox." });
+          } else {
+            console.log("checkpoint8");
+            await OTP.deleteMany({ email: existingemail });
+
+            const token = jwt.sign(
+              {
+                usertypetoken: existingusertype,
+                username: existingUsername,
+                useremail: existingemail,
+              },
+              JWT_SECRET,
+              {
+                expiresIn: "1h",
+              }
+            );
+            return res.status(200).json({
+              message: "Login successful",
+              token,
+            });
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while verifying OTP" });
+  }
+};
+
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
 exports.getUserById = getUserById;
 exports.loginUser = loginUser;
+exports.verifyOTP = verifyOTP;

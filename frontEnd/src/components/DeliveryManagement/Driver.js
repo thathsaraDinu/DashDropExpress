@@ -1,7 +1,4 @@
-
 import { Box } from "@mui/material";
-import Userform from "./userform";
-import UsersTable from "./usersTable";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import "./users.css";
@@ -10,9 +7,6 @@ import MainMenu from "../../MainMenu";
 
 const DriverDelivery = () => {
   const [users, setUsers] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
-  const [selectedUser, setSelectedUser] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     getUsers();
@@ -28,64 +22,7 @@ const DriverDelivery = () => {
       });
   };
 
-  const addUser = (data) => {
-    setSubmitted(true);
-
-    const payload = {
-      id: data.id,
-      did: data.did,
-      d_name: data.d_name,
-      c_name: data.c_name,
-      address: data.address,
-      instruction: data.instruction,
-      date: data.date,
-    };
-
-    Axios.post("http://localhost:3001/api/createdelivery", payload)
-      .then(() => {
-        getUsers();
-        setSubmitted(false);
-        setIsEdit(false);
-      })
-      .catch((error) => {
-        console.error("Error adding user:", error);
-      });
-  };
-
-  const updateUser = (data) => {
-    setSubmitted(true);
-
-    const payload = {
-      id: data.id,
-      did: data.did,
-      d_name: data.d_name,
-      c_name: data.c_name,
-      address: data.address,
-      instruction: data.instruction,
-      date: data.date,
-    };
-
-    Axios.post("http://localhost:3001/api/updatedelivery", payload)
-      .then(() => {
-        getUsers();
-        setSubmitted(false);
-        setIsEdit(false);
-      })
-      .catch((error) => {
-        console.error("Error updating user:", error);
-      });
-  };
-
-  const deleteUser = (data) => {
-    Axios.post("http://localhost:3001/api/deletedelivery", data)
-      .then(() => {
-        getUsers();
-      })
-      .catch((error) => {
-        console.error("Error deleting user:", error);
-      });
-  };
-
+ 
   return (
     <div>
       <MainMenu></MainMenu>

@@ -1,12 +1,13 @@
-.cont{
-    margin-left: 550px;
 
-}
-@media (max-width: 1200px) {
+@media (max-width: 1240px) {
   .sloganregister {
     display: none;
   }
-  .cont{
-    margin-left: 0;
-  }
+  
 }
+
+
+
+
+
+

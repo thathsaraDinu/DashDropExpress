@@ -6,10 +6,10 @@ import { jwtDecode } from "jwt-decode";
 function MainMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  ///////function for toggle the dropdown menu item
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
 
   /////////////import this to append the login section
   const [usertypetoken, setUserType] = useState("");
@@ -22,6 +22,7 @@ function MainMenu() {
   }, [token]);
   ////////////////////////////////////////////////////
 
+  //////logout function
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
     if (confirmLogout) {
@@ -35,7 +36,7 @@ function MainMenu() {
       {token && usertypetoken === "Admin" ? (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
-            src="dashdrop-express-high-resolution-logo-transparent.png"
+            src="/dashdrop-express-high-resolution-logo-transparent.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}
             alt="logo"
             className="text-2xl "
@@ -74,7 +75,14 @@ function MainMenu() {
                 <span>Deliveries</span>
               </Link>
             </li>
-
+            <li className="relative parent">
+              <Link
+                to="/myprofile"
+                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
+              >
+                <span>My Profile</span>
+              </Link>
+            </li>
             <li>
               <button
                 id="dropdownDefaultButton"
@@ -121,7 +129,7 @@ function MainMenu() {
                   </li>
                   <li>
                     <Link
-                      to="!#"
+                      to="/driversfeedback"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Feedbacks
@@ -164,6 +172,14 @@ function MainMenu() {
                 className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
               >
                 <span>Home</span>
+              </Link>
+            </li>
+            <li className="relative parent">
+              <Link
+                to="/myprofile"
+                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
+              >
+                <span>My Profile</span>
               </Link>
             </li>
             <li>
@@ -282,6 +298,14 @@ function MainMenu() {
               >
                 <span>Home</span>
               </Link>
+            </li>{" "}
+            <li className="relative parent">
+              <Link
+                to="/myprofile"
+                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
+              >
+                <span>My Profile</span>
+              </Link>
             </li>
             <li>
               <Link
@@ -299,9 +323,7 @@ function MainMenu() {
                 <span>My Salary</span>
               </Link>
             </li>
-
             <li></li>
-
             <li>
               <button
                 id="dropdownDefaultButton"

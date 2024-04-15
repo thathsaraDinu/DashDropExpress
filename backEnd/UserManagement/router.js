@@ -9,6 +9,7 @@ router.get("/getuserbyid/:id", controller.getUserById);
 router.delete("/deleteuser/:id", controller.deleteUser);
 router.put("/updateuser/:id", controller.updateUser);
 router.post("/loginuser", controller.loginUser);
+router.post("/verifyOTP", controller.verifyOTP);
 
 // Protected route
 

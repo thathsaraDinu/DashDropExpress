@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import MainMenu from "../../MainMenu";
-import { jwtDecode } from "jwt-decode";
+
+import FooterMain from "../../FooterMain";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
@@ -16,18 +17,18 @@ const TheUpdateForm = () => {
 
   const navigate = useNavigate();
 
+  const [togglepasswordview, setTogglePasswordView] = useState(false);
+
   /////////////import this to append the login section
-  const [usertypetoken, setUserType] = useState("");
+
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      const decodedToken = jwtDecode(token); // Corrected function call
-
-      setUserType(decodedToken.usertypetoken);
     }
   }, [token]);
   ////////////////////////////////////////////////////
 
+  /////get the user information before updating function
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getuserbyid/" + id)
@@ -42,6 +43,7 @@ const TheUpdateForm = () => {
       .catch((error) => console.error("Axios Error : ", error));
   }, [id]);
 
+  /////////////update function on submit
   const Update = (e) => {
     e.preventDefault();
 
@@ -50,7 +52,6 @@ const TheUpdateForm = () => {
       setConfPassword("");
       return; // Stop execution if passwords don't match
     }
-
     axios
       .put("http://localhost:3001/api/updateuser/" + id, {
         fullName,
@@ -71,29 +72,39 @@ const TheUpdateForm = () => {
         setEmail("");
       });
   };
+const location = useLocation();
+  const [updatetype, setUpdateType] = useState("");
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const user1 = searchParams.get("usertype");
+    if (user1) setUpdateType(user1);
+    else setUpdateType("Customer");
+  }, [location]);
+
+  ////////timout function for password visibility
+  useEffect((e) => {
+    const timer = setTimeout(() => {
+      setTogglePasswordView(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  });
+
   return (
     <div>
       {token ? (
         <div>
           <MainMenu />
-          <img
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "0",
-              width: "100%",
-              zIndex: "0",
-            }}
-            src="/pexels-pavel-danilyuk-6407556.jpg"
-            className="brightness-50 object-cover "
-            alt=""
-          ></img>
+
           <div
             style={{
+              position: "relative",
+              backgroundImage: "url('/pexels-francesco-ungaro-2325446.jpg')",
+              backgroundSize: "cover",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
+            className="backgroundimage pb-10"
           >
             <form
               onSubmit={Update}
@@ -108,7 +119,12 @@ const TheUpdateForm = () => {
               }}
               className="p-8  rounded-md  border border-gray-500"
             >
-              <h2 className="text-3xl pb-10 ">Update User</h2>
+              <h2
+                style={{ fontFamily: "tajawal", fontWeight: "500" }}
+                className="text-3xl pb-10 "
+              >
+                Update User - {updatetype}
+              </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="fullName"
@@ -187,15 +203,65 @@ const TheUpdateForm = () => {
                 >
                   Password
                 </label>
-                <input
-                  required
-                  name="password"
-                  type="password"
-                  className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
-                  id="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
+                <div className="relative w-full">
+                  <input
+                    required
+                    name="password"
+                    type={togglepasswordview ? "text" : "password"}
+                    className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
+                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    autocomplete="new-password"
+                  />
+                  <svg
+                    style={{
+                      zIndex: "10",
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    id="passwordtoggle"
+                    className={`password-toggle-icon w-6 h-6 ${
+                      togglepasswordview ? "hidden" : ""
+                    }`}
+                    onClick={(e) => setTogglePasswordView(true)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                    />
+                  </svg>
+                  <svg
+                    style={{
+                      zIndex: "20",
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    id="passwordtoggle2"
+                    className={`password-toggle-icon2 w-6 h-6 ${
+                      togglepasswordview ? "" : "hidden"
+                    }`}
+                    onClick={(e) => setTogglePasswordView(false)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
+                </div>
               </div>
 
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
@@ -221,7 +287,7 @@ const TheUpdateForm = () => {
               <div className="col-12">
                 <button
                   type="submit"
-                  className="appearance-none w-full block border-b border-grey outline-none focus:border-black hover:border-blue-800 py-2 px-2"
+                  className=" z-20 focus:outline-none text-white bg-green-700 hover:bg-green-800 ring-2 ring-white focus:ring-4 focus:ring-green-300 text-base rounded-lg text-sm px-5 py-2.5 me-2 mb-10 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
                 >
                   Update User
                 </button>
@@ -230,6 +296,7 @@ const TheUpdateForm = () => {
             <br></br>
             <hr />
           </div>
+          <FooterMain></FooterMain>
         </div>
       ) : (
         <div>You need to login to the website to access this page</div>
