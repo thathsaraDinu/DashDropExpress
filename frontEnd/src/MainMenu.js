@@ -169,7 +169,7 @@ function MainMenu() {
             </li>
             <li className="relative parent">
               <Link
-                to="!#"
+                to="/myprofile"
                 className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
               >
                 <span>My Profile</span>
@@ -291,6 +291,14 @@ function MainMenu() {
               >
                 <span>Home</span>
               </Link>
+            </li>{" "}
+            <li className="relative parent">
+              <Link
+                to="/myprofile"
+                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
+              >
+                <span>My Profile</span>
+              </Link>
             </li>
             <li>
               <Link
@@ -308,9 +316,7 @@ function MainMenu() {
                 <span>My Salary</span>
               </Link>
             </li>
-
             <li></li>
-
             <li>
               <button
                 id="dropdownDefaultButton"

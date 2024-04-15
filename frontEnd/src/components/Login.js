@@ -135,21 +135,21 @@ function Login() {
             className="bg-white bg-opacity-80 shadow-md rounded-2xl px-8 pt-6 pb-5 mb-4"
           >
             <h1
-              style={{ fontFamily: "jost", fontWeight: "600" }}
+              style={{ fontFamily: "Jost", fontWeight: "600" }}
               className="text-center text-2xl pb-8"
             >
               Login
             </h1>
             <div className="mb-4">
               <label
-                style={{ fontFamily: "jost", fontWeight: "500" }}
+                style={{ fontFamily: "Jost", fontWeight: "500" }}
                 className="block text-gray-700  font-bold mb-2"
                 htmlFor="username"
               >
                 Email
               </label>
               <input
-                style={{ fontFamily: "jost", fontWeight: "500" }}
+                style={{ fontFamily: "Jost", fontWeight: "500" }}
                 className="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
@@ -267,7 +267,7 @@ function Login() {
             className="bg-white p-5 rounded-2xl"
           >
             <label className="block text-gray-700   mb-2" htmlFor="otp">
-              Enter the OTP
+              Enter the OTP. <span>(Check your email)</span>
             </label>
             <input
               className="shadow appearance-none mb-5 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

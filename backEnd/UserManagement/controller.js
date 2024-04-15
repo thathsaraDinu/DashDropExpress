@@ -132,17 +132,21 @@ const loginUser = async (req, res) => {
       password,
       existingUser.password
     );
-    
+
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Incorrect password or email" }); // 401 Unauthorized
     }
-    
-    const msgotp = await sendOtpVerificationEmail(email);
 
-    return res
-      .status(200)
-      .json({ msgotp, message: "passmatch", user: existingUser });
-    // 200 OK
+    const msgotp = await sendOtpVerificationEmail(email);
+    if (msgotp === "The OTP has sent to your email") {
+      return res
+        .status(200)
+        .json({ msgotp, message: "passmatch", user: existingUser });
+      // 200 OK
+    } else {
+      return res.status(500).json({ msgotp });
+      // 500
+    }
   } catch (error) {
     console.error("Error logging in:", error);
     return res
@@ -174,11 +178,10 @@ const sendOtpVerificationEmail = async (email) => {
       html: `<p>Enter <b>${otp}</b> in the app to verify your email address.</p>
       <p> This code expires in <b>1 hour</b></p>`,
     };
-
-    const hashedOTP = await bcrypt.hash(otp, 10);
+    await OTP.deleteMany({ email: email });
     const newotp = new OTP({
       email: email,
-      otp: hashedOTP,
+      otp: otp,
       createdAt: Date.now(),
       expiresAt: Date.now() + 3600000,
     });
@@ -186,7 +189,7 @@ const sendOtpVerificationEmail = async (email) => {
     const savedotp = await newotp.save();
     await transporter.sendMail(mailOptions);
 
-    return "The Otp has sent to your email";
+    return "The OTP has sent to your email";
   } catch (error) {
     console.log(error);
     return "Error sending OTP";
@@ -195,20 +198,25 @@ const sendOtpVerificationEmail = async (email) => {
 
 const verifyOTP = async (req, res) => {
   try {
-    let { existingUsername, existingemail, existingusertype, otpmod } = req.body;
+    let { existingUsername, existingemail, existingusertype, otpmod } =
+      req.body;
     console.log(existingUsername);
     console.log(existingemail, existingusertype, otpmod);
-    
 
     if (!existingemail || !otpmod) {
       console.log("checkpoint1");
-      return res.status(400).json({ message: "Empty otp details are not allowed" });
+      return res
+        .status(400)
+        .json({ message: "Empty otp details are not allowed" });
     } else {
       console.log("checkpoint2");
       const otpverify = await OTP.find({ email: existingemail });
       if (otpverify.length <= 0) {
         console.log("checkpoint3");
-        return res.status(404).json({ message: "Account record does not exist or has been verified already. please sign up or log in" });
+        return res.status(404).json({
+          message:
+            "Account record does not exist or has been verified already. please sign up or log in",
+        });
       } else {
         console.log("checkpoint4");
         const { expiresAt } = otpverify[0];
@@ -217,16 +225,22 @@ const verifyOTP = async (req, res) => {
         if (expiresAt < Date.now()) {
           console.log("checkpoint5");
           await OTP.deleteMany({ email: existingemail });
-          return res.status(410).json({ message: "Code has expired. Please request again." });
+          return res
+            .status(410)
+            .json({ message: "Code has expired. Please request again." });
         } else {
           console.log("checkpoint6");
-          const validotp = await bcrypt.compare(otpmod, hashedotp);
+          const validotp = otpmod === otpverify[0].otp;
+
           if (!validotp) {
-            console.log("checkpoint7");
-            return res.status(403).json({ message: "Invalid code passed. Check your inbox." });
+            console.log("checkpoint7", validotp, otpmod, otpverify[0].otp);
+            return res
+              .status(403)
+              .json({ message: "Invalid code passed. Check your inbox." });
           } else {
             console.log("checkpoint8");
             await OTP.deleteMany({ email: existingemail });
+
             const token = jwt.sign(
               {
                 usertypetoken: existingusertype,
@@ -239,7 +253,6 @@ const verifyOTP = async (req, res) => {
               }
             );
             return res.status(200).json({
-              
               message: "Login successful",
               token,
             });
@@ -249,10 +262,11 @@ const verifyOTP = async (req, res) => {
     }
   } catch (error) {
     console.error("Error verifying OTP:", error);
-    return res.status(500).json({ message: "An error occurred while verifying OTP" });
+    return res
+      .status(500)
+      .json({ message: "An error occurred while verifying OTP" });
   }
 };
-
 
 exports.getUsers = getUsers;
 exports.addUser = addUser;
