@@ -52,10 +52,10 @@ console.log(description)
   };
 
   return (
-    <Grid
+    <form
         container
         spacing={2}
-        sx={{
+        style={{
           
           backgroundColor: "rgba(43, 149, 232,0.3)",
           border: "3px solid #000000",
@@ -80,13 +80,14 @@ console.log(description)
               width: "500px",
               display: "block",
               fontWeight: "bold",
+              marginBottom:"30px"
             }}
           >
             Feedback Form
           </Typography>
         </Grid>
         
-        <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
+        <Grid item xs={12} sm={12} sx={{ display: "flex", marginRight:"40px" }}>
           <Typography
             component={"label"}
             htmlFor="name"
@@ -95,32 +96,29 @@ console.log(description)
               marginRight: "10px",
               marginLeft: "50px",
               marginTop: "20px",
-              fontSize: "20px",
+              fontSize: "18px",
               width: "200px",
               display: "block",
               fontWeight: "900",
+              marginBottom:"30px"
             }}
           >
             Name
           </Typography>
-          <Input
+          <input
             required
             type="text"
             id="name"
             onChange={(e) => setName(e.target.value)}
             name="name"
-            sx={{
-              width: "400px",
-              marginTop: "20px",
-              fontWeight: "normal",
-              fontSize: "18px",
+            className="appearance-none  w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+                    style={{marginBottom:"30px"}}
 
-            }}
            
           />
         </Grid>
 
-        <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
+        <Grid item xs={12} sx={{ display: "flex", marginRight:"40px" }}>
           <Typography
             component={"label"}
             htmlFor="name"
@@ -129,7 +127,7 @@ console.log(description)
               marginRight: "20px",
               marginLeft: "40px",
               marginTop: "20px",
-              fontSize: "20px",
+              fontSize: "18px",
               width: "200px",
               display: "block",
               fontWeight: "900",
@@ -137,23 +135,19 @@ console.log(description)
           >
             Driver number
           </Typography>
-          <Input
+          <input
             required
             type="text"
             id="name"
             onChange={(e) => setDrivernumber(e.target.value)}
             name="name"
-            sx={{
-              width: "400px",
-              marginTop: "40px",
-              fontWeight: "normal",
-              fontSize: "18px",
-            }}
+            className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+                    
            
           />
         </Grid>
         <div style={styles.container}>
-      <h2>Give your ratings </h2>
+      <h2 style={{marginTop:"50px"}}>Give your ratings </h2>
       <div style={styles.stars}>
         {stars.map((_, index) => {
           return (
@@ -194,6 +188,7 @@ console.log(description)
     transition: "background-color 0.3s ease", 
   }}
   className="button"
+  type="submit"
 >
   Submit
 </button>
@@ -201,7 +196,7 @@ console.log(description)
       
     </div>
         
-       </Grid>
+       </form>
     
   );
 };
