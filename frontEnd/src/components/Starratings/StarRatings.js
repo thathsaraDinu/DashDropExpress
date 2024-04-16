@@ -2,7 +2,9 @@ import { useState } from "react";
 import './App.css';
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
-import { Grid, Input, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 const colors = {
     orange: "#FFBA5A",
@@ -52,6 +54,8 @@ console.log(description)
   };
 
   return (
+    <div>
+      
     <form
         container
         spacing={2}
@@ -197,7 +201,8 @@ console.log(description)
     </div>
         
        </form>
-    
+       
+    </div>
   );
 };
 

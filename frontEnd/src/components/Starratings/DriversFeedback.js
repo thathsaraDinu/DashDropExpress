@@ -3,6 +3,8 @@ import FeedbackTable from './feedbacktable';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import StarRatings from "./StarRatings";
+import FooterMain from '../../FooterMain';
+import MainMenu from '../../MainMenu';
 
 const DriversFeedback=() =>{
   const [feedbacks, setFeedbacks] = useState([]);
@@ -22,8 +24,10 @@ const DriversFeedback=() =>{
   
   return(
     <div>
+      <MainMenu></MainMenu>
    <StarRatings/> 
    <FeedbackTable rows={feedbacks}  />
+   <FooterMain></FooterMain>
    </div>
 
   )

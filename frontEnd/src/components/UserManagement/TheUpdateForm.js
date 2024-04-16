@@ -5,6 +5,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import MainMenu from "../../MainMenu";
 
 import FooterMain from "../../FooterMain";
+import { jwtDecode } from "jwt-decode";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const TheUpdateForm = () => {
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confpassword, setConfPassword] = useState("");
+  const [tokenemail, setTokenEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,6 +26,9 @@ const TheUpdateForm = () => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
+      const decodedToken = jwtDecode(token); // Corrected function call
+
+      setTokenEmail(decodedToken.useremail);
     }
   }, [token]);
   ////////////////////////////////////////////////////
@@ -72,7 +77,7 @@ const TheUpdateForm = () => {
         setEmail("");
       });
   };
-const location = useLocation();
+  const location = useLocation();
   const [updatetype, setUpdateType] = useState("");
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -91,7 +96,8 @@ const location = useLocation();
 
   return (
     <div>
-      {token ? (
+      {(token && tokenemail === "thathsaradinuwan@gmail.com") ||
+      (token && tokenemail === email) ? (
         <div>
           <MainMenu />
 
@@ -299,7 +305,10 @@ const location = useLocation();
           <FooterMain></FooterMain>
         </div>
       ) : (
-        <div>You need to login to the website to access this page</div>
+        <div className="p-5 text-2xl">
+          You need to be a User Manager or the owner of this account to update
+          account
+        </div>
       )}
     </div>
   );
