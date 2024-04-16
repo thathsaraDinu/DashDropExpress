@@ -50,7 +50,7 @@ function StarRatings() {
   };
 
   return (
-    <div>
+   
       
     <form
       container
@@ -193,6 +193,7 @@ function StarRatings() {
       </div>
 
     </form>
+
 
   );
 }
