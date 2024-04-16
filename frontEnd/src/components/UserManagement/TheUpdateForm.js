@@ -29,7 +29,6 @@ const TheUpdateForm = () => {
       const decodedToken = jwtDecode(token); // Corrected function call
 
       setTokenEmail(decodedToken.useremail);
-
     }
   }, [token]);
   ////////////////////////////////////////////////////
@@ -78,7 +77,7 @@ const TheUpdateForm = () => {
         setEmail("");
       });
   };
-const location = useLocation();
+  const location = useLocation();
   const [updatetype, setUpdateType] = useState("");
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -306,7 +305,10 @@ const location = useLocation();
           <FooterMain></FooterMain>
         </div>
       ) : (
-        <div className="p-5 text-2xl">You need to be a User Manager or the owner of this account to update account</div>
+        <div className="p-5 text-2xl">
+          You need to be a User Manager or the owner of this account to update
+          account
+        </div>
       )}
     </div>
   );
