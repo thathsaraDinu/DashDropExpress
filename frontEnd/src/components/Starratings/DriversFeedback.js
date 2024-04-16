@@ -1,14 +1,14 @@
-
-import FeedbackTable from './feedbacktable';
+import FeedbackTable from "./feedbacktable";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import StarRatings from "./StarRatings";
 
-const DriversFeedback=() =>{
+const DriversFeedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/feedbacks")
+    axios
+      .get("http://localhost:3001/api/feedbacks")
       .then((response) => {
         setFeedbacks(response.data?.response || []);
       })
@@ -17,15 +17,11 @@ const DriversFeedback=() =>{
       });
   }, [feedbacks]);
 
-  
-
-  
-  return(
+  return (
     <div>
-   <StarRatings/> 
-   <FeedbackTable rows={feedbacks}  />
-   </div>
-
-  )
-}
+      <StarRatings />
+      <FeedbackTable rows={feedbacks} />
+    </div>
+  );
+};
 export default DriversFeedback;

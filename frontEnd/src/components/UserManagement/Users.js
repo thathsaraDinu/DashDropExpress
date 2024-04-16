@@ -13,7 +13,7 @@ import FooterMain from "../../FooterMain";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
- 
+  const [tokenemail, setTokenEmail] = useState("");
 
   ///////////get users to show
   useEffect(() => {
@@ -32,6 +32,7 @@ const Users = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
+      setTokenEmail(decodedToken.useremail);
 
       setUserType(decodedToken.usertypetoken);
     }
@@ -40,13 +41,17 @@ const Users = () => {
 
   //////delete function
   const handleDelete = (id) => {
-    axios
-      .delete("http://localhost:3001/api/deleteuser/" + id)
-      .then((response) => {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+    if (token && tokenemail === "thathsaradinuwan@gmail.com") {
+      axios
+        .delete("http://localhost:3001/api/deleteuser/" + id)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("You need to be a User Manager delete the account");
+    }
   };
 
   ////////confirm alert for deletion
@@ -60,7 +65,6 @@ const Users = () => {
       // User chose not to delete, handle accordingly
     }
   }
- 
 
   return (
     <div>

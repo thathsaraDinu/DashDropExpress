@@ -243,6 +243,7 @@ const verifyOTP = async (req, res) => {
 
             const token = jwt.sign(
               {
+                
                 usertypetoken: existingusertype,
                 username: existingUsername,
                 useremail: existingemail,
