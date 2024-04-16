@@ -4,6 +4,8 @@ import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { Grid, Typography } from "@mui/material";
 
+
+
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -48,6 +50,8 @@ function StarRatings() {
   };
 
   return (
+    <div>
+      
     <form
       container
       spacing={2}
@@ -187,7 +191,9 @@ function StarRatings() {
           Submit
         </button>
       </div>
+
     </form>
+
   );
 }
 
