@@ -1,17 +1,16 @@
-
-import FeedbackTable from './feedbacktable';
+import FeedbackTable from "./feedbacktable";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UpdateStarRatings from './UpdateStarRatings';
-import { useParams } from 'react-router-dom';
+import UpdateStarRatings from "./UpdateStarRatings";
+import { useParams } from "react-router-dom";
 
-
-const Driversfeedbackupdate = () =>{
+const Driversfeedbackupdate = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const { id } = useParams();
-  console.log("id is"+id);
+  console.log("id is" + id);
   useEffect(() => {
-    axios.get("http://localhost:3001/api/feedbacks")
+    axios
+      .get("http://localhost:3001/api/feedbacks")
       .then((response) => {
         setFeedbacks(response.data?.response || []);
       })
@@ -20,14 +19,12 @@ const Driversfeedbackupdate = () =>{
       });
   }, []);
 
-  
-  return(
+  return (
     <div>
-   <UpdateStarRatings id={id}/> 
-   
-   <FeedbackTable rows={feedbacks} />
-    </div>
+      <UpdateStarRatings id={id} />
 
-  )
-}
+      <FeedbackTable rows={feedbacks} />
+    </div>
+  );
+};
 export default Driversfeedbackupdate;
