@@ -51,7 +51,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
       spacing={2}
       sx={{
         
-        backgroundColor: "#ffffff",
+        
         marginBottom: "30px",
         width:"500px",  // Fix the width property
         marginLeft:'50px',

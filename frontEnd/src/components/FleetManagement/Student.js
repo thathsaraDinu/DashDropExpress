@@ -15,7 +15,7 @@ const Student = () => {
      const[selectedStudent,setSelectedStudent]=useState('');
      const[isEdit,setIsEdit]=useState(false);
      const [monthlyCost, setMonthlyCost] = useState(0); // Add state variable for monthly cost
-     const [distanceTraveled, setDistanceTraveled] = useState(0); // Add state variable for distance traveled
+     
      const [startDistance, setStartDistance] = useState(0); // State variable for start distance
      const [endDistance, setEndDistance] = useState(0); // State variable for end distance
      const [selectedVehicleType, setSelectedVehicleType] = useState('car'); // Add state variable for selected vehicle type

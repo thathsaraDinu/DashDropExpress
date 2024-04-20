@@ -31,7 +31,7 @@ const StudentTable = ({rows,selectedStudent,deleteStudent}) => {
                     
                         <Button
                             sx={{margin:'0px 10px',
-                                  margin: "auto",
+                                  
                                    marginBottom: "20px",
                                     backgroundColor: "#006400",
                                      color: "#ffffff",
@@ -59,7 +59,7 @@ const StudentTable = ({rows,selectedStudent,deleteStudent}) => {
                         </Button>
                         <Button
                             sx={{margin:'0px 10px',
-                                  margin: "auto",
+                                  
                                  marginBottom: "20px",
                                   backgroundColor: "#ff0000",
                                   color: "#ffffff",
