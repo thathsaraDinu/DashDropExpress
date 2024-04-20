@@ -3,6 +3,7 @@ import Studentform from "./Studentform";
 import StudentTable from "./StudentTable";
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import MainMenu from "../../MainMenu";
 
 
 
@@ -120,6 +121,8 @@ const Student = () => {
      
 
       return(
+        <div>
+          <MainMenu></MainMenu>
         <div style={{ position: "relative" }}>
         <img
           style={{
@@ -139,7 +142,7 @@ const Student = () => {
            sx={{
             
              margin:'auto',
-             marginTop:'100px',
+             paddingTop:'100px',
              
            }}>
             <Studentform
@@ -158,8 +161,8 @@ const Student = () => {
          deleteStudent={data =>window.confirm('Are you sure?')&& deleteStudent(data)}
         />
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-  <Box
-          sx={{
+  <div
+          style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -169,7 +172,7 @@ const Student = () => {
             padding: "10px",
             marginTop: "20px",
             backgroundColor: "Navy",
-            maxWidth: "200px"
+            width: "300px"
           
           }}
         >
@@ -185,9 +188,10 @@ const Student = () => {
           <button onClick={calculateMonthlyCost} style={{ backgroundColor: 'green', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px',margin: '5px' }}>Calculate Monthly oil Cost</button>
 
           <p style={{ color: 'white' }}>Monthly oilCost: Rs.{monthlyCost}</p>
-        </Box>
+        </div>
         </div>
       </Box>
+    </div>
     </div>
   );
 }
