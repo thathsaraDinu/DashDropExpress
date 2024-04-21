@@ -54,18 +54,24 @@ function StarRatings() {
   };
 
   return (
+    <div style={{
+      
+      paddingTop: "100px",
+
+    }}>
     <form
       container
       spacing={2}
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.3)",
+        backgroundColor: "rgba(43, 149, 232,0.7)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
         width: "600px",
         height: "650px",
-        marginTop: "10px",
+        
+
       }}
     >
       <Grid item xs={12}>
@@ -198,6 +204,7 @@ function StarRatings() {
         </button>
       </div>
     </form>
+    </div>
   );
 }
 
