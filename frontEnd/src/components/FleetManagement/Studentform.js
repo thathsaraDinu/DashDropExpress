@@ -6,7 +6,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [model, setModel] = useState('');
-  const [selectedyear,setSelectedYear]=useState('');
+  const [selectedyear,setSelectedYear]=useState(''); 
   const [insuranceDetails,setInsuranceDetails]=useState('');
   
 
