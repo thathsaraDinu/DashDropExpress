@@ -6,7 +6,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [model, setModel] = useState('');
-  const [selectedyear,setSelectedYear]=useState(''); 
+  const [selectedyear,setSelectedYear]=useState('');
   const [insuranceDetails,setInsuranceDetails]=useState('');
   
 
@@ -15,7 +15,22 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
   for (let year = 2000; year <= 2020; year++) {
     years.push(year);
   }
+  const handleSubmit = () => {
+    if (!registrationNumber) {
+      alert('Please enter the Registration Number.');
+      return;
+    }
 
+    if (isEdit) {
+      updateStudent({ vin, registrationNumber, vehicleType, model, selectedyear, insuranceDetails });
+    } else {
+      addStudent({ vin, registrationNumber, vehicleType, model, selectedyear, insuranceDetails });
+    }
+  };
+
+
+  
+  
 
 
 
@@ -51,7 +66,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
       spacing={2}
       sx={{
         
-        
+        backgroundColor: "#ffffff",
         marginBottom: "30px",
         width:"500px",  // Fix the width property
         marginLeft:'50px',
@@ -239,7 +254,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
           },
           
         }}
-         onClick={() =>isEdit ? updateStudent({vin,registrationNumber,vehicleType,model,selectedyear,insuranceDetails}) :addStudent({vin,registrationNumber,vehicleType,model,selectedyear,insuranceDetails})}
+        onClick={handleSubmit}
       >
         {
           isEdit ? 'update' :'submit'
