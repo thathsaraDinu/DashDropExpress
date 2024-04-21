@@ -89,11 +89,20 @@ const PackageForm = ({
           ID
         </Typography>
         <Input
+        required
           type="text"
           id="id"
           name="id"
           sx={{ width: "400px" }}
           value={id}
+          
+          onBlur={()=>{
+            if(id.length>4){
+              alert('Id must be less than 4');
+              return;
+            }
+            
+          }}
           onChange={(e) => setId(e.target.value)}
         />
       </Grid>
@@ -174,6 +183,13 @@ const PackageForm = ({
           sx={{ width: "400px" }}
           value={packageWeight}
           onChange={(e) => setPackageWeight(e.target.value)}
+          onBlur={()=>{
+            if(packageWeight.length>5){
+              alert('Length must be less than 5');
+              return;
+            }
+          }}
+
         />
       </Grid>
 <Grid sx={{display:"flex", flexDirection:"row", justifyContent:"center", alignItems:"center", width:"100%"}}>
