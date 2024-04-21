@@ -141,7 +141,7 @@ function StarRatings() {
         </Typography>
         <input
           required
-          type="number" // Changed to type number for numeric input
+          type="text" // Changed to type number for numeric input
           id="drivernumber"
           onChange={handleChangeDriverNumber}
           value={drivernumber}
