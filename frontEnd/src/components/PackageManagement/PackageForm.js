@@ -41,7 +41,7 @@ const PackageForm = ({
       setCustomerName(data.customerName);
       setPackageType(data.packageType);
       setPackageWeight(data.packageWeight);
-      console.log("Package: "+packageType);
+      
     }
   }, [data]);
 
