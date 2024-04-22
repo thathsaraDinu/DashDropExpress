@@ -2,23 +2,26 @@ import { Grid, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
-  const [id, setId] = useState("");
-  const [did, setDid] = useState("");
+  const [id, setId] = useState();
+  const [did, setDid] = useState();
   const [d_name, setDname] = useState("");
   const [c_name, setCname] = useState("");
   const [address, setAddress] = useState("");
   const [instruction, setInstruction] = useState("");
   const [date, setDate] = useState("");
+  const [orderNumberError, setOrderNumberError] = useState("");
+  const [isOrderNumberValid, setIsOrderNumberValid] = useState(false);
 
   useEffect(() => {
     if (!submitted) {
-      setId(0);
-      setDid(0);
+      setId();
+      setDid();
       setDname("");
       setCname("");
       setAddress("");
       setInstruction("");
       setDate("");
+      setIsOrderNumberValid(false);
     }
   }, [submitted]);
 
@@ -31,26 +34,52 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
       setAddress(data.address);
       setInstruction(data.instruction);
       setDate(data.date);
+      setIsOrderNumberValid(true);
     }
   }, [data]);
 
+  const handleOrderNumberChange = (value) => {
+    if (/^O\d{4}$/.test(value)) {
+      setId(value);
+      setIsOrderNumberValid(true);
+      setOrderNumberError("");
+    } else {
+      setOrderNumberError(
+        "Order number must start with O and contain 4 numbers."
+      );
+      setIsOrderNumberValid(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    isEdit
+      ? updateUser({
+          id,
+          did,
+          d_name,
+          c_name,
+          address,
+          instruction,
+          date,
+        })
+      : addUser({
+          id,
+          did,
+          d_name,
+          c_name,
+          address,
+          instruction,
+          date,
+        });
+
+    setId("");
+    setDid("");
+  };
+
   return (
     <div>
-      <form
-        onSubmit={() =>
-          isEdit
-            ? updateUser({
-                id,
-                did,
-                d_name,
-                c_name,
-                address,
-                instruction,
-                date,
-              })
-            : addUser({ id, did, d_name, c_name, address, instruction, date })
-        }
-      >
+      <form onSubmit={handleSubmit}>
         <Grid
           sx={{
             backgroundColor: "rgba(192,192,192,0.8)",
@@ -80,7 +109,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               Order Delivery Form
             </Typography>
           </Grid>
-
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
             <Typography
               component={"label"}
@@ -110,8 +138,15 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
                 fontSize: "18px",
               }}
               value={id}
-              onChange={(e) => setId(e.target.value)}
+              error={orderNumberError !== ""}
+              onChange={(e) => handleOrderNumberChange(e.target.value)}
+              disabled={isOrderNumberValid}
             />
+            {orderNumberError && (
+              <Typography sx={{ color: "red", marginTop: "5px" }}>
+                {orderNumberError}
+              </Typography>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
