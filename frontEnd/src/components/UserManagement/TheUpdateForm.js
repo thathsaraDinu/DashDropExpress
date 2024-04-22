@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
+  const [userid, setUserID] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ const TheUpdateForm = () => {
       .get("http://localhost:3001/api/getuserbyid/" + id)
       .then((response) => {
         console.log(response);
+        setUserID(response.data.userid);
         setFullName(response.data.fullName);
         setPhoneNumber(response.data.phoneNumber);
         setEmail(response.data.email);
@@ -133,6 +135,25 @@ const TheUpdateForm = () => {
               </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
+                  htmlFor="userid"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+                >
+                  User ID
+                </label>
+                <input
+                disabled
+                  required
+                  name="userid"
+                  type="text"
+                  className="rounded-full appearance-none w-full block  border-grey outline-none py-2 px-4"
+                  
+                  id="userid"
+                  value={userid}
+                  
+                />
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
+                <label
                   htmlFor="fullName"
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
                 >
@@ -211,7 +232,7 @@ const TheUpdateForm = () => {
                 </label>
                 <div className="relative w-full">
                   <input
-                    required
+                    
                     name="password"
                     type={togglepasswordview ? "text" : "password"}
                     className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
@@ -278,7 +299,7 @@ const TheUpdateForm = () => {
                   Confirm Password
                 </label>
                 <input
-                  required
+                  
                   name="confpassword"
                   type="password"
                   className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"

@@ -34,6 +34,20 @@ const getUserById = (req, res) => {
     .catch((err) => res.json(err));
 };
 
+const getUserByEmail = (req, res) => {
+  const email = req.query.email;
+  
+  User.findOne({ email: email })
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ message: "User not found" });
+      }
+    })
+    .catch((err) => res.json(err));
+};
+
 const addUser = async (req, res, next) => {
   try {
     const { fullName, phoneNumber, email, address, usertype, password } =
@@ -51,7 +65,33 @@ const addUser = async (req, res, next) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+ // Query the database to find the last user of each type
+    const lastAdmin = await User.findOne({ usertype: "Admin" }).sort({ _id: -1 });
+    const lastDriver = await User.findOne({ usertype: "Driver" }).sort({ _id: -1 });
+    const lastCustomer = await User.findOne({ usertype: "Customer" }).sort({ _id: -1 });
+
+    // Generate the next user ID 
+    let nextUserID;
+    switch (usertype) {
+      case "Admin":
+        nextUserID = lastAdmin ? parseInt(lastAdmin.userid.substring(1)) + 1 : 1;
+        break;
+      case "Driver":
+        nextUserID = lastDriver ? parseInt(lastDriver.userid.substring(1)) + 1 : 1;
+        break;
+      case "Customer":
+        nextUserID = lastCustomer ? parseInt(lastCustomer.userid.substring(1)) + 1 : 1;
+        break;
+      default:
+        nextUserID = 1; // Default to 1 if no previous user of the same type exists
+    }
+
+    // Generate the next user ID with the appropriate prefix
+    const prefix = usertype.charAt(0).toUpperCase();
+    const userid = `${prefix}${nextUserID.toString().padStart(4, '0')}`;
+console.log("userID " +  userid);
     const newUser = new User({
+      userid,
       fullName,
       phoneNumber,
       email,
@@ -59,6 +99,8 @@ const addUser = async (req, res, next) => {
       usertype,
       password: hashedPassword, // Store hashed password in the database
     });
+
+    
 
     const savedUser = await newUser.save();
 
@@ -100,6 +142,7 @@ const updateUser = async (req, res) => {
       address,
       usertype,
     };
+    console.log(fullName, phoneNumber, email, address, usertype, password);
 
     // If password is provided, add it to the updateFields
     if (hashedPassword) {
@@ -240,9 +283,10 @@ const verifyOTP = async (req, res) => {
           } else {
             console.log("checkpoint8");
             await OTP.deleteMany({ email: existingemail });
-
+            console.log(existingemail);
             const token = jwt.sign(
               {
+                
                 usertypetoken: existingusertype,
                 username: existingUsername,
                 useremail: existingemail,
@@ -275,3 +319,4 @@ exports.deleteUser = deleteUser;
 exports.getUserById = getUserById;
 exports.loginUser = loginUser;
 exports.verifyOTP = verifyOTP;
+exports.getUserByEmail = getUserByEmail;

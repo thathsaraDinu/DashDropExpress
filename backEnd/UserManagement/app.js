@@ -14,6 +14,12 @@ app.get("/users", (req, res) => {
   });
 });
 
+app.get("/getuserbyemail", (req, res) => {
+  controller.getUsers((callback) => {
+    res.send(callback);
+  });
+});
+
 app.get("/getuserbyid/:id", (req, res) => {
   controller.getUserById((callback) => {
     res.send(callback);
