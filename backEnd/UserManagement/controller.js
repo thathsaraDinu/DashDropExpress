@@ -89,7 +89,7 @@ const addUser = async (req, res, next) => {
     // Generate the next user ID with the appropriate prefix
     const prefix = usertype.charAt(0).toUpperCase();
     const userid = `${prefix}${nextUserID.toString().padStart(4, '0')}`;
-console.log("userID " +  userid);
+
     const newUser = new User({
       userid,
       fullName,
@@ -142,7 +142,7 @@ const updateUser = async (req, res) => {
       address,
       usertype,
     };
-    console.log(fullName, phoneNumber, email, address, usertype, password);
+    
 
     // If password is provided, add it to the updateFields
     if (hashedPassword) {
