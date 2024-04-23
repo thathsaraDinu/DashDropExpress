@@ -194,7 +194,7 @@ function MainMenu() {
 
             <li>
               <Link
-                to="!#"
+                to="/tickets"
                 className="transition-all duration-500 ease-in-out flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-ternary"
               >
                 <span>Contact Us</span>
@@ -255,7 +255,7 @@ function MainMenu() {
                   </li>
                   <li>
                     <Link
-                      to="!#"
+                      to="/tickets"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Help Desk
