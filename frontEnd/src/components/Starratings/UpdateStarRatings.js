@@ -126,6 +126,7 @@ function UpdateStarRatings() {
           type="text"
           id="name"
           onChange={(e) => setName(e.target.value)}
+          value={name} 
           name="name"
           className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
           style={{ marginBottom: "10px" }}
