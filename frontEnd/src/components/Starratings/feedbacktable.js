@@ -34,7 +34,7 @@ const FeedbackTable = ({ rows }) => {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{marginBottom:"50px"}}>
       <Table>
         <TableHead>
           <TableRow>

@@ -40,6 +40,12 @@ function StarRatings() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+     if (currentValue === 0) {
+      alert("Please select a rating.");
+      return;
+    }
+
+
     axios
       .post("http://localhost:3001/api/createfeedbacks", {
         name,
@@ -61,7 +67,6 @@ function StarRatings() {
     }}>
     <form
       container
-      spacing={2}
       style={{
         backgroundColor: "rgba(43, 149, 232,0.7)",
         border: "3px solid #000000",
@@ -70,7 +75,7 @@ function StarRatings() {
         display: "block",
         width: "600px",
         height: "650px",
-        
+        padding:"10px"
 
       }}
     >
@@ -79,32 +84,31 @@ function StarRatings() {
           component={"h1"}
           sx={{
             color: "#000000",
-            marginRight: "20px",
-            marginLeft: "100px",
-            marginTop: "10px",
+            textAlign:"center",
+            marginTop: "20px",
             fontSize: "50px",
-            width: "500px",
             display: "block",
             fontWeight: "bold",
             marginBottom: "30px",
+            fontFamily:"jost"
           }}
         >
           Feedback Form
         </Typography>
       </Grid>
 
-      <Grid item xs={12} sm={12} sx={{ display: "flex", marginRight: "40px" }}>
+      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
             color: "#000000",
-            marginRight: "10px",
-            marginLeft: "50px",
+            marginRight: "20px",
             marginTop: "20px",
-            fontSize: "18px",
-            width: "200px",
+            fontSize: "20px",
+            width:"200px",
             display: "block",
+            textAlign:"left",
             fontWeight: "900",
             marginBottom: "30px",
           }}
@@ -117,24 +121,25 @@ function StarRatings() {
           id="name"
           onChange={(e) => setName(e.target.value)}
           name="name"
-          className="appearance-none  w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
-          style={{ marginBottom: "30px" }}
+          className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         />
       </Grid>
 
-      <Grid item xs={12} sx={{ display: "flex", marginRight: "40px" }}>
+      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
             color: "#000000",
             marginRight: "20px",
-            marginLeft: "40px",
             marginTop: "20px",
-            fontSize: "18px",
-            width: "200px",
+            fontSize: "20px",
+            width:"200px",
             display: "block",
+            textAlign:"left",
             fontWeight: "900",
+            marginBottom: "30px",
           }}
         >
           Driver number
@@ -146,14 +151,15 @@ function StarRatings() {
           onChange={handleChangeDriverNumber}
           value={drivernumber}
           name="drivernumber"
-          className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+          className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         />
       </Grid>
 
       {/* Rest of your form */}
 
       <div style={styles.container}>
-        <h2 style={{ marginTop: "50px" }}>Give your ratings </h2>
+        <h2 style={{ marginTop: "20px" }}>Give your ratings </h2>
         <div style={styles.stars}>
           {stars.map((_, index) => {
             return (
@@ -188,7 +194,7 @@ function StarRatings() {
           style={{
             border: "1px solid #a9a9a9",
             borderRadius: 5,
-            width: 300,
+            width: 100,
             padding: 10,
             backgroundColor: "#0B8BEA",
             color: "black",
