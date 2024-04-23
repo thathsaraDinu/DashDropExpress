@@ -9,8 +9,6 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
   const [selectedyear,setSelectedYear]=useState('');
   const [insuranceDetails,setInsuranceDetails]=useState('');
   
-
-
   const years= [];
   for (let year = 2000; year <= 2020; year++) {
     years.push(year);
@@ -27,11 +25,6 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
       addStudent({ vin, registrationNumber, vehicleType, model, selectedyear, insuranceDetails });
     }
   };
-
-
-  
-  
-
 
 
   useEffect(() => {
@@ -72,13 +65,13 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
         marginLeft:'50px',
         marginTop:'50px',
         border: '#1px solid #333',
-        padding:"20px",
+        padding:"30px",
         borderRadius: "20px", 
         
       }}
       
     >
-      <Grid sx={{ width:"400px", display: 'flex',
+      <Grid sx={{ width:"100%", display: 'flex',
         flexDirection: 'column', gap:"20px" }}>
         <Typography component={'h1'} sx={{ color: '#000000', fontSize: '24px', textAlign: 'center'  }}> Add Vehicle Details</Typography>
       
@@ -91,7 +84,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
             color: "#000000",
             marginRight: "20px",
             fontSize: "16px",
-            width: "100px",
+            width: "250px",
             display: "block",
           }}
         >
@@ -115,7 +108,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
             color: "#000000",
             marginRight: "20px",
             fontSize: "16px",
-            width: "100px",
+            width: "250px",
             display: "block",
           }}
         >
@@ -140,7 +133,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
             color: "#000000",
             marginRight: "20px",
             fontSize: "16px",
-            width: "100px",
+            width: "250px",
             display: "block",
           }}
         >
@@ -167,7 +160,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
         color: "#000000",
         marginRight: "20px",
         fontSize: "16px",
-        width: "100px",
+        width: "250px",
         display: "block",
     }}
       >
@@ -191,7 +184,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
           color: "#000000",
           marginRight: "20px",
           fontSize: "16px",
-          width: "100px",
+          width: "250px",
           display: "block",
         }}
       >
@@ -221,7 +214,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
         color: "#000000",
         marginRight: "20px",
         fontSize: "16px",
-        width: "100px",
+        width: "250px",
         display: "block",
       }}
     >
@@ -246,7 +239,6 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
           marginBottom: "20px",
           backgroundColor: "#008000",
           color: "#FFFFFF",
-          marginLeft: "15px",
           marginTop: "20px",
           "&:hover": {
             opacity: 0.7,

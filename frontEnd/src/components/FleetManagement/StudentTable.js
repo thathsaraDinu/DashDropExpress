@@ -5,8 +5,8 @@ import { useState } from "react";
 const StudentTable = ({rows,selectedStudent,deleteStudent}) => {
     const [search, setSearch] = useState("");
     return(
-        <div><div className="flex justify-end">
-        <div className="w-80 float-right">
+        <div className="p-10"><div className="mt-10 flex justify-end">
+        <div className="w-80 float-right mb-5">
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only"
