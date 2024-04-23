@@ -60,7 +60,7 @@ function MainMenu() {
             </li>
             <li className="relative parent">
               <Link
-                to="!#"
+                to="/package"
                 className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
               >
                 <span>Packages</span>
@@ -160,7 +160,7 @@ function MainMenu() {
       ) : token && usertypetoken === "Customer" ? (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
-            src="dashdrop-express-high-resolution-logo-transparent.png"
+            src="/dashdrop-express-high-resolution-logo-transparent.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}
             alt="logo"
             className="text-2xl "
@@ -254,7 +254,7 @@ function MainMenu() {
                   </li>
                   <li>
                     <Link
-                      to="!#"
+                      to="/driversfeedback"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Feedbacks
@@ -285,7 +285,7 @@ function MainMenu() {
       ) : token && usertypetoken === "Driver" ? (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
-            src="dashdrop-express-high-resolution-logo-transparent.png"
+            src="/dashdrop-express-high-resolution-logo-transparent.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}
             alt="logo"
             className="text-2xl "

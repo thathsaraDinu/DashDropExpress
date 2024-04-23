@@ -20,7 +20,12 @@ const DriversFeedback = () => {
   }, [feedbacks]);
 
   return (
-    <div>
+    <div style={{
+      
+      backgroundImage: "url('/Starrating3.jpg')",
+      backgroundSize: "cover",
+    }}
+    className="backgroundimage  ">
 
       <MainMenu></MainMenu>
    <StarRatings/> 
