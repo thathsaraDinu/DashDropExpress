@@ -14,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
   const navigate = useNavigate();
   return (
-    <div>
+    <div style={
+      {marginBottom:"50px"}
+    }>
       <TableContainer
         sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
         component={Paper}

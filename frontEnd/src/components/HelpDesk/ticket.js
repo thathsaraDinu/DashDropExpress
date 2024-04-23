@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import Userform from "./ticketform";
-import UsersTable from "./ticketTable";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import MainMenu from "../../MainMenu";
 import FooterMain from "../../FooterMain";
+import TicketForm from "./ticketform";
+import TicketsTable from "./ticketTable";
 
 const Ticket = () => {
   const [users, setUsers] = useState([]);
@@ -79,26 +79,26 @@ const Ticket = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundImage: "url('/pexels-mart-production-7706373.jpg')" }}
+      className="backgroundimage"
+    >
       <MainMenu></MainMenu>
-    <div className="body1">
-      <img
-        className="image1"
-      ></img>
       <Box
         sx={{
           width: "calc(100% - 100px)",
           margin: "auto",
+          
         }}
       >
-        <Userform
+        <TicketForm
           addUser={addUser}
           updateUser={updateUser}
           submitted={submitted}
           data={selectedUser}
           isEdit={isEdit}
         />
-        <UsersTable
+        <TicketsTable
           rows={users}
           selectedUser={(data) => {
             setSelectedUser(data);
@@ -108,9 +108,8 @@ const Ticket = () => {
             window.confirm("Are you Sure?") && deleteUser(data)
           }
         />
-      </Box>
-    </div>
-    <FooterMain></FooterMain>
+      </Box>{" "}
+      <FooterMain></FooterMain>
     </div>
   );
 };
