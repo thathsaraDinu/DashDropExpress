@@ -190,14 +190,7 @@ function MainMenu() {
                 <span>Place an Order</span>
               </Link>
             </li>
-            <li className="relative parent">
-              <Link
-                to="#!"
-                className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
-              >
-                <span>Add a Package</span>
-              </Link>
-            </li>
+            
 
             <li>
               <Link
