@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { Grid, Typography } from "@mui/material";
+
 
 const colors = {
   orange: "#FFBA5A",
@@ -28,11 +29,17 @@ function StarRatings() {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
-  const Submit = (e) => {
-    console.log(name);
-    console.log(drivernumber);
-    console.log(currentValue);
-    console.log(description);
+
+  const handleChangeDriverNumber = (e) => {
+    const newValue = e.target.value;
+    if (newValue < 0) {
+      alert("Please enter a positive number for the driver number.");
+      return;
+    }
+    setDrivernumber(newValue);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:3001/api/createfeedbacks", {
@@ -48,18 +55,24 @@ function StarRatings() {
   };
 
   return (
+    <div style={{
+      
+      paddingTop: "100px",
+
+    }}>
     <form
       container
       spacing={2}
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.3)",
+        backgroundColor: "rgba(43, 149, 232,4)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
         width: "600px",
         height: "650px",
-        marginTop: "10px",
+        
+
       }}
     >
       <Grid item xs={12}>
@@ -129,13 +142,17 @@ function StarRatings() {
         </Typography>
         <input
           required
-          type="text"
-          id="name"
-          onChange={(e) => setDrivernumber(e.target.value)}
-          name="name"
+          type="text" // Changed to type number for numeric input
+          id="drivernumber"
+          onChange={handleChangeDriverNumber}
+          value={drivernumber}
+          name="drivernumber"
           className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
         />
       </Grid>
+
+      {/* Rest of your form */}
+
       <div style={styles.container}>
         <h2 style={{ marginTop: "50px" }}>Give your ratings </h2>
         <div style={styles.stars}>
@@ -163,18 +180,18 @@ function StarRatings() {
         </div>
         <textarea
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Add a comments here:"
+          placeholder="Add a comment here:"
           style={styles.textarea}
         />
 
         <button
-          onClick={Submit}
+          onClick={handleSubmit}
           style={{
             border: "1px solid #a9a9a9",
             borderRadius: 5,
             width: 300,
             padding: 10,
-            backgroundColor: "#0B8BEA",
+            backgroundColor: "#3A09E7",
             color: "black",
             fontSize: 16,
             fontWeight: "bold",
@@ -188,6 +205,7 @@ function StarRatings() {
         </button>
       </div>
     </form>
+    </div>
   );
 }
 

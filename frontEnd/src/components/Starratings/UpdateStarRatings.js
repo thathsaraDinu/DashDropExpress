@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
-import { Grid, Input, Typography } from "@mui/material";
+import { Grid,  Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
 const colors = {
@@ -63,18 +63,24 @@ function UpdateStarRatings() {
   };
 
   return (
-    <Grid
+    <div style={{
+      
+      paddingTop: "100px",
+
+    }}>
+    <form
       container
       spacing={2}
-      sx={{
-        backgroundColor: "rgba(43, 86, 232,0.3)",
+      style={{
+        backgroundColor: "rgba(43, 149, 232,4)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
-        width: "600px",
+        width: "700px",
         height: "650px",
-        marginTop: "10px",
+        
+
       }}
     >
       <Grid item xs={12}>
@@ -89,6 +95,7 @@ function UpdateStarRatings() {
             width: "500px",
             display: "block",
             fontWeight: "bold",
+            marginBottom: "30px",
           }}
         >
           Feedback Form
@@ -102,29 +109,27 @@ function UpdateStarRatings() {
           sx={{
             color: "#000000",
             marginRight: "10px",
-            marginLeft: "50px",
+            marginLeft: "20px",
             marginTop: "20px",
             fontSize: "20px",
             width: "200px",
             display: "block",
             fontWeight: "900",
+            marginBottom: "30px",
           }}
         >
           Name
         </Typography>
-        <Input
+        <input
           required
           type="text"
           id="name"
           onChange={(e) => setName(e.target.value)}
           name="name"
-          sx={{
-            width: "400px",
-            marginTop: "20px",
-            fontWeight: "normal",
-            fontSize: "18px",
-          }}
-          value={name}
+          className="appearance-none  w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+          style={{ marginBottom: "30px",
+        
+        }}
         />
       </Grid>
 
@@ -145,19 +150,14 @@ function UpdateStarRatings() {
         >
           Driver number
         </Typography>
-        <Input
+        <input
           required
-          type="text"
-          id="name"
+          type="text" // Changed to type number for numeric input
+          id="drivernumber"
           onChange={(e) => setDrivernumber(e.target.value)}
-          name="name"
-          sx={{
-            width: "400px",
-            marginTop: "40px",
-            fontWeight: "normal",
-            fontSize: "18px",
-          }}
           value={drivernumber}
+          name="drivernumber"
+          className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
         />
       </Grid>
       <div style={styles.container}>
@@ -211,7 +211,8 @@ function UpdateStarRatings() {
           Update
         </button>
       </div>
-    </Grid>
+    </form>
+    </div>
   );
 }
 
