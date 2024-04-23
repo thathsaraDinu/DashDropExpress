@@ -174,7 +174,7 @@ const Student = () => {
             marginTop: "20px",
             backgroundColor: "Navy",
             width: "300px",
-            marginBottom:"20px",
+            marginBottom:"50px",
           
           }}
         >
