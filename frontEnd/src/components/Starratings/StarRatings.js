@@ -39,11 +39,26 @@ function StarRatings() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    if(name ===""){
+      alert("Please enter Customer Name");
+      return;
+    }
+    if(drivernumber ===""){
+      alert("Please enter Driver Number");
+
+      return;
+    }else if(drivernumber.length !== 5){
+      alert("Please enter a valid Driver Number");
+      setDrivernumber("");
+      return;
+    }
+
      if (currentValue === 0) {
       alert("Please select a rating.");
       return;
     }
+   
 
 
     axios
@@ -113,7 +128,7 @@ function StarRatings() {
             marginBottom: "30px",
           }}
         >
-          Name
+          Customer ID
         </Typography>
         <input
           required
