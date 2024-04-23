@@ -11,14 +11,14 @@ const getTickets = (req, res, next) => {
 };
 
 const addTicket = (req, res, next) => {
-  const Ticket = new Ticket({
+  const ticket = new Ticket({
     id: req.body.id,
     cname: req.body.cname,
     inquery: req.body.inquery,
     date: req.body.date,
   });
 
-  Ticket
+  ticket
     .save()
     .then((response) => {
       res.json({ response });
@@ -68,4 +68,3 @@ exports.getTickets = getTickets;
 exports.addTicket = addTicket;
 exports.updateTicket = updateTicket;
 exports.deleteTicket = deleteTicket;
-

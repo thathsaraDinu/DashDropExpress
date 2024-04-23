@@ -6,17 +6,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  colors,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
-
 const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
-  const navigate = useNavigate();
   return (
-    <div style={
-      {marginBottom:"50px"}
-    }>
+    <div style={{ marginBottom: "50px" }}>
       <TableContainer
         sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
         component={Paper}
@@ -40,7 +34,7 @@ const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
                   textAlign: "center",
                 }}
               >
-                TICKET NUMBER
+                ORDER NUMBER
               </TableCell>
               <TableCell
                 sx={{
@@ -140,7 +134,7 @@ const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
                   </TableCell>
                   <TableCell>
                     <button
-                      className="btn1"
+                      className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                       sx={{ margin: "0px 10px" }}
                       onClick={() =>
                         selectedUser({
@@ -154,7 +148,7 @@ const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
                       Update
                     </button>
                     <button
-                      className="btn2"
+                      className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                       sx={{
                         margin: "10px 20px",
                       }}
