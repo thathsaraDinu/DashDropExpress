@@ -38,7 +38,7 @@ const FeedbackTable = ({ rows }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
+            <TableCell>Customer ID</TableCell>
             <TableCell>Drivernumber</TableCell>
             <TableCell>Ratings</TableCell>
             <TableCell>Description</TableCell>

@@ -31,20 +31,34 @@ function StarRatings() {
   };
 
   const handleChangeDriverNumber = (e) => {
-    const newValue = e.target.value;
-    if (newValue < 0) {
-      alert("Please enter a positive number for the driver number.");
+    if (e.target.value.length !== 5) {
+      alert("Please enter a valid driver number");
       return;
     }
-    setDrivernumber(newValue);
+    
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    if(name ===""){
+      alert("Please enter Customer Name");
+      return;
+    }
+    if(drivernumber ===""){
+      alert("Please enter Driver Number");
+
+      return;
+    }else if(drivernumber.length !== 5){
+      alert("Please enter a valid Driver Number");
+      setDrivernumber("");
+      return;
+    }
+
      if (currentValue === 0) {
       alert("Please select a rating.");
       return;
     }
+   
 
 
     axios
@@ -114,7 +128,7 @@ function StarRatings() {
             marginBottom: "30px",
           }}
         >
-          Name
+          Customer ID
         </Typography>
         <input
           required
@@ -124,6 +138,7 @@ function StarRatings() {
           name="name"
           className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
           style={{ marginBottom: "10px" }}
+         
         />
       </Grid>
 
@@ -149,11 +164,12 @@ function StarRatings() {
           required
           type="text" // Changed to type number for numeric input
           id="drivernumber"
-          onChange={handleChangeDriverNumber}
+          onChange={(e) => setDrivernumber(e.target.value)}
           value={drivernumber}
           name="drivernumber"
           className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
           style={{ marginBottom: "10px" }}
+          onBlur={handleChangeDriverNumber}
         />
       </Grid>
 
