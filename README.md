@@ -1,6 +1,6 @@
 Admin Accounts info
 
-it22361240@my.sliit.lk - Navin1
+it22361240@my.sliit.lk - Navin123
     
 it22349460@my.sliit.lk  - Shashini123
 	
