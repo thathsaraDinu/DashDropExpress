@@ -72,12 +72,12 @@ function UpdateStarRatings() {
       container
       
       style={{
-        backgroundColor: "rgba(43, 149, 232,4)",
+        backgroundColor: "rgba(43, 149, 232,0.8)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
-        width: "700px",
+        width: "600px",
         height: "650px",
         padding:"10px"
         

@@ -69,7 +69,7 @@ function StarRatings() {
     <form
       container
       style={{
-        backgroundColor: "rgba(43, 149, 232,4)",
+        backgroundColor: "rgba(43, 149, 232,0.8)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
