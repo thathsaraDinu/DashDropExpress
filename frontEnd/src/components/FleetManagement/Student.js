@@ -4,6 +4,7 @@ import StudentTable from "./StudentTable";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 
 
@@ -172,7 +173,8 @@ const Student = () => {
             padding: "10px",
             marginTop: "20px",
             backgroundColor: "Navy",
-            width: "300px"
+            width: "300px",
+            marginBottom:"20px",
           
           }}
         >
@@ -192,6 +194,7 @@ const Student = () => {
         </div>
       </Box>
     </div>
+    <FooterMain></FooterMain>
     </div>
   );
 }
