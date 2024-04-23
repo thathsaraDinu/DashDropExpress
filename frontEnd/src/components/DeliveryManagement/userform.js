@@ -82,7 +82,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
       <form onSubmit={handleSubmit}>
         <Grid
           sx={{
-            backgroundColor: "rgba(192,192,192,0.8)",
+            backgroundColor: "rgba(192,192,192,0.6)",
             border: "3px solid #000000",
             marginBottom: "50px",
             marginLeft: "280px",
