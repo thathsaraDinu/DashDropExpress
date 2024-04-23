@@ -74,7 +74,7 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
         border: '#1px solid #333',
         padding:"20px",
         borderRadius: "20px", 
-        backgroundColor:"white"
+        
       }}
       
     >
