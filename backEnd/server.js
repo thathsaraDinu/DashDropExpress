@@ -8,6 +8,7 @@ const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
 const router2 = require("./Starratings/router");
 const Orders = require("./OrderManagement/router");
+const package = require("./PackageManagement/router");
 
 
 const { MONGODB_URI } = require("./config");
@@ -35,4 +36,5 @@ app.use("/api", router);
 app.use("/api", router1);
 app.use("/api", router2);
 app.use("/api", Orders);
+app.use("/api", package);
 
