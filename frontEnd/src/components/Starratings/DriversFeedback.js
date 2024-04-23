@@ -22,7 +22,7 @@ const DriversFeedback = () => {
   return (
     <div style={{
       
-      backgroundImage: "url('/Starrating3.jpg')",
+      backgroundImage: "url('/starratings2.jpg')",
       backgroundSize: "cover",
     }}
     className="backgroundimage  ">
