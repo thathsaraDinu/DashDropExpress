@@ -28,6 +28,7 @@ import Orders from "./components/OrderManagement/Orders";
 import Package from "./components/PackageManagement/Package";
 
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -61,6 +62,10 @@ root.render(
    <Route path='/student'element={<Student/>}/>
 
    <Route path='/package' element={<Package />} />
+
+   <Route path="/employees" element={<Employees />} />
+   <Route path="/addsalary/:id" element={<AddSalaryForm />} />
+   <Route path="/salaries" element={<SalaryTable />} />
     </Routes>
   </BrowserRouter>
 );

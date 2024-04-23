@@ -11,6 +11,7 @@ const ticket = require("./HelpDesk/router")
 const vehicle = require("./FleetManagement/router");
 const package = require("./PackageManagement/router");
 const Orders = require("./OrderManagement/router");
+const employeeRoutes = require("./PayrollManagement/routes/employee");
 
 const { MONGODB_URI } = require("./config");
 
@@ -40,4 +41,5 @@ app.use("/api", ticket);
 app.use("/api", vehicle);
 app.use("/api", package);
 app.use("/api", Orders);
+app.use('/api/employee/', employeeRoutes);
 
