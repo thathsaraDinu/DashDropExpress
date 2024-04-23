@@ -1,0 +1,11 @@
+
+.body{
+    background-image: url(images/back2_image.jpg);
+    width: 100%;
+    z-index: -1;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    position: absolute;
+    background-size: cover;
+  }
+  

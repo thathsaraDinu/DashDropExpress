@@ -7,6 +7,8 @@ const host = "localhost";
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
 const router2 = require("./Starratings/router");
+const Orders = require("./OrderManagement/router");
+
 
 const { MONGODB_URI } = require("./config");
 
@@ -32,4 +34,5 @@ const server = app.listen(port, host, () => {
 app.use("/api", router);
 app.use("/api", router1);
 app.use("/api", router2);
+app.use("/api", Orders);
 

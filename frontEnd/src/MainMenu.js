@@ -60,7 +60,7 @@ function MainMenu() {
             </li>
             <li className="relative parent">
               <Link
-                to="!#"
+                to="/package"
                 className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
               >
                 <span>Packages</span>
@@ -184,7 +184,7 @@ function MainMenu() {
             </li>
             <li>
               <Link
-                to="!#"
+                to="/orders"
                 className="transition-all duration-500 ease-in-out flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-ternary"
               >
                 <span>Place an Order</span>
@@ -192,7 +192,7 @@ function MainMenu() {
             </li>
             <li className="relative parent">
               <Link
-                to="!#"
+                to="#!"
                 className="transition-all duration-500 ease-in-out flex justify-between md:inline-flex p-3 pl-5 pr-5  items-center hover:bg-ternary"
               >
                 <span>Add a Package</span>
