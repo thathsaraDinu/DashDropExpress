@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { Grid, Typography } from "@mui/material";
 
+
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -68,7 +69,7 @@ function StarRatings() {
     <form
       container
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.7)",
+        backgroundColor: "rgba(43, 149, 232,4)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
@@ -196,7 +197,7 @@ function StarRatings() {
             borderRadius: 5,
             width: 100,
             padding: 10,
-            backgroundColor: "#0B8BEA",
+            backgroundColor: "#3A09E7",
             color: "black",
             fontSize: 16,
             fontWeight: "bold",

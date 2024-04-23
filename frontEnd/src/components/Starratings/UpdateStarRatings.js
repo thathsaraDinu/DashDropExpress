@@ -72,12 +72,12 @@ function UpdateStarRatings() {
       container
       
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.7)",
+        backgroundColor: "rgba(43, 149, 232,4)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
-        width: "600px",
+        width: "700px",
         height: "650px",
         padding:"10px"
         
@@ -96,6 +96,7 @@ function UpdateStarRatings() {
             fontWeight: "bold",
             marginBottom: "30px",
             fontFamily:"jost"
+
           }}
         >
           Feedback Form
@@ -107,14 +108,13 @@ function UpdateStarRatings() {
           component={"label"}
           htmlFor="name"
           sx={{
-            
-            color: "#000000",
+             color: "#000000",
             marginRight: "20px",
             marginTop: "20px",
             fontSize: "20px",
             width:"200px",
             display: "block",
-            textAlign:"right",
+            textAlign:"left",
             fontWeight: "900",
             marginBottom: "30px",
           }}
@@ -126,10 +126,10 @@ function UpdateStarRatings() {
           type="text"
           id="name"
           onChange={(e) => setName(e.target.value)}
-          value={name} 
           name="name"
           className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
           style={{ marginBottom: "10px" }}
+        }}
         />
       </Grid>
 
@@ -155,11 +155,11 @@ function UpdateStarRatings() {
           required
           type="text" // Changed to type number for numeric input
           id="drivernumber"
-          onChange={(e) => setDrivernumber(e.target.value)}
+          onChange={handleChangeDriverNumber}
           value={drivernumber}
           name="drivernumber"
-          className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
-
+          className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         />
       </Grid>
       <div style={styles.container}>
