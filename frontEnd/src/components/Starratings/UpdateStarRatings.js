@@ -171,7 +171,7 @@ function UpdateStarRatings() {
             fontSize: "20px",
             width:"200px",
             display: "block",
-            textAlign:"right",
+            textAlign:"left",
             fontWeight: "900",
             marginBottom: "30px",
           }}
