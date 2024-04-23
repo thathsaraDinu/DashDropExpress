@@ -23,6 +23,10 @@ import UpdateStarRatings from "./components/Starratings/UpdateStarRatings";
 import Driversfeedbackupdate from "./components/Starratings/Driversfeedbackupdate";
 import FeedbackTable from "./components/Starratings/feedbacktable";
 import Ticket from "./components/HelpDesk/ticket";
+import Student from "./components/FleetManagement/Student";
+import Orders from "./components/OrderManagement/Orders";
+import Package from "./components/PackageManagement/Package";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -45,6 +49,7 @@ root.render(
       <Route path="/drivertable" element={<DriverTable></DriverTable>} />
       <Route path="/userdelivery" element={<UserDelivery></UserDelivery>} />
       <Route path="/userstable" element={<UsersTable></UsersTable>} />
+      <Route path='/orders' element={<Orders />} />
 
       <Route path='/driversfeedback' element={<DriversFeedback />} />
    <Route path='/starratings' element={<StarRatings />} />
@@ -52,6 +57,10 @@ root.render(
    <Route path='/Driversfeedbackupdate/:id' element={<Driversfeedbackupdate/>} />
    <Route path='/feedbacktable' element={<FeedbackTable />} />
    <Route path='/tickets' element={<Ticket></Ticket>}/>
+
+   <Route path='/student'element={<Student/>}/>
+
+   <Route path='/package' element={<Package />} />
     </Routes>
   </BrowserRouter>
 );
