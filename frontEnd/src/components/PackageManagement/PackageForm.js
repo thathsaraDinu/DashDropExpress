@@ -207,7 +207,7 @@ const PackageForm = ({
           },
           
         }}
-        onClick={() =>
+        onClick={() =>{
           isEdit
             ? updatePackage(
                 { id, customerName, packageType, packageWeight },
@@ -216,7 +216,10 @@ const PackageForm = ({
             : addPackage(
                 { id, customerName, packageType, packageWeight },
                 selectedItem
-              )
+              ); setId(0);
+              setCustomerName("");
+              setPackageType("");
+              setPackageWeight("");}
         }
       >
         {isEdit ? "update" : "submit"}
