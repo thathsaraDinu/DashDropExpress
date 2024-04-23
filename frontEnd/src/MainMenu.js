@@ -386,7 +386,7 @@ function MainMenu() {
       ) : (
         <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
-            src="dashdrop-express-high-resolution-logo-transparent.png"
+            src="/dashdrop-express-high-resolution-logo-transparent.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}
             alt="logo"
             className="text-2xl "

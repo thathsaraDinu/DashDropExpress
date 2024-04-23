@@ -70,7 +70,7 @@ function UpdateStarRatings() {
     }}>
     <form
       container
-      spacing={2}
+      
       style={{
         backgroundColor: "rgba(43, 149, 232,4)",
         border: "3px solid #000000",
@@ -79,41 +79,42 @@ function UpdateStarRatings() {
         display: "block",
         width: "700px",
         height: "650px",
+        padding:"10px"
         
 
       }}
     >
-      <Grid item xs={12}>
+      <Grid item>
         <Typography
           component={"h1"}
           sx={{
             color: "#000000",
-            marginRight: "20px",
-            marginLeft: "100px",
-            marginTop: "10px",
+            textAlign:"center",
+            marginTop: "20px",
             fontSize: "50px",
-            width: "500px",
             display: "block",
             fontWeight: "bold",
             marginBottom: "30px",
+            fontFamily:"jost"
+
           }}
         >
           Feedback Form
         </Typography>
       </Grid>
 
-      <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
+      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
-            color: "#000000",
-            marginRight: "10px",
-            marginLeft: "20px",
+             color: "#000000",
+            marginRight: "20px",
             marginTop: "20px",
             fontSize: "20px",
-            width: "200px",
+            width:"200px",
             display: "block",
+            textAlign:"left",
             fontWeight: "900",
             marginBottom: "30px",
           }}
@@ -126,26 +127,26 @@ function UpdateStarRatings() {
           id="name"
           onChange={(e) => setName(e.target.value)}
           name="name"
-          className="appearance-none  w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
-          style={{ marginBottom: "30px",
-        
+          className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         }}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
+      <Grid sx={{ display: "flex", marginX:"40px",flexDirection:"row", alignItems:"center", justifyContent:"center", marginBottom:"20px" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
             color: "#000000",
             marginRight: "20px",
-            marginLeft: "40px",
             marginTop: "20px",
             fontSize: "20px",
-            width: "200px",
+            width:"200px",
             display: "block",
+            textAlign:"right",
             fontWeight: "900",
+            marginBottom: "30px",
           }}
         >
           Driver number
@@ -154,10 +155,11 @@ function UpdateStarRatings() {
           required
           type="text" // Changed to type number for numeric input
           id="drivernumber"
-          onChange={(e) => setDrivernumber(e.target.value)}
+          onChange={handleChangeDriverNumber}
           value={drivernumber}
           name="drivernumber"
-          className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+          className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         />
       </Grid>
       <div style={styles.container}>
@@ -197,7 +199,7 @@ function UpdateStarRatings() {
           style={{
             border: "1px solid #a9a9a9",
             borderRadius: 5,
-            width: 300,
+            width: 100,
             padding: 10,
             backgroundColor: "#3A09E7",
             color: "white",
