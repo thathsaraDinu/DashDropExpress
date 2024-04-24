@@ -5,6 +5,7 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import "./users.css";
 import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 const UserDelivery = () => {
   const [users, setUsers] = useState([]);
@@ -85,10 +86,10 @@ const UserDelivery = () => {
   };
 
   return (
-    <div>
+    <div >
       <MainMenu></MainMenu>
 
-      <div className="pt-1 ">
+      <div className="pt-1 mb-10 ">
         <img className="image1 " src="/pic8.jpg" alt="background"></img>
         <Box
           sx={{
@@ -115,6 +116,7 @@ const UserDelivery = () => {
           />
         </Box>
       </div>
+      <FooterMain></FooterMain>
     </div>
   );
 };

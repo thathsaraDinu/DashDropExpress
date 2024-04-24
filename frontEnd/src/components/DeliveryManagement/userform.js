@@ -39,48 +39,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
     }
   }, [data]);
 
-  const handleOrderNumberChange = (value) => {
-    if (/^O\d{4}$/.test(value)) {
-      setId(value);
-      setIsOrderNumberValid(true);
-      setOrderNumberError("");
-    } else {
-      setOrderNumberError(
-        "Order number must start with O and contain 4 numbers."
-      );
-      setIsOrderNumberValid(false);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    isEdit
-      ? updateUser({
-          id,
-          did,
-          d_name,
-          c_name,
-          address,
-          instruction,
-          date,
-        })
-      : addUser({
-          id,
-          did,
-          d_name,
-          c_name,
-          address,
-          instruction,
-          date,
-        });
-
-    setId("");
-    setDid("");
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
    const handleOrderNumberChange = (value) => {
      if (/^O\d{4}$/.test(value)) {
        setId(value);

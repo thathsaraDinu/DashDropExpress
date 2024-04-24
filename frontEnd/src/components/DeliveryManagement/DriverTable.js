@@ -20,6 +20,7 @@ const DriverTable = ({ rows }) => {
 
   return (
     <div>
+    <div>
       <h1 className="driver pt-20">Assign order Details Page for Drivers</h1>
 
       <TableContainer
@@ -257,7 +258,8 @@ const DriverTable = ({ rows }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+      
+    </div></div>
   );
 };
 export default DriverTable;
