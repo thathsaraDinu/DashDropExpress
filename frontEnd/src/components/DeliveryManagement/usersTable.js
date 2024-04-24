@@ -16,7 +16,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
   return (
     <div>
       <TableContainer
-        sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
+        sx={{ backgroundColor: "rgba(192,192,192,0.8)" }}
         component={Paper}
       >
         <Table
