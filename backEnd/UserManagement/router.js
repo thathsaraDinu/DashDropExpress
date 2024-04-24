@@ -10,6 +10,7 @@ router.delete("/deleteuser/:id", controller.deleteUser);
 router.put("/updateuser/:id", controller.updateUser);
 router.post("/loginuser", controller.loginUser);
 router.post("/verifyOTP", controller.verifyOTP);
+router.get("/getuserbyemail", controller.getUserByEmail);
 
 // Protected route
 

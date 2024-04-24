@@ -5,15 +5,18 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import MainMenu from "../../MainMenu";
 
 import FooterMain from "../../FooterMain";
+import { jwtDecode } from "jwt-decode";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
+  const [userid, setUserID] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confpassword, setConfPassword] = useState("");
+  const [tokenemail, setTokenEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,6 +27,9 @@ const TheUpdateForm = () => {
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
+      const decodedToken = jwtDecode(token); // Corrected function call
+
+      setTokenEmail(decodedToken.useremail);
     }
   }, [token]);
   ////////////////////////////////////////////////////
@@ -34,6 +40,7 @@ const TheUpdateForm = () => {
       .get("http://localhost:3001/api/getuserbyid/" + id)
       .then((response) => {
         console.log(response);
+        setUserID(response.data.userid);
         setFullName(response.data.fullName);
         setPhoneNumber(response.data.phoneNumber);
         setEmail(response.data.email);
@@ -72,7 +79,7 @@ const TheUpdateForm = () => {
         setEmail("");
       });
   };
-const location = useLocation();
+  const location = useLocation();
   const [updatetype, setUpdateType] = useState("");
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -91,7 +98,8 @@ const location = useLocation();
 
   return (
     <div>
-      {token ? (
+      {(token && tokenemail === "thathsaradinuwan@gmail.com") ||
+      (token && tokenemail === email) ? (
         <div>
           <MainMenu />
 
@@ -125,6 +133,25 @@ const location = useLocation();
               >
                 Update User - {updatetype}
               </h2>
+              <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
+                <label
+                  htmlFor="userid"
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
+                >
+                  User ID
+                </label>
+                <input
+                disabled
+                  required
+                  name="userid"
+                  type="text"
+                  className="rounded-full appearance-none w-full block  border-grey outline-none py-2 px-4"
+                  
+                  id="userid"
+                  value={userid}
+                  
+                />
+              </div>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="fullName"
@@ -205,7 +232,7 @@ const location = useLocation();
                 </label>
                 <div className="relative w-full">
                   <input
-                    required
+                    
                     name="password"
                     type={togglepasswordview ? "text" : "password"}
                     className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
@@ -272,7 +299,7 @@ const location = useLocation();
                   Confirm Password
                 </label>
                 <input
-                  required
+                  
                   name="confpassword"
                   type="password"
                   className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
@@ -299,7 +326,10 @@ const location = useLocation();
           <FooterMain></FooterMain>
         </div>
       ) : (
-        <div>You need to login to the website to access this page</div>
+        <div className="p-5 text-2xl">
+          You need to be a User Manager or the owner of this account to update
+          account
+        </div>
       )}
     </div>
   );

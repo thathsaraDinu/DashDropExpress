@@ -13,7 +13,7 @@ import FooterMain from "../../FooterMain";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
- 
+  const [tokenemail, setTokenEmail] = useState("");
 
   ///////////get users to show
   useEffect(() => {
@@ -32,21 +32,27 @@ const Users = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
+      setTokenEmail(decodedToken.useremail);
 
       setUserType(decodedToken.usertypetoken);
     }
   }, [token]);
+  console.log(tokenemail);
   ////////////////////////////////////////////////////
 
   //////delete function
   const handleDelete = (id) => {
-    axios
-      .delete("http://localhost:3001/api/deleteuser/" + id)
-      .then((response) => {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+    if (token && tokenemail === "thathsaradinuwan@gmail.com") {
+      axios
+        .delete("http://localhost:3001/api/deleteuser/" + id)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("You need to be a User Manager delete the account");
+    }
   };
 
   ////////confirm alert for deletion
@@ -60,7 +66,6 @@ const Users = () => {
       // User chose not to delete, handle accordingly
     }
   }
- 
 
   return (
     <div>
@@ -150,6 +155,13 @@ const Users = () => {
                         <th
                           scope="col"
                           className="px-6 py-3"
+                          style={{ width: "150px" }}
+                        >
+                          User ID
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3"
                           style={{ width: "250px" }}
                         >
                           Full Name
@@ -205,6 +217,7 @@ const Users = () => {
                             className="text-secondary  odd:bg-gray-50  even:bg-gray-200  border-b "
                             key={user._id}
                           >
+                            <td className="px-6 py-4">{user.userid}</td>
                             <td className="px-6 py-4">{user.fullName}</td>
                             <td className="px-6 py-4">{user.phoneNumber}</td>
                             <td className="px-6 py-4">{user.email}</td>

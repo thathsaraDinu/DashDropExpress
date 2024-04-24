@@ -13,7 +13,7 @@ const getfeedbacks = (req, res, next) => {
 
 const getfeedbackById = (req, res) => {
   const id = req.params.id;
-  console.log(id)
+  
   Feedback.findById({ _id: id })
     .then((feedback) => res.json(feedback))
     .catch((err) => res.json(err));
@@ -35,9 +35,7 @@ const addfeedbacks = async (req, res) => {
       currentValue,
       description,
     });
-    console.log(req.body)
-    console.log(name)
-    console.log(newFeedback)
+    
      const savedfeedback = await newFeedback.save()
       
        return res.json({ feedback: savedfeedback });

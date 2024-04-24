@@ -135,7 +135,7 @@ function App() {
                   <Link
                     to={
                       usertypetoken === "Customer"
-                        ? "#"
+                        ? "/orders"
                         : usertypetoken === "Admin"
                         ? "#"
                         : "#"
@@ -270,7 +270,7 @@ function App() {
           className="App-body-1"
         >
           <div className="text-right App-body-1-text">
-            <h2 className="text-3xl ">
+            <h2 className="text-3xl font-medium">
               Trusted, Swift, and Efficient Delivery, Respecting Your Time
             </h2>
             <br></br>
@@ -292,7 +292,7 @@ function App() {
             ></img>
           </div>
           <div className="text-left App-body-2-text">
-            <h2 className="text-3xl">
+            <h2 className="text-3xl font-medium">
               Dedicated to Your Deliveries, Valuing Your Health and Safety
             </h2>
             <br></br>

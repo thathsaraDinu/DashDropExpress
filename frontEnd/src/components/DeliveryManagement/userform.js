@@ -12,6 +12,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
   const [orderNumberError, setOrderNumberError] = useState("");
   const [isOrderNumberValid, setIsOrderNumberValid] = useState(false);
 
+
   useEffect(() => {
     if (!submitted) {
       setId();
@@ -80,6 +81,49 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+   const handleOrderNumberChange = (value) => {
+     if (/^O\d{4}$/.test(value)) {
+       setId(value);
+       setIsOrderNumberValid(true);
+       setOrderNumberError("");
+     } else {
+       setOrderNumberError(
+         "Order number must start with O and contain 4 numbers."
+       );
+       setIsOrderNumberValid(false);
+     }
+   };
+
+   const handleSubmit = (e) => {
+     e.preventDefault();
+     isEdit
+       ? updateUser({
+           id,
+           did,
+           d_name,
+           c_name,
+           address,
+           instruction,
+           date,
+         })
+       : addUser({
+           id,
+           did,
+           d_name,
+           c_name,
+           address,
+           instruction,
+           date,
+         });
+
+     setId("");
+     setDid("");
+   };
+
+  return (
+    <div>
+      <form
+        onSubmit={handleSubmit}>
         <Grid
           sx={{
             backgroundColor: "rgba(192,192,192,0.6)",

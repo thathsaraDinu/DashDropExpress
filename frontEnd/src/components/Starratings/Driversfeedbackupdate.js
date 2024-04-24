@@ -1,17 +1,18 @@
-
-import FeedbackTable from './feedbacktable';
+import FeedbackTable from "./feedbacktable";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UpdateStarRatings from './UpdateStarRatings';
-import { useParams } from 'react-router-dom';
+import UpdateStarRatings from "./UpdateStarRatings";
+import { useParams } from "react-router-dom";
+import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
-
-const Driversfeedbackupdate = () =>{
+const Driversfeedbackupdate = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const { id } = useParams();
-  console.log("id is"+id);
+  console.log("id is" + id);
   useEffect(() => {
-    axios.get("http://localhost:3001/api/feedbacks")
+    axios
+      .get("http://localhost:3001/api/feedbacks")
       .then((response) => {
         setFeedbacks(response.data?.response || []);
       })
@@ -20,14 +21,20 @@ const Driversfeedbackupdate = () =>{
       });
   }, []);
 
-  
-  return(
-    <div>
-   <UpdateStarRatings id={id}/> 
-   
-   <FeedbackTable rows={feedbacks} />
-    </div>
+  return (
 
-  )
-}
+    <div style={{
+      
+      backgroundImage: "url('/starratings2.jpg')",
+      backgroundSize: "cover",
+    }}
+    className="backgroundimage  ">
+      <MainMenu></MainMenu>
+      <UpdateStarRatings id={id} />
+
+      <FeedbackTable rows={feedbacks} />
+      <FooterMain></FooterMain>
+    </div>
+  );
+};
 export default Driversfeedbackupdate;

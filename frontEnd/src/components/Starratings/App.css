@@ -12,7 +12,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.button:hover{
+.button:hover {
   cursor: pointer;
 }
 .App-header {
@@ -26,17 +26,11 @@
   color: white;
 }
 
-.Drivers-button{
-  font-size :18px;
+.Drivers-button {
+  font-size: 18px;
   padding: 20px 40px;
-  border:none ;
-  border: radius 10px; 
+  border: none;
+  border: radius 10px;
   background-color: #ffffff;
   cursor: pointer;
 }
-
-
-
-
-
-

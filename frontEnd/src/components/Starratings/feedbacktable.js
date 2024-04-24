@@ -7,13 +7,11 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const FeedbackTable = ({ rows }) => {
- 
-
   const handleDelete = (id) => {
     axios
       .delete("http://localhost:3001/api/deletefeedbacks/" + id)
@@ -36,11 +34,11 @@ const FeedbackTable = ({ rows }) => {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{marginBottom:"50px"}}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
+            <TableCell>Customer ID</TableCell>
             <TableCell>Drivernumber</TableCell>
             <TableCell>Ratings</TableCell>
             <TableCell>Description</TableCell>
@@ -54,7 +52,7 @@ const FeedbackTable = ({ rows }) => {
                 key={row._id}
                 sx={{
                   "&:last-child td,&:last-child th": { border: 0 },
-                  border: "2px solid #000000"
+                  border: "2px solid #000000",
                 }}
               >
                 <TableCell
@@ -63,7 +61,7 @@ const FeedbackTable = ({ rows }) => {
                   sx={{
                     fontSize: "15px",
                     textAlign: "left",
-                    fontWeight: "900"
+                    fontWeight: "900",
                   }}
                 >
                   {row.name}
@@ -74,7 +72,7 @@ const FeedbackTable = ({ rows }) => {
                   sx={{
                     fontSize: "15px",
                     textAlign: "left",
-                    fontWeight: "900"
+                    fontWeight: "900",
                   }}
                 >
                   {row.drivernumber}
@@ -85,7 +83,7 @@ const FeedbackTable = ({ rows }) => {
                   sx={{
                     fontSize: "15px",
                     textAlign: "left",
-                    fontWeight: "900"
+                    fontWeight: "900",
                   }}
                 >
                   {row.currentValue}
@@ -97,7 +95,7 @@ const FeedbackTable = ({ rows }) => {
                   sx={{
                     fontSize: "15px",
                     textAlign: "left",
-                    fontWeight: "900"
+                    fontWeight: "900",
                   }}
                 >
                   {row.description}
@@ -110,9 +108,9 @@ const FeedbackTable = ({ rows }) => {
                       padding: "10px",
                       backgroundColor: "#EAE30B",
                       color: "black",
-                      textDecoration: "none", 
+                      textDecoration: "none",
                       borderRadius: "5px",
-                      cursor: "pointer"
+                      cursor: "pointer",
                     }}
                   >
                     Update
@@ -128,7 +126,7 @@ const FeedbackTable = ({ rows }) => {
                       color: "white",
                       border: "none",
                       borderRadius: "5px",
-                      cursor: "pointer"
+                      cursor: "pointer",
                     }}
                   >
                     Delete
