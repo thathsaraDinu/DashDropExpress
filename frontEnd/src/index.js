@@ -27,6 +27,9 @@ import Student from "./components/FleetManagement/Student";
 import Orders from "./components/OrderManagement/Orders";
 import Package from "./components/PackageManagement/Package";
 
+import Employees from './components/PayrollManagement/pages/Employees';
+import AddSalaryForm from './components/PayrollManagement/components/AddSalaryForm';
+import SalaryTable from './components/PayrollManagement/components/SalaryTable';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
