@@ -9,7 +9,7 @@
     z-index: -1;
     object-fit: cover;
     background-color: rgba(0, 0, 0, 0.4);
-    height: 1800px;
+    height: 2000px;
 }
 
 .image2 {
@@ -17,7 +17,7 @@
     position: absolute;
     z-index: -1;
     object-fit: cover;
-    height: 1000px;
+    height: 1200px;
 }
 
 

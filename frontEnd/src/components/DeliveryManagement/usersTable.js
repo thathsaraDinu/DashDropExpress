@@ -16,14 +16,35 @@ import "jspdf-autotable";
 const UsersTable = ({ rows, selectedUser, deleteUser }) => {
   const navigate = useNavigate();
 
-  const handleDownloadPdf = () => {
-    const doc = new jsPDF();
-    doc.autoTable({
-      html: "#table-to-pdf",
-      excludeColumns: [7],
-    });
-    doc.save("Table.pdf");
-  };
+   const handleDownloadPdf = () => {
+     const doc = new jsPDF();
+     doc.autoTable({
+       head: [
+         [
+           "Order Number",
+           "Driver Number",
+           "Driver Name",
+           "Customer Name",
+           "Customer Number",
+           "Delivery Address",
+           "Special Instructions",
+           "Delivery Date",
+         ],
+       ],
+       body: rows.map((row) => [
+         row.id,
+         row.did,
+         row.d_name,
+         row.c_name,
+         row.phoneNumber,
+         row.address,
+         row.instruction,
+         row.date ? row.date.split("T")[0] : "",
+       ]),
+     });
+     doc.save("Delivery_Table.pdf");
+   };
+
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -59,7 +80,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
               type="search"
               id="default-search"
               className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-              placeholder="Search Full Name"
+              placeholder="Search Driver Name"
               onChange={(e) => setSearchQuery(e.target.value)}
               required
             />
@@ -117,6 +138,16 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                 }}
               >
                 Customer Name
+              </TableCell>
+              <TableCell
+                sx={{
+                  border: "3px solid #000000",
+                  fontSize: "18px",
+                  fontWeight: "900",
+                  textAlign: "center",
+                }}
+              >
+                Customer Number
               </TableCell>
               <TableCell
                 sx={{
@@ -219,6 +250,17 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                     <TableCell
                       component={"th"}
                       scope="row"
+                      sx={{
+                        fontSize: "15px",
+                        textAlign: "left",
+                        fontWeight: "900",
+                      }}
+                    >
+                      {row.phoneNumber}
+                    </TableCell>
+                    <TableCell
+                      component={"th"}
+                      scope="row"
                       sx={{ fontSize: "15px", fontWeight: "900" }}
                     >
                       {row.address}
@@ -255,6 +297,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                             did: row.did,
                             d_name: row.d_name,
                             c_name: row.c_name,
+                            phoneNumber: row.phoneNumber,
                             address: row.address,
                             instruction: row.instruction,
                             date: row.date,

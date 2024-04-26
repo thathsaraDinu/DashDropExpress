@@ -2,27 +2,24 @@ import { Grid, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
-  const [id, setId] = useState();
-  const [did, setDid] = useState();
+  const [id, setId] = useState("");
+  const [did, setDid] = useState("");
   const [d_name, setDname] = useState("");
   const [c_name, setCname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [instruction, setInstruction] = useState("");
   const [date, setDate] = useState("");
   const [orderNumberError, setOrderNumberError] = useState("");
   const [isOrderNumberValid, setIsOrderNumberValid] = useState(false);
-
+  const [driverNumberError, setDriverNumberError] = useState("");
+  const [isDriverNumberValid, setIsDriverNumberValid] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
   useEffect(() => {
     if (!submitted) {
-      setId();
-      setDid();
-      setDname("");
-      setCname("");
-      setAddress("");
-      setInstruction("");
-      setDate("");
-      setIsOrderNumberValid(false);
+      clearForm();
     }
   }, [submitted]);
 
@@ -32,56 +29,106 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
       setDid(data.did);
       setDname(data.d_name);
       setCname(data.c_name);
+      setPhoneNumber(data.phoneNumber);
       setAddress(data.address);
       setInstruction(data.instruction);
       setDate(data.date);
       setIsOrderNumberValid(true);
+      setIsDriverNumberValid(true);
+      setIsPhoneNumberValid(true);
     }
   }, [data]);
 
-   const handleOrderNumberChange = (value) => {
-     if (/^O\d{4}$/.test(value)) {
-       setId(value);
-       setIsOrderNumberValid(true);
-       setOrderNumberError("");
+  const clearForm = () => {
+    setId();
+    setDid();
+    setDname("");
+    setCname("");
+    setPhoneNumber();
+    setAddress("");
+    setInstruction("");
+    setDate("");
+    setOrderNumberError("");
+    setIsOrderNumberValid(false);
+    setDriverNumberError("");
+    setIsDriverNumberValid(false);
+    setPhoneNumberError("");
+    setIsPhoneNumberValid(false);
+  };
+
+  const handleOrderNumberChange = (value) => {
+    if (/^O\d{3}$/.test(value)) {
+      setId(value);
+      setIsOrderNumberValid(true);
+      setOrderNumberError("");
+    } else {
+      setOrderNumberError(
+        "Order number must start with O and contain 3 numbers."
+      );
+      setIsOrderNumberValid(false);
+    }
+  };
+
+   const handleDriverNumberChange = (value) => {
+     if (/^D\d{3}$/.test(value)) {
+       setDid(value);
+       setIsDriverNumberValid(true);
+       setDriverNumberError("");
      } else {
-       setOrderNumberError(
-         "Order number must start with O and contain 4 numbers."
+       setDriverNumberError(
+         "Driver number must start with D and contain 3 numbers."
        );
-       setIsOrderNumberValid(false);
+       setIsDriverNumberValid(false);
      }
    };
 
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     isEdit
-       ? updateUser({
-           id,
-           did,
-           d_name,
-           c_name,
-           address,
-           instruction,
-           date,
-         })
-       : addUser({
-           id,
-           did,
-           d_name,
-           c_name,
-           address,
-           instruction,
-           date,
-         });
+  const handlePhoneNumberChange = (value) => {
+    if (/^\d{10}$/.test(value)) {
+      setPhoneNumber(value);
+      setIsPhoneNumberValid(true);
+      setPhoneNumberError("");
+    } else {
+      setPhoneNumberError("Phone number must contain 10 digits.");
+      setIsPhoneNumberValid(false);
+    }
+  };
 
-     setId("");
-     setDid("");
-   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isOrderNumberValid && isPhoneNumberValid && isDriverNumberValid) {
+      isEdit
+        ? updateUser({
+            id,
+            did,
+            d_name,
+            c_name,
+            phoneNumber,
+            address,
+            instruction,
+            date,
+          })
+        : addUser({
+            id,
+            did,
+            d_name,
+            c_name,
+            phoneNumber,
+            address,
+            instruction,
+            date,
+          });
+
+      clearForm();
+    }
+
+       setId("");
+       setDid("");
+       setPhoneNumber("");
+  };
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Grid
           sx={{
             backgroundColor: "rgba(192,192,192,0.6)",
@@ -91,7 +138,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
             display: "block",
             marginTop: "100px",
             width: "900px",
-            height: "600px",
+            height: "650px",
           }}
         >
           <Grid item xs={12}>
@@ -134,8 +181,8 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="id"
               name="id"
               sx={{
-                width: "400px",
-                marginTop: "50px",
+                width: "450px",
+                marginTop: "30px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
@@ -159,7 +206,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
                 color: "#000000",
                 marginRight: "20px",
                 marginLeft: "100px",
-                marginTop: "10px",
+                marginTop: "17px",
                 fontSize: "20px",
                 width: "200px",
                 display: "block",
@@ -174,14 +221,21 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="did"
               name="did"
               sx={{
-                width: "400px",
+                width: "450px",
                 marginTop: "10px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
               value={did}
-              onChange={(e) => setDid(e.target.value)}
+              error={driverNumberError !== ""}
+              onChange={(e) => handleDriverNumberChange(e.target.value)}
+              disabled={isDriverNumberValid}
             />
+            {driverNumberError && (
+              <Typography sx={{ color: "red", marginTop: "5px" }}>
+                {driverNumberError}
+              </Typography>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
@@ -207,7 +261,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="d_name"
               name="d_name"
               sx={{
-                width: "400px",
+                width: "450px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
@@ -239,13 +293,51 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="c_name"
               name="c_name"
               sx={{
-                width: "400px",
+                width: "450px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
               value={c_name}
               onChange={(e) => setCname(e.target.value)}
             />
+          </Grid>
+          <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
+            <Typography
+              component={"label"}
+              htmlFor="id"
+              sx={{
+                color: "#000000",
+                marginRight: "20px",
+                marginLeft: "100px",
+                marginTop: "10px",
+                fontSize: "20px",
+                width: "250px",
+                display: "block",
+                fontWeight: "900",
+              }}
+            >
+              Customer Number
+            </Typography>
+            <Input
+              required
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              sx={{
+                width: "400px",
+                fontWeight: "bold",
+                fontSize: "18px",
+              }}
+              value={phoneNumber}
+              error={phoneNumberError !== ""}
+              onChange={(e) => handlePhoneNumberChange(e.target.value)}
+              disabled={isPhoneNumberValid}
+            />
+            {phoneNumberError && (
+              <Typography sx={{ color: "red", marginTop: "5px" }}>
+                {phoneNumberError}
+              </Typography>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
@@ -271,7 +363,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="address"
               name="address"
               sx={{
-                width: "400px",
+                width: "450px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
@@ -335,7 +427,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
               id="date"
               name="date"
               sx={{
-                width: "400px",
+                width: "450px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}

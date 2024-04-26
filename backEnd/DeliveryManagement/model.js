@@ -7,6 +7,7 @@ const userSchema = new Schema({
   did: String,
   d_name: String,
   c_name: String,
+  phoneNumber: String,
   address: String,
   instruction: String,
   date: Date,
