@@ -316,7 +316,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
                 fontWeight: "900",
               }}
             >
-              Customer Number
+              Customer Phone
             </Typography>
             <Input
               required
