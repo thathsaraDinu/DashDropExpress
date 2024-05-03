@@ -37,7 +37,7 @@ const UserDelivery = () => {
       c_name: data.c_name,
       phoneNumber: data.phoneNumber,
       address: data.address,
-      instruction: data.instruction,
+      email: data.email,
       date: data.date,
     };
 
@@ -62,7 +62,7 @@ const UserDelivery = () => {
       c_name: data.c_name,
       phoneNumber: data.phoneNumber,
       address: data.address,
-      instruction: data.instruction,
+      email: data.email,
       date: data.date,
     };
 

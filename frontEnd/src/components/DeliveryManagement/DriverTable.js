@@ -44,7 +44,7 @@ const DriverTable = ({ rows }) => {
          row.c_name,
          row.phoneNumber,
          row.address,
-         row.instruction,
+         row.email,
          row.date ? row.date.split("T")[0] : "",
        ]),
      });
@@ -76,6 +76,7 @@ const DriverTable = ({ rows }) => {
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
                   Order Number
@@ -85,6 +86,7 @@ const DriverTable = ({ rows }) => {
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
                   Driver Number
@@ -94,6 +96,7 @@ const DriverTable = ({ rows }) => {
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
                   Driver Name
@@ -103,6 +106,7 @@ const DriverTable = ({ rows }) => {
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
                   Customer Name
@@ -115,7 +119,7 @@ const DriverTable = ({ rows }) => {
                     textAlign: "center",
                   }}
                 >
-                  Customer Number
+                  Customer Phone
                 </TableCell>
                 <TableCell
                   sx={{
@@ -132,15 +136,17 @@ const DriverTable = ({ rows }) => {
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
-                  Special Instructions
+                  Driver Email
                 </TableCell>
                 <TableCell
                   sx={{
                     border: "3px solid #000000",
                     fontSize: "18px",
                     fontWeight: "900",
+                    textAlign: "center",
                   }}
                 >
                   Delivery Date
@@ -204,7 +210,7 @@ const DriverTable = ({ rows }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "left",
+                        textAlign: "center",
                         fontWeight: "900",
                       }}
                     >
@@ -215,7 +221,7 @@ const DriverTable = ({ rows }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "left",
+                        textAlign: "center",
                         fontWeight: "900",
                       }}
                     >
@@ -226,7 +232,7 @@ const DriverTable = ({ rows }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "left",
+                        textAlign: "center",
                         fontWeight: "900",
                       }}
                     >
@@ -235,7 +241,11 @@ const DriverTable = ({ rows }) => {
                     <TableCell
                       component={"th"}
                       scope="row"
-                      sx={{ fontSize: "15px", fontWeight: "900" }}
+                      sx={{
+                        fontSize: "15px",
+                        fontWeight: "900",
+                        textAlign: "center",
+                      }}
                     >
                       {row.address}
                     </TableCell>
@@ -244,18 +254,18 @@ const DriverTable = ({ rows }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "left",
+                        textAlign: "center",
                         fontWeight: "900",
                       }}
                     >
-                      {row.instruction}
+                      {row.email}
                     </TableCell>
                     <TableCell
                       component={"th"}
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "left",
+                        textAlign: "center",
                         fontWeight: "900",
                       }}
                     >
