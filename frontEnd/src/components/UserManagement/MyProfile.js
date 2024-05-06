@@ -29,7 +29,6 @@ const MyProfile = () => {
         })
         .then((response) => {
           console.log(response);
-
           setUserID(response.data.userid);
           setFullName(response.data.fullName);
           setPhoneNumber(response.data.phoneNumber);
