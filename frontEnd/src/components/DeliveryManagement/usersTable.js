@@ -38,7 +38,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
          row.c_name,
          row.phoneNumber,
          row.address,
-         row.email,
+         row.instruction,
          row.date ? row.date.split("T")[0] : "",
        ]),
      });
@@ -108,7 +108,6 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
                 Order Number
@@ -118,7 +117,6 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
                 Driver Number
@@ -128,7 +126,6 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
                 Driver Name
@@ -138,7 +135,6 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
                 Customer Name
@@ -168,17 +164,15 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
-                Driver Email
+                Special Instructions
               </TableCell>
               <TableCell
                 sx={{
                   border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
-                  textAlign: "center",
                 }}
               >
                 Delivery Date
@@ -236,7 +230,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "center",
+                        textAlign: "left",
                         fontWeight: "900",
                       }}
                     >
@@ -247,7 +241,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "center",
+                        textAlign: "left",
                         fontWeight: "900",
                       }}
                     >
@@ -258,7 +252,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "center",
+                        textAlign: "left",
                         fontWeight: "900",
                       }}
                     >
@@ -267,11 +261,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                     <TableCell
                       component={"th"}
                       scope="row"
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "900",
-                        textAlign: "center",
-                      }}
+                      sx={{ fontSize: "15px", fontWeight: "900" }}
                     >
                       {row.address}
                     </TableCell>
@@ -280,18 +270,18 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "center",
+                        textAlign: "left",
                         fontWeight: "900",
                       }}
                     >
-                      {row.email}
+                      {row.instruction}
                     </TableCell>
                     <TableCell
                       component={"th"}
                       scope="row"
                       sx={{
                         fontSize: "15px",
-                        textAlign: "center",
+                        textAlign: "left",
                         fontWeight: "900",
                       }}
                     >
@@ -309,7 +299,7 @@ const UsersTable = ({ rows, selectedUser, deleteUser }) => {
                             c_name: row.c_name,
                             phoneNumber: row.phoneNumber,
                             address: row.address,
-                            email: row.email,
+                            instruction: row.instruction,
                             date: row.date,
                           })
                         }

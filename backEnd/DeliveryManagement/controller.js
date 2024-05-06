@@ -20,7 +20,7 @@ const addUser = (req, res, next) => {
     c_name: req.body.c_name,
     phoneNumber: req.body.phoneNumber,
     address: req.body.address,
-    email: req.body.email,
+    instruction: req.body.instruction,
     date: req.body.date,
   });
 
@@ -41,7 +41,7 @@ const updateUser = (req, res, next) => {
   const c_name = req.body.c_name;
   const phoneNumber = req.body.phoneNumber;
   const address = req.body.address;
-  const email = req.body.email;
+  const instruction = req.body.instruction;
   const date = req.body.date;
 
   Delivery1.updateOne(
@@ -53,7 +53,7 @@ const updateUser = (req, res, next) => {
         c_name: c_name,
         phoneNumber: phoneNumber,
         address: address,
-        email: email,
+        instruction: instruction,
         date: date,
       },
     }

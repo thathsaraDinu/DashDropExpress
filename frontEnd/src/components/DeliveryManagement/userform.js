@@ -8,7 +8,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
   const [c_name, setCname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
+  const [instruction, setInstruction] = useState("");
   const [date, setDate] = useState("");
   const [orderNumberError, setOrderNumberError] = useState("");
   const [isOrderNumberValid, setIsOrderNumberValid] = useState(false);
@@ -16,8 +16,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
   const [isDriverNumberValid, setIsDriverNumberValid] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
 
   useEffect(() => {
     if (!submitted) {
@@ -33,12 +31,11 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
       setCname(data.c_name);
       setPhoneNumber(data.phoneNumber);
       setAddress(data.address);
-      setEmail(data.email);
+      setInstruction(data.instruction);
       setDate(data.date);
       setIsOrderNumberValid(true);
       setIsDriverNumberValid(true);
       setIsPhoneNumberValid(true);
-      setIsEmailValid(true);
     }
   }, [data]);
 
@@ -49,7 +46,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
     setCname("");
     setPhoneNumber();
     setAddress("");
-    setEmail();
+    setInstruction("");
     setDate("");
     setOrderNumberError("");
     setIsOrderNumberValid(false);
@@ -57,8 +54,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
     setIsDriverNumberValid(false);
     setPhoneNumberError("");
     setIsPhoneNumberValid(false);
-    setEmailError("");
-    setIsEmailValid(false);
   };
 
   const handleOrderNumberChange = (value) => {
@@ -98,25 +93,9 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
     }
   };
 
-   const handleEmailChange = (value) => {
-     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-       setEmail(value);
-       setIsEmailValid(true);
-       setEmailError("");
-     } else {
-       setEmailError("Invalid email address.");
-       setIsEmailValid(false);
-     }
-   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      isOrderNumberValid &&
-      isPhoneNumberValid &&
-      isDriverNumberValid &&
-      isEmailValid
-    ) {
+    if (isOrderNumberValid && isPhoneNumberValid && isDriverNumberValid) {
       isEdit
         ? updateUser({
             id,
@@ -125,7 +104,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
             c_name,
             phoneNumber,
             address,
-            email,
+            instruction,
             date,
           })
         : addUser({
@@ -135,7 +114,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
             c_name,
             phoneNumber,
             address,
-            email,
+            instruction,
             date,
           });
 
@@ -145,7 +124,6 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
        setId("");
        setDid("");
        setPhoneNumber("");
-       setEmail("");
   };
 
   return (
@@ -397,7 +375,7 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
             <Typography
               component={"label"}
-              htmlFor="email"
+              htmlFor="id"
               sx={{
                 color: "#000000",
                 marginRight: "20px",
@@ -409,28 +387,21 @@ const Userform = ({ addUser, updateUser, submitted, data, isEdit }) => {
                 fontWeight: "900",
               }}
             >
-              Driver Email
+              Special Instructions
             </Typography>
             <Input
               required
-              type="email"
-              id="email"
-              name="email"
+              type="text"
+              id="instruction"
+              name="instruction"
               sx={{
                 width: "400px",
                 fontWeight: "bold",
                 fontSize: "18px",
               }}
-              value={email}
-              error={emailError !== ""}
-              onChange={(e) => handleEmailChange(e.target.value)}
-              disabled={isEmailValid}
+              value={instruction}
+              onChange={(e) => setInstruction(e.target.value)}
             />
-            {emailError && (
-              <Typography sx={{ color: "red", marginTop: "5px" }}>
-                {emailError}
-              </Typography>
-            )}
           </Grid>
 
           <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
