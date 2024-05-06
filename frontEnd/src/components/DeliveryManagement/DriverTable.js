@@ -60,7 +60,7 @@ const DriverTable = ({ rows }) => {
           sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
           component={Paper}
 
-      
+      >
           <Table
             sx={{
               border: "3px solid #000000",
