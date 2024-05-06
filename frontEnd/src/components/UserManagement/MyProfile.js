@@ -69,7 +69,12 @@ const MyProfile = () => {
             </div>
             <div className="absolute inset-x-0 top-5 w-90 mx-auto flex flex-row justify-center">
               <div
-                style={{ width: "200px", height: "200px" }}
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundImage: "url('/pexels-olly-846741.jpg')",
+                  backgroundSize: "cover",
+                }}
                 className="border-2 border-gray-500 rounded-full"
               ></div>
             </div>
