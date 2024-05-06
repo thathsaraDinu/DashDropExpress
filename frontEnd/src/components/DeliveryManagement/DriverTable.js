@@ -53,7 +53,7 @@ const DriverTable = ({ rows }) => {
   return (
     <div>
       <div>
-        <h1 className="driver pt-20">Assign order Details Page for Drivers</h1>
+        <h1 className="driver pt-20 text-white">Assign order Details Page for Drivers</h1>
 
         <TableContainer
           sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}

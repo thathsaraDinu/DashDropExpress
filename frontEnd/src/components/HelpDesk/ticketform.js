@@ -1,8 +1,4 @@
-import {
-  Grid,
-  Input,
-  Typography,
-} from "@mui/material";
+import { Grid, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const TicketForm = ({ addUser, updateUser, submitted, data, isEdit }) => {
@@ -32,18 +28,21 @@ const TicketForm = ({ addUser, updateUser, submitted, data, isEdit }) => {
   return (
     <div style={{ paddingTop: "100px" }}>
       <form
-        onSubmit={() =>
+        onSubmit={(e) => {
+          e.preventDefault(); 
+          if (!id || !/^\d+$/.test(id)) {
+            alert("Please enter a valid ID."); 
+            return; 
+          }
+          // If validation passes, proceed with form submission
           isEdit
-            ? updateUser({
-                id,
-                cname,
-                inquery,
-                date,
-              })
-            : addUser({ id, cname, inquery, date })
-        }
+            ? updateUser({ id, cname, inquery, date })
+            : addUser({ id, cname, inquery, date });
+        }}
         className="flex justify-center"
       >
+        {/* Your form inputs here */}
+
         <Grid
           Container
           spacing={2}
