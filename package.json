@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "frontEnd",
-    "backEnd"
+    "frontend",
+    "backend"
   ],
   "scripts": {
-    "install-all": "npm install --prefix frontEnd && npm install --prefix backEnd",
-    "start": "start npm run start-frontEnd & start npm run start-backEnd",
-    "start-frontEnd": "npm start --prefix frontEnd",
-    "start-backEnd": "npm start --prefix backEnd",
-    "test": "npm-run-all --parallel test-frontEnd test-backEnd",
-    "test-frontEnd": "npm test --prefix frontEnd",
-    "test-backend": "npm test --prefix backEnd"
+    "install-all": "npm install --prefix frontend && npm install --prefix backend",
+    "start": "start npm run start-frontend & start npm run start-backend",
+    "start-frontend": "npm start --prefix frontend",
+    "start-backend": "npm start --prefix backend",
+    "test": "npm-run-all --parallel test-frontend test-backend",
+    "test-frontend": "npm test --prefix frontend",
+    "test-backend": "npm test --prefix backend"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
