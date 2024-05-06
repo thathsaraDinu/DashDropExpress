@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Paper,
   Table,
@@ -59,8 +58,7 @@ const DriverTable = ({ rows }) => {
         <TableContainer
           sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
           component={Paper}
-
-      >
+        >
           <Table
             sx={{
               border: "3px solid #000000",
