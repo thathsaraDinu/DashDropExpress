@@ -40,7 +40,7 @@ const OrderForm = ({addOrder, updateOrder ,submitted, data ,isEdit})=>{
     const [weight,setWeight] = useState(0);
 
     const isFormValid = () => {
-        return name && address && contact && email && Name && Address && Contact && item && quantity && weight;
+        return name && address && contact && email && Name && Address && Contact && item && quantity>=0 && weight>=0 && weight<=50;
     }
 
     useEffect(()=>{
@@ -424,8 +424,16 @@ const OrderForm = ({addOrder, updateOrder ,submitted, data ,isEdit})=>{
                     sx={{width:'400px'}}
                     value={weight}
                     onChange={e => setWeight(e.target.value)}
+
+                    inputProps={{ min: 0, max: 50 }} 
                                
-                />
+                    />
+                    {(weight < 0 || weight > 50) && (
+                        <Typography variant="body3" color="red">
+                               Weight must be between 0 and 50 kgs.
+                           </Typography>
+    )}
+                               
             </Grid>
         
             <Button
