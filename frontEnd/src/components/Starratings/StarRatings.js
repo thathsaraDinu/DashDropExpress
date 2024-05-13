@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { Grid, Typography } from "@mui/material";
+
 
 const colors = {
   orange: "#FFBA5A",
@@ -28,12 +29,38 @@ function StarRatings() {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
-  const Submit = (e) => {
-    console.log(name);
-    console.log(drivernumber);
-    console.log(currentValue);
-    console.log(description);
-    e.preventDefault();
+
+  const handleChangeDriverNumber = (e) => {
+    if (e.target.value.length !== 5) {
+      alert("Please enter a valid driver number");
+      return;
+    }
+    
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    if(name ===""){
+      alert("Please enter Customer Name");
+      return;
+    }
+    if(drivernumber ===""){
+      alert("Please enter Driver Number");
+
+      return;
+    }else if(drivernumber.length !== 5){
+      alert("Please enter a valid Driver Number");
+      setDrivernumber("");
+      return;
+    }
+
+     if (currentValue === 0) {
+      alert("Please select a rating.");
+      return;
+    }
+   
+
+
     axios
       .post("http://localhost:3001/api/createfeedbacks", {
         name,
@@ -48,18 +75,23 @@ function StarRatings() {
   };
 
   return (
+    <div style={{
+      
+      paddingTop: "100px",
+
+    }}>
     <form
       container
-      spacing={2}
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.3)",
+        backgroundColor: "rgba(43, 149, 232,0.8)",
         border: "3px solid #000000",
         marginBottom: "50px",
         marginLeft: "300px",
         display: "block",
         width: "600px",
         height: "650px",
-        marginTop: "10px",
+        padding:"10px"
+
       }}
     >
       <Grid item xs={12}>
@@ -67,37 +99,36 @@ function StarRatings() {
           component={"h1"}
           sx={{
             color: "#000000",
-            marginRight: "20px",
-            marginLeft: "100px",
-            marginTop: "10px",
+            textAlign:"center",
+            marginTop: "20px",
             fontSize: "50px",
-            width: "500px",
             display: "block",
             fontWeight: "bold",
             marginBottom: "30px",
+            fontFamily:"jost"
           }}
         >
           Feedback Form
         </Typography>
       </Grid>
 
-      <Grid item xs={12} sm={12} sx={{ display: "flex", marginRight: "40px" }}>
+      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
             color: "#000000",
-            marginRight: "10px",
-            marginLeft: "50px",
+            marginRight: "20px",
             marginTop: "20px",
-            fontSize: "18px",
-            width: "200px",
+            fontSize: "20px",
+            width:"200px",
             display: "block",
+            textAlign:"left",
             fontWeight: "900",
             marginBottom: "30px",
           }}
         >
-          Name
+          Customer ID
         </Typography>
         <input
           required
@@ -105,39 +136,47 @@ function StarRatings() {
           id="name"
           onChange={(e) => setName(e.target.value)}
           name="name"
-          className="appearance-none  w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
-          style={{ marginBottom: "30px" }}
+          className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
+         
         />
       </Grid>
 
-      <Grid item xs={12} sx={{ display: "flex", marginRight: "40px" }}>
+      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
         <Typography
           component={"label"}
           htmlFor="name"
           sx={{
             color: "#000000",
             marginRight: "20px",
-            marginLeft: "40px",
             marginTop: "20px",
-            fontSize: "18px",
-            width: "200px",
+            fontSize: "20px",
+            width:"200px",
             display: "block",
+            textAlign:"left",
             fontWeight: "900",
+            marginBottom: "30px",
           }}
         >
           Driver number
         </Typography>
         <input
           required
-          type="text"
-          id="name"
+          type="text" // Changed to type number for numeric input
+          id="drivernumber"
           onChange={(e) => setDrivernumber(e.target.value)}
-          name="name"
-          className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
+          value={drivernumber}
+          name="drivernumber"
+          className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
+          onBlur={handleChangeDriverNumber}
         />
       </Grid>
+
+      {/* Rest of your form */}
+
       <div style={styles.container}>
-        <h2 style={{ marginTop: "50px" }}>Give your ratings </h2>
+        <h2 style={{ marginTop: "20px" }}>Give your ratings </h2>
         <div style={styles.stars}>
           {stars.map((_, index) => {
             return (
@@ -163,18 +202,18 @@ function StarRatings() {
         </div>
         <textarea
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Add a comments here:"
+          placeholder="Add a comment here:"
           style={styles.textarea}
         />
 
         <button
-          onClick={Submit}
+          onClick={handleSubmit}
           style={{
             border: "1px solid #a9a9a9",
             borderRadius: 5,
-            width: 300,
+            width: 100,
             padding: 10,
-            backgroundColor: "#0B8BEA",
+            backgroundColor: "#3A09E7",
             color: "black",
             fontSize: 16,
             fontWeight: "bold",
@@ -188,6 +227,7 @@ function StarRatings() {
         </button>
       </div>
     </form>
+    </div>
   );
 }
 

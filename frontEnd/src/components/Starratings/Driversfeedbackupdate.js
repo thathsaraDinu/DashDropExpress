@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateStarRatings from "./UpdateStarRatings";
 import { useParams } from "react-router-dom";
+import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 const Driversfeedbackupdate = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -20,10 +22,18 @@ const Driversfeedbackupdate = () => {
   }, []);
 
   return (
-    <div>
+
+    <div style={{
+      
+      backgroundImage: "url('/starratings2.jpg')",
+      backgroundSize: "cover",
+    }}
+    className="backgroundimage  ">
+      <MainMenu></MainMenu>
       <UpdateStarRatings id={id} />
 
       <FeedbackTable rows={feedbacks} />
+      <FooterMain></FooterMain>
     </div>
   );
 };

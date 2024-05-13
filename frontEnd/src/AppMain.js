@@ -135,7 +135,7 @@ function App() {
                   <Link
                     to={
                       usertypetoken === "Customer"
-                        ? "#"
+                        ? "/orders"
                         : usertypetoken === "Admin"
                         ? "#"
                         : "#"
