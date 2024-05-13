@@ -15,6 +15,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 const FeedbackTable = ({ rows }) => {
+<<<<<<< Updated upstream
   const [search, setSearch] = useState(""); // Added state for search
 
   const handleDownloadPdf = () => {
@@ -37,6 +38,9 @@ const FeedbackTable = ({ rows }) => {
     });
     doc.save("Feedback_Table.pdf");
   };
+=======
+  const [search, setSearch] = useState("");
+>>>>>>> Stashed changes
 
   const handleDelete = (id) => {
     axios
@@ -89,13 +93,19 @@ const FeedbackTable = ({ rows }) => {
               type="search"
               id="default-search"
               className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+<<<<<<< Updated upstream
               placeholder="Search Full Name"
+=======
+              placeholder="Search Customer ID"
+              value={search}
+>>>>>>> Stashed changes
               onChange={(e) => setSearch(e.target.value)}
               required
             />
           </div>
         </div>
       </div>
+<<<<<<< Updated upstream
       <>
         <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
           <Table>
@@ -208,6 +218,122 @@ const FeedbackTable = ({ rows }) => {
           </Button>
         </div>
       </>
+=======
+      <TableContainer component={Paper} sx={{ marginBottom: "50px" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Customer ID</TableCell>
+              <TableCell>Driver Number</TableCell>
+              <TableCell>Ratings</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.length > 0 ? (
+              rows
+                .filter((row) =>
+                  row.name.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((row) => (
+                  <TableRow
+                    key={row._id}
+                    sx={{
+                      "&:last-child td,&:last-child th": { border: 0 },
+                      border: "2px solid #000000",
+                    }}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        fontSize: "15px",
+                        textAlign: "left",
+                        fontWeight: "900",
+                      }}
+                    >
+                      {row.name}
+                    </TableCell>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        fontSize: "15px",
+                        textAlign: "left",
+                        fontWeight: "900",
+                      }}
+                    >
+                      {row.drivernumber}
+                    </TableCell>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        fontSize: "15px",
+                        textAlign: "left",
+                        fontWeight: "900",
+                      }}
+                    >
+                      {row.currentValue}
+                    </TableCell>
+
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        fontSize: "15px",
+                        textAlign: "left",
+                        fontWeight: "900",
+                      }}
+                    >
+                      {row.description}
+                    </TableCell>
+                    <TableCell>
+                      <Link
+                        to={`/Driversfeedbackupdate/${row._id}`}
+                        style={{
+                          margin: "5px",
+                          padding: "10px",
+                          backgroundColor: "#EAE30B",
+                          color: "black",
+                          textDecoration: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Update
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleDeleteConfirmation(row._id);
+                        }}
+                        style={{
+                          margin: "5px",
+                          padding: "10px",
+                          backgroundColor: "#f44336",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  No data available
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+>>>>>>> Stashed changes
     </div>
   );
 };
