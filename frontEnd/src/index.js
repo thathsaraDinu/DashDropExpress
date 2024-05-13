@@ -45,11 +45,15 @@ root.render(
       <Route path="/userdelivery" element={<UserDelivery></UserDelivery>} />
       <Route path="/userstable" element={<UsersTable></UsersTable>} />
 
-      <Route path='/driversfeedback' element={<DriversFeedback />} />
-   <Route path='/starratings' element={<StarRatings />} />
-   <Route path='/UpdateStarRatings/:id' element={<UpdateStarRatings/>} />
-   <Route path='/Driversfeedbackupdate/:id' element={<Driversfeedbackupdate/>} />
-   <Route path='/feedbacktable' element={<FeedbackTable />} />
+      <Route path="/driversfeedback" element={<DriversFeedback />} />
+      <Route path="/starratings" element={<StarRatings />} />
+      <Route path="/UpdateStarRatings/:id" element={<UpdateStarRatings />} />
+      <Route
+        path="/Driversfeedbackupdate/:id"
+        element={<Driversfeedbackupdate />}
+      />
+      <Route path="/feedbacktable" element={<FeedbackTable />} />
+      
     </Routes>
   </BrowserRouter>
 );

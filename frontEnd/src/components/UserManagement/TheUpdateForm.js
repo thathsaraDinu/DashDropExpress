@@ -17,6 +17,7 @@ const TheUpdateForm = () => {
   const [password, setPassword] = useState("");
   const [confpassword, setConfPassword] = useState("");
   const [tokenemail, setTokenEmail] = useState("");
+  const [page, setPage] = useState("");
 
   const navigate = useNavigate();
 
@@ -69,8 +70,10 @@ const TheUpdateForm = () => {
       })
       .then((result) => {
         alert(result.data.message);
-
-        navigate("/Users");
+        if(!page)
+          navigate("/Users");
+        else
+          navigate("/myprofile")
         console.log(result);
       })
       .catch((err) => {
@@ -84,6 +87,7 @@ const TheUpdateForm = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const user1 = searchParams.get("usertype");
+    setPage(searchParams.get("page"));
     if (user1) setUpdateType(user1);
     else setUpdateType("Customer");
   }, [location]);

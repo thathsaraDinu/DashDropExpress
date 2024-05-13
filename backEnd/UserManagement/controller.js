@@ -312,6 +312,43 @@ const verifyOTP = async (req, res) => {
   }
 };
 
+const uploadProfilePhoto = async (req, res) => {
+  try {
+     const id = req.params.id;
+
+     const user = await User.findById({ _id: id });
+     if(user){
+      console.log("exists")
+     }
+    const formData = req.body; 
+    if (!formData) {
+      console.log("no file")
+      // If no file is uploaded
+      return res.status(400).send("No file uploaded.");
+    }
+    
+      console.log("formData" + formData)
+    
+   
+
+    // Encode the image as Base64
+    const encodedImage = formData.buffer.toString("base64");
+
+    // Update the user's profilePhoto field with the Base64 encoded image
+    user.profilephoto = `data:${req.file.mimetype};base64,${encodedImage}`;
+
+    // Save the user document
+    await user.save();
+
+    res.status(200).send("Profile photo uploaded successfully");
+  } catch (error) {
+    console.error("Error uploading profile photo:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+exports.uploadProfilePhoto = uploadProfilePhoto;
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.updateUser = updateUser;
