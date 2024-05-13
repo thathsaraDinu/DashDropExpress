@@ -9,6 +9,9 @@ const userSchemamodel = new Schema({
   address: { type: String, required: true },
   usertype: { type: String, required: true },
   password: { type: String, required: true },
+  profilephoto: {
+    type: String, 
+  },
 });
 
 const Usermod = mongoose.model("User", userSchemamodel);

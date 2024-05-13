@@ -60,4 +60,11 @@ app.post("/verifyOTP", (req, res) => {
   });
 });
 
+// API
+app.post("/uploadprofilephoto/:id", (req, res) => {
+  controller.uploadProfilePhoto(req.body, (callback) => {
+    res.send(callback);
+  });
+});
+
 module.exports = app;
