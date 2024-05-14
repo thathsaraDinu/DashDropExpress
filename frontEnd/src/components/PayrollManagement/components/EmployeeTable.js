@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const EmployeeTable = () => {
   const [result, setResult] = useState();
   useEffect(() => {
@@ -55,6 +56,7 @@ const EmployeeTable = () => {
               ))}
           </tbody>
         </table>
+        
       </div>
     </>
   );

@@ -8,7 +8,7 @@ const Employees = () => {
     <Paper 
       elevation={0} // Remove the shadow
       sx={{
-        backgroundImage: "url('/image.jpg')",
+        backgroundImage: "url('/image_3.jpg')",
         backgroundSize: 'cover',
         height: '200vh', // Set the height to cover the entire viewport
         flexDirection: 'column',

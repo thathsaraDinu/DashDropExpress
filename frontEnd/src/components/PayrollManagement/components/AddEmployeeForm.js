@@ -6,6 +6,9 @@ const AddEmployeeForm = () => {
     lastname: '',
     email: '',
     role: '',
+    accountnumber:'',
+    gender:'',
+    phonenumber:'',
   });
 
   const handleChange = (e) => {
@@ -42,7 +45,7 @@ const AddEmployeeForm = () => {
   return (
     <>
       <form className="max-w-screen-md mx-auto" onSubmit={handleSubmit}>
-        <h2 className="pt-10 text-[34px] text-base text-center font-semibold leading-7 text-gray-900">
+        <h2 className="pt-10 text-[48px] text-base text-center font-semibold leading-7 text-gray-900">
           Add Employee
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -86,7 +89,7 @@ const AddEmployeeForm = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-4">
+          <div className="sm:col-span-3">
             <label
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -106,7 +109,7 @@ const AddEmployeeForm = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-4">
+          <div className="sm:col-span-3">
             <label
               htmlFor="role"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -125,6 +128,72 @@ const AddEmployeeForm = () => {
               />
             </div>
           </div>
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="accountnumber"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Account Number
+            </label>
+            <div className="mt-2">
+              <input
+                type="integer"
+                name="accountnumber"
+                id="accountnumber"
+                autoComplete="family-name"
+                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-0"
+                value={formData.accountnumber}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-3">
+      <label
+        htmlFor="gender"
+        className="block text-sm font-medium leading-6 text-gray-900"
+      >
+        Gender
+      </label>
+      <div className="mt-2">
+        <input
+          type="text"
+          name="gender"
+          id="gender"
+          autoComplete="off"
+          className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-0"
+          value={formData.gender}
+          onChange={handleChange}
+          list="gender-suggestions"
+        />
+        <datalist id="gender-suggestions">
+          <option value="Male" />
+          <option value="Female" />
+        </datalist>
+      </div>
+      
+    </div>
+    
+    <div className="sm:col-span-3">
+            <label
+              htmlFor="phonenum"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Phone Number
+            </label>
+            <div className="mt-2">
+              <input
+                type="number"
+                name="phonenumber"
+                id="phonenumber"
+                autoComplete="family-name"
+                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-0"
+                value={formData.phonenumber}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          
+          
         </div>
         <button
           type="submit"
