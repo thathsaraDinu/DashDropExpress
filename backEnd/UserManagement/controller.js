@@ -353,15 +353,12 @@ const uploadProfilePhoto = async (req, res) => {
     
     if (!base64) {
       console.log("no file");
-      // If no file is uploaded
       return res.status(400).send("No file uploaded.");
     }
 
     console.log("aawaaa" );
 
-    // Update the user's profilePhoto field with the Base64 encoded image
     user.profilephoto = base64;
-    console.log(user.profilephoto)
     // Save the user document
     await user.save();
 
