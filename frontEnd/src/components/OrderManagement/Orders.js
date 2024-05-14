@@ -120,40 +120,85 @@ const Orders = () => {
          });
     }
     const calculateTotalCost = () => {
-        const costPerKg = 10;
+        const costPerKg = 10; 
         const distancePrices = {
-            "Matara-Galle": 1000,
-            "Matara-Colombo": 1500,
+            "Matara-Galle": 2000,
+            "Matara-Colombo": 2500,
+            "Matara-Kandy": 3000,
+            "Matara-Rathnapura": 3500,
+            "Matara-Nuwara Eliya": 4000,
+            "Matara-Jaffna": 5000,
+            "Matara-Anuradhapura": 5500,
+            "Matara-within 30km": 1000,
+            "Matara-over 30km": 1500,
+            "Galle-Matara": 2000,
+            "Galle-Colombo": 2500,
+            "Galle-Gampaha": 300,
+            "Galle-Kandy": 3500,
+            "Galle-Rathnapura": 4000,
+            "Galle-Nuwara Eliya": 4500,
+            "Galle-Jaffna": 5000,
+            "Galle-Anuradhapura": 5500,
+            "Galle-within 30km": 1000,
+            "Galle-over 30km": 1500,
+            "Colombo-Matara": 300,
+            "Colombo-Galle": 3000,
+            "Colombo-Colombo": 350,
+            "Colombo-Kandy": 350,
+            "Colombo-Matale": 350,
+            "Colombo-Rathnapura": 350,
+            "Colombo-Nuwara Eliya": 350,
+            "Colombo-Hambantota": 350,
+            "Colombo-Jaffna": 350,
+            "Colombo-Anuradhapura": 350,
+            "Colombo-within 30km": 350,
+            "Colombo-over 30km": 350,
+            "kandy-Galle": 300,
+            "kandy-Colombo": 350,
+            "kandy-Matara": 350,
+            "kandy-Rathnapura": 350,
+            "kandy-Nuwara Eliya": 350,
+            "kandy-Hambantota": 350,
+            "kandy-Jaffna": 350,
+            "kandy-Anuradhapura": 350,
+            "kandy-Polonnaruwa": 350,
+            "kandy-within 30km": 350,
+            "kandy-over 30km": 350,
+            "Rathnapura-Galle": 300,
+            "Rathnapura-Colombo": 350,
+            "Rathnapura-Kandy": 350,
+            "Rathnapura-Matara": 350,
+            "Rathnapura-Nuwara Eliya": 350,
+            "Rathnapura-Hambantota": 350,
+            "Rathnapura-Jaffna": 350,
+            "Rathnapura-Anuradhapura": 350,
+            "Rathnapura-within 30km": 350,
+            "Rathnapura-over 30km": 350,
         };
-        const start = parseFloat(startDistance);
-        const end = parseFloat(endDistance);
-        const weightValue = parseFloat(kg)
-
-        console.log("Start Distance:", start);
-        console.log("End Distance:", end);
-        console.log("Weight Value:", weightValue);
-
-        if (isNaN(start) || isNaN(end) || isNaN(weightValue)) {
+    
+        const start = startDistance;
+        const end = endDistance;
+        const selectedItem = item;
+        const weightValue = parseFloat(kg);
+    
+        if (!start || !end || !selectedItem || isNaN(weightValue)) {
             setTotalCost(0);
             return;
         }
-
-        const distanceKey = `${startDistance}-${endDistance}`;
-
-        console.log("Distance Key:", distanceKey);
-
+    
+        const distanceKey = `${start}-${end}`;
+    
         if (!distancePrices.hasOwnProperty(distanceKey)) {
-            setTotalCost(2000);
+            setTotalCost(0); 
             return;
         }
+    
         const distancePrice = distancePrices[distanceKey];
-        console.log("Distance Price:", distancePrice);
-   
-        const totalCostValue = weightValue * costPerKg  * distancePrice;
-        console.log("Total Cost Value:", totalCostValue);
+    
+        const totalCostValue = weightValue * costPerKg + distancePrice;
+    
         setTotalCost(totalCostValue);
-      }
-
+    }
 
     return (
         <div className="body backgroundimage relative" >
@@ -216,6 +261,14 @@ const Orders = () => {
         <option value="Galle">Galle</option>
         <option value="Colombo">Colombo</option>
         <option value="Anuradhapura">Anuradhapura</option>
+        <option value="Kandy">Kandy</option>
+        <option value="Nuwara Eliya">Nuwara Eliya</option>
+        <option value="Gampaha">Gampaha</option>
+        <option value="Matale">Matale</option>
+        <option value="Rathnapura">Rathnapura</option>
+        <option value="Jaffna">Jaffna</option>
+        <option value="within 30km">within 30km</option>
+        <option value="over 30km">over 30km</option>
     </select>
 </div>
 
@@ -232,6 +285,14 @@ const Orders = () => {
         <option value="Galle">Galle</option>
         <option value="Colombo">Colombo</option>
         <option value="Anuradhapura">Anuradhapura</option>
+        <option value="Kandy">Kandy</option>
+        <option value="Nuwara Eliya">Nuwara Eliya</option>
+        <option value="Gampaha">Gampaha</option>
+        <option value="Matale">Matale</option>
+        <option value="Rathnapura">Rathnapura</option>
+        <option value="Jaffna">Jaffna</option>
+        <option value="within 30km">within 30km</option>
+        <option value="over 30km">over 30km</option>
     </select>
 </div>
 
