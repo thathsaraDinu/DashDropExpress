@@ -14,10 +14,31 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
     years.push(year);
   }
   const handleSubmit = () => {
+    if (!vin) {
+      alert('Please enter the vin Number.');
+      return;
+    }
     if (!registrationNumber) {
       alert('Please enter the Registration Number.');
       return;
     }
+    if (!vehicleType) {
+      alert('Please enter the vehicle Type.');
+      return;
+    }
+    if (!model) {
+      alert('Please enter the model.');
+      return;
+    }
+    if (!selectedyear) {
+      alert('Please enter selected year.');
+      return;
+    }
+      if (!insuranceDetails) {
+        alert('Please enter insurance details.');
+        return;
+      }
+
 
     if (isEdit) {
       updateStudent({ vin, registrationNumber, vehicleType, model, selectedyear, insuranceDetails });
