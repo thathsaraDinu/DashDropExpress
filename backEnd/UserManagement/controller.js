@@ -176,10 +176,10 @@ const checkPassword = async (req, res) => {
   console.log(oldpassword);
   try {
     const existingUser = await User.findById({ _id: id });
-      const isPasswordValid = await bcrypt.compare(
-        oldpassword,
-        existingUser.password
-      );
+    const isPasswordValid = await bcrypt.compare(
+      oldpassword,
+      existingUser.password
+    );
 
     if (!isPasswordValid)
       return res.status(401).json({ message: "Password is incorrect" });
@@ -343,31 +343,30 @@ const verifyOTP = async (req, res) => {
 
 const uploadProfilePhoto = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id, base64 } = req.body;
 
     const user = await User.findById({ _id: id });
     if (user) {
       console.log("exists");
     }
-    const formData = req.body;
-    if (!formData) {
+    console.log(id, base64);
+    
+    if (!base64) {
       console.log("no file");
       // If no file is uploaded
       return res.status(400).send("No file uploaded.");
     }
 
-    console.log("formData" + formData);
-
-    // Encode the image as Base64
-    const encodedImage = formData.buffer.toString("base64");
+    console.log("aawaaa" );
 
     // Update the user's profilePhoto field with the Base64 encoded image
-    user.profilephoto = `data:${req.file.mimetype};base64,${encodedImage}`;
-
+    user.profilephoto = base64;
+    console.log(user.profilephoto)
     // Save the user document
     await user.save();
 
-    res.status(200).send("Profile photo uploaded successfully");
+    res.status(200).json({ message: "profile photo uploaded successfully" });
+
   } catch (error) {
     console.error("Error uploading profile photo:", error);
     res.status(500).send("Internal Server Error");

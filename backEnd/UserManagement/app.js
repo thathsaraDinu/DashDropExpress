@@ -61,7 +61,7 @@ app.post("/verifyOTP", (req, res) => {
 });
 
 // API
-app.post("/uploadprofilephoto/:id", (req, res) => {
+app.post("/uploadprofilephoto", (req, res) => {
   controller.uploadProfilePhoto(req.body, (callback) => {
     res.send(callback);
   });
