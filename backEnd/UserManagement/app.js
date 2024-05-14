@@ -14,6 +14,12 @@ app.get("/users", (req, res) => {
   });
 });
 
+app.get("/getuserbyemail", (req, res) => {
+  controller.getUsers((callback) => {
+    res.send(callback);
+  });
+});
+
 app.get("/getuserbyid/:id", (req, res) => {
   controller.getUserById((callback) => {
     res.send(callback);
@@ -50,6 +56,19 @@ app.delete("/deleteuser/:id", (req, res) => {
 // API
 app.post("/verifyOTP", (req, res) => {
   controller.verifyOTP(req.body, (callback) => {
+    res.send(callback);
+  });
+});
+
+// API
+app.post("/uploadprofilephoto/:id", (req, res) => {
+  controller.uploadProfilePhoto(req.body, (callback) => {
+    res.send(callback);
+  });
+});
+
+app.post("/checkpassword/:id", (req, res) => {
+  controller.checkPassword(req.body, (callback) => {
     res.send(callback);
   });
 });
