@@ -42,6 +42,16 @@ const TheForm = () => {
   ////////submit function
   const Submit = (e) => {
     e.preventDefault();
+     if (phoneNumber.length !== 10) {
+       alert("The Phone Number should be 10 digits");
+       setPhoneNumber("");
+       return; // Stop execution if passwords don't match
+     }
+     if (!email.includes("@")) {
+       alert("Please Enter a valid Email");
+       setEmail("");
+       return; // Stop execution if passwords don't match
+     }
     if (password !== confpassword) {
       alert("Password and confirm password do not match");
       setConfPassword("");

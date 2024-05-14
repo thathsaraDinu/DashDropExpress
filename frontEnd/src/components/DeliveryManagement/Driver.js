@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./users.css";
 import DriverTable from "./DriverTable";
 import MainMenu from "../../MainMenu";
+import FooterMain from "../../FooterMain";
 
 const DriverDelivery = () => {
   const [users, setUsers] = useState([]);
@@ -26,7 +27,7 @@ const DriverDelivery = () => {
   return (
     <div>
       <MainMenu></MainMenu>
-      <div className="body1">
+      <div className="pb-20">
         <img
           className="image2"
           src="/pic8.jpg"
@@ -41,6 +42,7 @@ const DriverDelivery = () => {
           <DriverTable rows={users} />
         </Box>
       </div>
+      <FooterMain></FooterMain>
     </div>
   );
 };
