@@ -15,7 +15,10 @@ const Orders = require("./OrderManagement/router");
 const { MONGODB_URI } = require("./config");
 
 app.use(express.json());
+
 app.use(cors());
+const bodyParser = require("body-parser");
+app.use(bodyParser.json({ limit: "100mb" }));
 
 const uri = MONGODB_URI;
 const connect = async () => {

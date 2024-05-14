@@ -3,19 +3,18 @@ import MainMenu from "../../MainMenu";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import FooterMain from "../../FooterMain";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   //const [tokenemail, setTokenEmail] = useState("");
   const [id, setTheID] = useState("");
   const [usertype, setUserType] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
   const [userid, setUserID] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [tokenemail, setTokenEmail] = useState("");
   //const [password, setPassword] = useState("");
   /////////////import this to append the login section
   //const [usertypetoken, setUserType] = useState("");
@@ -25,7 +24,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
-      setTokenEmail(decodedToken.useremail);
+      
 
       axios
         .get("http://localhost:3001/api/getuserbyemail", {
@@ -42,6 +41,7 @@ const MyProfile = () => {
           setPhoneNumber(response.data.phoneNumber);
           setEmail(response.data.email);
           setAddress(response.data.address);
+          setFile(response.data.profilephoto)
         })
 
         .catch((error) => console.error("Axios Error : ", error));
@@ -55,6 +55,14 @@ const MyProfile = () => {
     var reader = new FileReader();
     if (event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
 
+    const fileSizeInBytes = event.target.files[0].size;
+    // Convert bytes to kilobytes (1 KB = 1024 bytes)
+    const fileSizeInKB = fileSizeInBytes / 1024;
+
+    if (fileSizeInKB>100) {
+      alert("Please upload a smaller image")
+      return
+    }
     reader.onload = () => {
       console.log(reader.result);
 
@@ -63,22 +71,37 @@ const MyProfile = () => {
     reader.onerror = (error) => {
       console.log("error: ", error);
     };
-
-    axios
-      .post("http://localhost:3001/api/uploadprofilephoto/" + id, {})
-      .then((response) => {
-        console.log("File uploaded successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error uploading file:", error);
-      });
-    if (file !== null) {
-      console.log("An image is captured.");
-      // Further processing if needed
-    } else {
-      console.log("No image is captured.");
-    }
   }
+
+async function upload() {
+  await fetch("http://localhost:3001/api/uploadprofilephoto", {
+    method: "POST",
+    mode: "cors", // Set the mode to 'cors'
+    headers: {
+      "Content-Type": "application/json", // Set the Content-Type header
+    },
+    body: JSON.stringify({
+      id: id,
+      base64: file,
+    }),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("ddd"+data);
+      alert("Image uploaded successfully") // Handle the response data
+    })
+    .catch((error) => {
+      console.error("Error:", error); // Handle any errors
+    });
+
+    
+}
+
 
   function handleDeleteConfirmation(id) {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
@@ -92,15 +115,13 @@ const MyProfile = () => {
 
   //////delete function
   const handleDelete = (id) => {
-    
-      axios
-        .delete("http://localhost:3001/api/deleteuser/" + id)
-        .then((response) => {
-          console.log(response);
-          window.location.reload();
-        })
-        .catch((err) => console.log(err));
-    
+    axios
+      .delete("http://localhost:3001/api/deleteuser/" + id)
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div
@@ -125,18 +146,19 @@ const MyProfile = () => {
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 User ID
               </h3>
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">{userid}</p>
+              <p className=" max-w-2xl text-sm text-gray-500">{userid}</p>
             </div>
-            <div className="absolute inset-x-0 top-5 w-90 mx-auto flex flex-row justify-center">
+            <div className="absolute inset-x-0 top-5 w-90 mx-auto flex flex-row justify-center items-center">
               <label
                 style={{
+                  
                   width: "200px",
                   height: "200px",
                   backgroundImage: `url(${file})`,
                   backgroundSize: "cover",
                   position: "relative",
                 }}
-                className="imagechanger border-2 border-gray-500 rounded-full"
+                className="ml-20 imagechanger border-2 border-gray-500 rounded-full"
                 htmlFor="fileInput"
               >
                 <span className="text-white hover-text">
@@ -154,6 +176,7 @@ const MyProfile = () => {
                   handleUpload(event);
                 }}
               />
+              <button className="h-15 ml-5 bg-blue-200 border-2 px-2" onClick={upload}>Upload Image</button>
             </div>
           </div>
           <div className="border-t border-gray-200">
@@ -187,7 +210,7 @@ const MyProfile = () => {
                 </dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <a
+                <button
                   className="text-center flex items-center justify-center my-5 relative rounded px-5 py-3 overflow-hidden group bg-blue-500 relative hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-blue-400 transition-all ease-out duration-300"
                   onClick={() =>
                     navigate(
@@ -197,8 +220,8 @@ const MyProfile = () => {
                 >
                   <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">Change Password</span>
-                </a>
-                <a
+                </button>
+                <button
                   className="text-center flex items-center justify-center my-5 relative rounded px-5 py-3 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
                   onClick={() =>
                     navigate(
@@ -208,8 +231,8 @@ const MyProfile = () => {
                 >
                   <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">Update Personal Details</span>
-                </a>
-                <a
+                </button>
+                <button
                   onClick={() => {
                     handleDeleteConfirmation(id);
                   }}
@@ -217,48 +240,14 @@ const MyProfile = () => {
                 >
                   <span className=" absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">Delete My Account</span>
-                </a>
+                </button>
               </div>
             </dl>
           </div>
         </div>
       </div>
       <FooterMain></FooterMain>
-      <div id="popup1" className="overlay">
-        <div className="popup">
-          <a className="close" href="#">
-            &times;
-          </a>
-          <form
-            style={{
-              fontFamily: "jost",
-              fontWeight: "600",
-
-              // Adjust the value as needed
-            }}
-            className="bg-white p-5 rounded-2xl"
-          >
-            <label className="block text-gray-700   mb-2" htmlFor="otp">
-              Enter the OTP. <span>(Check your email)</span>
-            </label>
-            <input
-              className="shadow appearance-none mb-2 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="otp"
-              type="text"
-              onChange={(e) => {}}
-              placeholder="OTP"
-            />
-            <div className="otpsubmit flex items-center justify-center">
-              <button
-                style={{ fontFamily: "jost", fontWeight: "600" }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Verify
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      
     </div>
   );
 };

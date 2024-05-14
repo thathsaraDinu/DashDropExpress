@@ -50,10 +50,21 @@ const TheUpdateForm = () => {
       })
 
       .catch((error) => console.error("Axios Error : ", error));
-  }, []);
+  }, [id]);
 
   /////////////update function on submit
   const Update = (e) => {
+    if (phoneNumber.length !== 10) {
+      alert("The Phone Number should be 10 digits");
+      setPhoneNumber("");
+      return; // Stop execution if passwords don't match
+    }
+    if (!email.includes("@")) {
+      alert("Please Enter a valid Email");
+      setEmail("");
+      return; // Stop execution if passwords don't match
+    }
+    
     e.preventDefault();
     if (page === "pass") {
       axios
@@ -64,6 +75,13 @@ const TheUpdateForm = () => {
             alert("Please Enter the new password");
             return;
           }
+           const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+           const isValidPassword = regex.test(password);
+           if (!isValidPassword) {
+             alert("Please match the requested password format");
+             return;
+           }
+
           if (password !== confpassword) {
             alert("Password and confirm password do not match");
             setConfPassword("");
@@ -101,6 +119,7 @@ const TheUpdateForm = () => {
     }
 
     if (page === "profile" || page === null) {
+     
       if (password !== confpassword) {
         alert("Password and confirm password do not match");
         setConfPassword("");
@@ -250,6 +269,7 @@ const TheUpdateForm = () => {
                     required
                     type="tel"
                     name="phoneNumber"
+                    pattern="[0-9]{10}"
                     className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
                     id="phoneNumber"
                     value={phoneNumber}
