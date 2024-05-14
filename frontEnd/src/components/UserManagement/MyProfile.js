@@ -3,7 +3,7 @@ import MainMenu from "../../MainMenu";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import FooterMain from "../../FooterMain";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   //const [tokenemail, setTokenEmail] = useState("");
@@ -15,7 +15,6 @@ const MyProfile = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [tokenemail, setTokenEmail] = useState("");
   //const [password, setPassword] = useState("");
   /////////////import this to append the login section
   //const [usertypetoken, setUserType] = useState("");
@@ -25,7 +24,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
-      setTokenEmail(decodedToken.useremail);
+      
 
       axios
         .get("http://localhost:3001/api/getuserbyemail", {
@@ -248,41 +247,7 @@ async function upload() {
         </div>
       </div>
       <FooterMain></FooterMain>
-      <div id="popup1" className="overlay">
-        <div className="popup">
-          <a className="close" href="#">
-            &times;
-          </a>
-          <form
-            style={{
-              fontFamily: "jost",
-              fontWeight: "600",
-
-              // Adjust the value as needed
-            }}
-            className="bg-white p-5 rounded-2xl"
-          >
-            <label className="block text-gray-700   mb-2" htmlFor="otp">
-              Enter the OTP. <span>(Check your email)</span>
-            </label>
-            <input
-              className="shadow appearance-none mb-2 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="otp"
-              type="text"
-              onChange={(e) => {}}
-              placeholder="OTP"
-            />
-            <div className="otpsubmit flex items-center justify-center">
-              <button
-                style={{ fontFamily: "jost", fontWeight: "600" }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Verify
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      
     </div>
   );
 };

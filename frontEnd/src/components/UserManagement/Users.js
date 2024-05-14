@@ -9,6 +9,8 @@ import axios from "axios";
 import MainMenu from "../../MainMenu";
 import { jwtDecode } from "jwt-decode";
 import FooterMain from "../../FooterMain";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -39,7 +41,32 @@ const Users = () => {
   }, [token]);
   console.log(tokenemail);
   ////////////////////////////////////////////////////
-
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [
+        [
+          "User ID",
+          "Full Name",
+          "Phone Number",
+          "Email",
+          "Address",
+          "User Type",
+          
+        ],
+      ],
+      body: users.map((user) => [
+        
+        user.userid,
+        user.fullName,
+        user.phoneNumber,
+        user.email,
+        user.address,
+        user.usertype,
+      ]),
+    });
+    doc.save("Users_Table.pdf");
+  };
   //////delete function
   const handleDelete = (id) => {
     if (token && tokenemail === "thathsaradinuwan@gmail.com") {
@@ -266,10 +293,16 @@ const Users = () => {
                   >
                     Add User
                   </Link>
-                </div>
+                </div>  
+              </div>
+              <div className="z-10 flex justify-center ">
+                <button className="bg-blue-600 text-primary rounded-md ring-1 p-2 mb-5" onClick={handleDownloadPdf}>
+                  Download PDF
+                </button>
               </div>
             </div>
           </div>
+
           <FooterMain></FooterMain>
         </div>
       ) : (

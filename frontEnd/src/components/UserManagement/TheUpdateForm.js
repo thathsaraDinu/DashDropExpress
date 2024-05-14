@@ -50,7 +50,7 @@ const TheUpdateForm = () => {
       })
 
       .catch((error) => console.error("Axios Error : ", error));
-  }, []);
+  }, [id]);
 
   /////////////update function on submit
   const Update = (e) => {
@@ -75,6 +75,13 @@ const TheUpdateForm = () => {
             alert("Please Enter the new password");
             return;
           }
+           const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+           const isValidPassword = regex.test(password);
+           if (!isValidPassword) {
+             alert("Please match the requested password format");
+             return;
+           }
+
           if (password !== confpassword) {
             alert("Password and confirm password do not match");
             setConfPassword("");
