@@ -29,14 +29,6 @@ function UpdateStarRatings() {
     setHoverValue(newHoverValue);
   };
 
-  const handleChangeDriverNumber = (e) => {
-    if (e.target.value.length !== 5) {
-      alert("Please enter a valid driver number");
-      return;
-    }
-    
-  };
-
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
@@ -56,25 +48,6 @@ function UpdateStarRatings() {
 
   const Update = (e) => {
     e.preventDefault();
-    e.preventDefault(); 
-    if(name ===""){
-      alert("Please enter Customer Name");
-      return;
-    }
-    if(drivernumber ===""){
-      alert("Please enter Driver Number");
-      
-      return;
-    }else if(drivernumber.length !== 5){
-      alert("Please enter a valid Driver Number");
-      setDrivernumber("");
-      return;
-    }
-
-     if (currentValue === 0) {
-      alert("Please select a rating.");
-      return;
-    }
     axios
       .put("http://localhost:3001/api/updatefeedbacks/" + id, {
         name,
@@ -146,14 +119,13 @@ function UpdateStarRatings() {
             marginBottom: "30px",
           }}
         >
-          Customer ID
+          Name
         </Typography>
         <input
           required
           type="text"
           id="name"
           onChange={(e) => setName(e.target.value)}
-          value={name} 
           name="name"
           className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
           style={{ marginBottom: "10px" }}
@@ -171,7 +143,7 @@ function UpdateStarRatings() {
             fontSize: "20px",
             width:"200px",
             display: "block",
-            textAlign:"left",
+            textAlign:"right",
             fontWeight: "900",
             marginBottom: "30px",
           }}
@@ -179,15 +151,14 @@ function UpdateStarRatings() {
           Driver number
         </Typography>
         <input
-           required
-           type="text" // Changed to type number for numeric input
-           id="drivernumber"
-           onChange={(e) => setDrivernumber(e.target.value)}
-           value={drivernumber}
-           name="drivernumber"
-           className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
-           style={{ marginBottom: "10px" }}
-           onBlur={handleChangeDriverNumber}
+          required
+          type="text" // Changed to type number for numeric input
+          id="drivernumber"
+          onChange={(e) => setDrivernumber(e.target.value)}
+          value={drivernumber}
+          name="drivernumber"
+          className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+          style={{ marginBottom: "10px" }}
         />
       </Grid>
       <div style={styles.container}>

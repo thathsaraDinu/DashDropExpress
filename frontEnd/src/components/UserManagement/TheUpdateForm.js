@@ -9,7 +9,6 @@ import { jwtDecode } from "jwt-decode";
 
 const TheUpdateForm = () => {
   const { id } = useParams();
-  const [userid, setUserID] = useState("");
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -17,8 +16,6 @@ const TheUpdateForm = () => {
   const [password, setPassword] = useState("");
   const [confpassword, setConfPassword] = useState("");
   const [tokenemail, setTokenEmail] = useState("");
-  const [page, setPage] = useState("");
-  const [oldpassword, setOldPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,7 +39,6 @@ const TheUpdateForm = () => {
       .get("http://localhost:3001/api/getuserbyid/" + id)
       .then((response) => {
         console.log(response);
-        setUserID(response.data.userid);
         setFullName(response.data.fullName);
         setPhoneNumber(response.data.phoneNumber);
         setEmail(response.data.email);
@@ -50,89 +46,42 @@ const TheUpdateForm = () => {
       })
 
       .catch((error) => console.error("Axios Error : ", error));
-  }, []);
+  }, [id]);
 
   /////////////update function on submit
   const Update = (e) => {
     e.preventDefault();
-    if (page === "pass") {
-      axios
-        .post("http://localhost:3001/api/checkpassword/" + id, { oldpassword })
-        .then((result) => {
-          console.log(password)
-          if (password === "") {
-            alert("Please Enter the new password");
-            return;
-          }
-          if (password !== confpassword) {
-            alert("Password and confirm password do not match");
-            setConfPassword("");
-            return; // Stop execution if passwords don't match
-          }
-          axios
-            .put("http://localhost:3001/api/updateuser/" + id, {
-              fullName,
-              phoneNumber,
-              email,
-              address,
-              password,
-            })
-            .then((result) => {
-              alert(result.data.message);
-              navigate("/myprofile");
-              console.log(result);
-            })
-            .catch((err) => {
-              if (
-                err.response &&
-                err.response.data &&
-                err.response.data.message
-              )
-                alert(err.response.data.message);
-              setEmail("");
-            });
-          console.log(result);
-        })
-        .catch((err) => {
-          if (err.response && err.response.data && err.response.data.message)
-            alert(err.response.data.message);
-          setOldPassword("");
-        });
-    }
 
-    if (page === "profile" || page === null) {
-      if (password !== confpassword) {
-        alert("Password and confirm password do not match");
-        setConfPassword("");
-        return; // Stop execution if passwords don't match
-      }
-      axios
-        .put("http://localhost:3001/api/updateuser/" + id, {
-          fullName,
-          phoneNumber,
-          email,
-          address,
-          password,
-        })
-        .then((result) => {
-          alert(result.data.message);
-          if (page !== "profile") navigate("/Users");
-          else navigate("/myprofile");
-          console.log(result);
-        })
-        .catch((err) => {
-          if (err.response && err.response.data && err.response.data.message)
-            alert(err.response.data.message);
-          setEmail("");
-        });
+    if (password !== confpassword) {
+      alert("Password and confirm password do not match");
+      setConfPassword("");
+      return; // Stop execution if passwords don't match
     }
+    axios
+      .put("http://localhost:3001/api/updateuser/" + id, {
+        fullName,
+        phoneNumber,
+        email,
+        address,
+        password,
+      })
+      .then((result) => {
+        alert(result.data.message);
+
+        navigate("/Users");
+        console.log(result);
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.message)
+          alert(err.response.data.message);
+        setEmail("");
+      });
   };
   const location = useLocation();
   const [updatetype, setUpdateType] = useState("");
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const user1 = searchParams.get("usertype");
-    setPage(searchParams.get("page"));
     if (user1) setUpdateType(user1);
     else setUpdateType("Customer");
   }, [location]);
@@ -177,47 +126,12 @@ const TheUpdateForm = () => {
               className="p-8  rounded-md  border border-gray-500"
             >
               <h2
-                style={{
-                  fontFamily: "tajawal",
-                  fontWeight: "500",
-                  display: page === "pass" ? "none" : null,
-                }}
+                style={{ fontFamily: "tajawal", fontWeight: "500" }}
                 className="text-3xl pb-10 "
               >
                 Update User - {updatetype}
               </h2>
-              <h2
-                style={{
-                  fontFamily: "tajawal",
-                  fontWeight: "500",
-                  display:
-                    page === "profile" ? "none" : page === null ? "none" : null,
-                }}
-                className="text-3xl pb-10 "
-              >
-                Change Password
-              </h2>
               <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
-                <label
-                  htmlFor="userid"
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
-                >
-                  User ID
-                </label>
-                <input
-                  disabled
-                  required
-                  name="userid"
-                  type="text"
-                  className="rounded-full appearance-none w-full block  border-grey outline-none py-2 px-4"
-                  id="userid"
-                  value={userid}
-                />
-              </div>
-              <div
-                style={{ display: page === "pass" ? "none" : null }}
-                className="flex flex-wrap -mx-3 mb-6 w-full px-3"
-              >
                 <label
                   htmlFor="fullName"
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
@@ -235,10 +149,7 @@ const TheUpdateForm = () => {
                   onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
-              <div
-                style={{ display: page === "pass" ? "none" : null }}
-                className="flex flex-wrap w-full -mx-3 mb-6"
-              >
+              <div className="flex flex-wrap w-full -mx-3 mb-6">
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                   <label
                     htmlFor="phoneNumber"
@@ -274,10 +185,7 @@ const TheUpdateForm = () => {
                   />
                 </div>
               </div>
-              <div
-                style={{ display: page === "pass" ? "none" : null }}
-                className="flex flex-wrap -mx-3 mb-6 w-full px-3"
-              >
+              <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="address"
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
@@ -294,51 +202,23 @@ const TheUpdateForm = () => {
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
-              <div
-                style={{
-                  display:
-                    page === "profile" ? "none" : page == null ? "none" : null,
-                }}
-                className="flex flex-wrap -mx-3 mb-6 w-full px-3"
-              >
-                <label
-                  htmlFor="oldpass"
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
-                >
-                  Old Password
-                </label>
-                <input
-                  name="oldpass"
-                  type="password"
-                  className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
-                  id="oldpass"
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  value={oldpassword}
-                />
-              </div>
-              <div
-                style={{ display: page === "profile" ? "none" : null }}
-                className="flex flex-wrap -mx-3 mb-6 w-full px-3"
-              >
+              <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="password"
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
                 >
-                  <span style={{ display: page === null ? "none" : null }}>
-                    New{" "}
-                  </span>{" "}
                   Password
                 </label>
                 <div className="relative w-full">
                   <input
+                    required
                     name="password"
                     type={togglepasswordview ? "text" : "password"}
                     className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"
                     id="password"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    autoComplete="off"
+                    autocomplete="new-password"
                   />
                   <svg
                     style={{
@@ -390,10 +270,7 @@ const TheUpdateForm = () => {
                 </div>
               </div>
 
-              <div
-                style={{ display: page === "profile" ? "none" : null }}
-                className="flex flex-wrap -mx-3 mb-6 w-full px-3"
-              >
+              <div className="flex flex-wrap -mx-3 mb-6 w-full px-3">
                 <label
                   htmlFor="confpassword"
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pt-1"
@@ -401,6 +278,7 @@ const TheUpdateForm = () => {
                   Confirm Password
                 </label>
                 <input
+                  required
                   name="confpassword"
                   type="password"
                   className="rounded-full appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-3 px-4"

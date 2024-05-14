@@ -34,20 +34,6 @@ const getUserById = (req, res) => {
     .catch((err) => res.json(err));
 };
 
-const getUserByEmail = (req, res) => {
-  const email = req.query.email;
-
-  User.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        res.json(user);
-      } else {
-        res.status(404).json({ message: "User not found" });
-      }
-    })
-    .catch((err) => res.json(err));
-};
-
 const addUser = async (req, res, next) => {
   try {
     const { fullName, phoneNumber, email, address, usertype, password } =
@@ -65,45 +51,7 @@ const addUser = async (req, res, next) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Query the database to find the last user of each type
-    const lastAdmin = await User.findOne({ usertype: "Admin" }).sort({
-      _id: -1,
-    });
-    const lastDriver = await User.findOne({ usertype: "Driver" }).sort({
-      _id: -1,
-    });
-    const lastCustomer = await User.findOne({ usertype: "Customer" }).sort({
-      _id: -1,
-    });
-
-    // Generate the next user ID
-    let nextUserID;
-    switch (usertype) {
-      case "Admin":
-        nextUserID = lastAdmin
-          ? parseInt(lastAdmin.userid.substring(1)) + 1
-          : 1;
-        break;
-      case "Driver":
-        nextUserID = lastDriver
-          ? parseInt(lastDriver.userid.substring(1)) + 1
-          : 1;
-        break;
-      case "Customer":
-        nextUserID = lastCustomer
-          ? parseInt(lastCustomer.userid.substring(1)) + 1
-          : 1;
-        break;
-      default:
-        nextUserID = 1; // Default to 1 if no previous user of the same type exists
-    }
-
-    // Generate the next user ID with the appropriate prefix
-    const prefix = usertype.charAt(0).toUpperCase();
-    const userid = `${prefix}${nextUserID.toString().padStart(4, "0")}`;
-
     const newUser = new User({
-      userid,
       fullName,
       phoneNumber,
       email,
@@ -167,27 +115,6 @@ const updateUser = async (req, res) => {
     return res
       .status(500)
       .json({ message: "An error occurred while updating user" });
-  }
-};
-
-const checkPassword = async (req, res) => {
-  const id = req.params.id;
-  const { oldpassword } = req.body;
-  console.log(oldpassword);
-  try {
-    const existingUser = await User.findById({ _id: id });
-      const isPasswordValid = await bcrypt.compare(
-        oldpassword,
-        existingUser.password
-      );
-
-    if (!isPasswordValid)
-      return res.status(401).json({ message: "Password is incorrect" });
-    else return res.status(200).json({ message: "password is right" });
-  } catch {
-    return res
-      .status(500)
-      .json({ message: "An error occurred while logging in" });
   }
 };
 
@@ -313,7 +240,7 @@ const verifyOTP = async (req, res) => {
           } else {
             console.log("checkpoint8");
             await OTP.deleteMany({ email: existingemail });
-            console.log(existingemail);
+
             const token = jwt.sign(
               {
                 usertypetoken: existingusertype,
@@ -341,41 +268,6 @@ const verifyOTP = async (req, res) => {
   }
 };
 
-const uploadProfilePhoto = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const user = await User.findById({ _id: id });
-    if (user) {
-      console.log("exists");
-    }
-    const formData = req.body;
-    if (!formData) {
-      console.log("no file");
-      // If no file is uploaded
-      return res.status(400).send("No file uploaded.");
-    }
-
-    console.log("formData" + formData);
-
-    // Encode the image as Base64
-    const encodedImage = formData.buffer.toString("base64");
-
-    // Update the user's profilePhoto field with the Base64 encoded image
-    user.profilephoto = `data:${req.file.mimetype};base64,${encodedImage}`;
-
-    // Save the user document
-    await user.save();
-
-    res.status(200).send("Profile photo uploaded successfully");
-  } catch (error) {
-    console.error("Error uploading profile photo:", error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-exports.checkPassword = checkPassword;
-exports.uploadProfilePhoto = uploadProfilePhoto;
 exports.getUsers = getUsers;
 exports.addUser = addUser;
 exports.updateUser = updateUser;
@@ -383,4 +275,3 @@ exports.deleteUser = deleteUser;
 exports.getUserById = getUserById;
 exports.loginUser = loginUser;
 exports.verifyOTP = verifyOTP;
-exports.getUserByEmail = getUserByEmail;

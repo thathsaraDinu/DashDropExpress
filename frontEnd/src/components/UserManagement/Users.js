@@ -37,7 +37,6 @@ const Users = () => {
       setUserType(decodedToken.usertypetoken);
     }
   }, [token]);
-  console.log(tokenemail);
   ////////////////////////////////////////////////////
 
   //////delete function
@@ -155,13 +154,6 @@ const Users = () => {
                         <th
                           scope="col"
                           className="px-6 py-3"
-                          style={{ width: "150px" }}
-                        >
-                          User ID
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3"
                           style={{ width: "250px" }}
                         >
                           Full Name
@@ -217,7 +209,6 @@ const Users = () => {
                             className="text-secondary  odd:bg-gray-50  even:bg-gray-200  border-b "
                             key={user._id}
                           >
-                            <td className="px-6 py-4">{user.userid}</td>
                             <td className="px-6 py-4">{user.fullName}</td>
                             <td className="px-6 py-4">{user.phoneNumber}</td>
                             <td className="px-6 py-4">{user.email}</td>

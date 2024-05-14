@@ -34,7 +34,7 @@ function MainMenu() {
   return (
     <div className="z-1000">
       {token && usertypetoken === "Admin" ? (
-        <nav className="w-full z-20 bg-secondary opacity-80 opacity menumain px-4 py-2 text-primary">
+        <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
           <img
             src="/dashdrop-express-high-resolution-logo-transparent.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}

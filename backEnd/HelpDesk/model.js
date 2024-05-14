@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TicketSchema = new Schema({
-  id: Number,
+  id: String,
   cname: String,
   inquery: String,
   date: Date,
