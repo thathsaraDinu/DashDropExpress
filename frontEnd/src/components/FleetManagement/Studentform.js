@@ -14,6 +14,10 @@ const Studentform = ({addStudent,updateStudent,submitted,isEdit,data}) => {
     years.push(year);
   }
   const handleSubmit = () => {
+    if (vin.length > 5) {
+      alert('VIN should not exceed 5 characters.');
+      return;
+    }
     if (!vin) {
       alert('Please enter the vin Number.');
       return;
