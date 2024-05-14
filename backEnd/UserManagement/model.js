@@ -10,7 +10,7 @@ const userSchemamodel = new Schema({
   usertype: { type: String, required: true },
   password: { type: String, required: true },
   profilephoto: {
-    type: String, 
+    type: String,
   },
 });
 

@@ -15,14 +15,18 @@ const MyProfile = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [tokenemail, setTokenEmail] = useState("");
   //const [password, setPassword] = useState("");
   /////////////import this to append the login section
   //const [usertypetoken, setUserType] = useState("");
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
+      setTokenEmail(decodedToken.useremail);
+
       axios
         .get("http://localhost:3001/api/getuserbyemail", {
           params: {
@@ -75,6 +79,29 @@ const MyProfile = () => {
       console.log("No image is captured.");
     }
   }
+
+  function handleDeleteConfirmation(id) {
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
+
+    if (isConfirmed) {
+      handleDelete(id);
+      // Additional logic for deletion confirmation
+    } else {
+    }
+  }
+
+  //////delete function
+  const handleDelete = (id) => {
+    
+      axios
+        .delete("http://localhost:3001/api/deleteuser/" + id)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    
+  };
   return (
     <div
       style={{ backgroundImage: "url('/pexels-francesco-ungaro-2835436.jpg')" }}
@@ -161,14 +188,17 @@ const MyProfile = () => {
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <a
-                  href="#popup1"
                   className="text-center flex items-center justify-center my-5 relative rounded px-5 py-3 overflow-hidden group bg-blue-500 relative hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-blue-400 transition-all ease-out duration-300"
+                  onClick={() =>
+                    navigate(
+                      `/TheUpdateForm/${id}?usertype=${usertype}&page=pass`
+                    )
+                  }
                 >
                   <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">Change Password</span>
                 </a>
                 <a
-                  href="#_"
                   className="text-center flex items-center justify-center my-5 relative rounded px-5 py-3 overflow-hidden group bg-green-500 relative hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
                   onClick={() =>
                     navigate(
@@ -180,7 +210,9 @@ const MyProfile = () => {
                   <span className="relative">Update Personal Details</span>
                 </a>
                 <a
-                  href="#_"
+                  onClick={() => {
+                    handleDeleteConfirmation(id);
+                  }}
                   className="text-center flex items-center justify-center relative rounded my-5 px-5 py-3 overflow-hidden group bg-red-500 relative hover:bg-gradient-to-r hover:from-red-500 hover:to-red-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-red-400 transition-all ease-out duration-300"
                 >
                   <span className=" absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
@@ -202,7 +234,7 @@ const MyProfile = () => {
               fontFamily: "jost",
               fontWeight: "600",
 
-              marginBottom: "4rem", // Adjust the value as needed
+              // Adjust the value as needed
             }}
             className="bg-white p-5 rounded-2xl"
           >
@@ -210,7 +242,7 @@ const MyProfile = () => {
               Enter the OTP. <span>(Check your email)</span>
             </label>
             <input
-              className="shadow appearance-none mb-5 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none mb-2 border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="otp"
               type="text"
               onChange={(e) => {}}
