@@ -338,7 +338,7 @@ const TheUpdateForm = () => {
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    autocomplete="new-password"
+                    autoComplete="off"
                   />
                   <svg
                     style={{
