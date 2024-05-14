@@ -22,6 +22,8 @@ import StarRatings from "./components/Starratings/StarRatings";
 import UpdateStarRatings from "./components/Starratings/UpdateStarRatings";
 import Driversfeedbackupdate from "./components/Starratings/Driversfeedbackupdate";
 import FeedbackTable from "./components/Starratings/feedbacktable";
+import Package from "./components/PackageManagement/Package";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -53,7 +55,7 @@ root.render(
         element={<Driversfeedbackupdate />}
       />
       <Route path="/feedbacktable" element={<FeedbackTable />} />
-      
+      <Route path="/package" element={<Package/>}/>
     </Routes>
   </BrowserRouter>
 );
