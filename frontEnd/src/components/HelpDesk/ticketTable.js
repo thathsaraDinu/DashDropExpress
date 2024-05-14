@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Paper,
   Table,
@@ -6,136 +7,128 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Button,
+  TextField,
 } from "@mui/material";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { useNavigate } from "react-router-dom";
 
-const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
+const TicketTable = ({ rows, selectedUser, deleteUser }) => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [
+        ["Customer ID", "Customer Name", "Customer Inquiry", "Inquiry Date"],
+      ],
+      body: rows.map((row) => [
+        row.id,
+        row.cname,
+        row.inquery,
+        row.date ? row.date.split("T")[0] : "",
+        "",
+      ]),
+    });
+    doc.save("Feedback_Table.pdf");
+  };
+
+  const filteredRows = rows.filter((row) =>
+    row.id?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div style={{ marginBottom: "50px" }}>
-      <TableContainer
-        sx={{ backgroundColor: "rgba(192,192,192,0.6)" }}
-        component={Paper}
+    <div className="mb-20">
+      <div
+        style={{
+          width: "25%",
+          background: "#ffffff",
+          backgroundColor: "rgba(192,192,192,0.7)",
+        }}
       >
+        <TextField
+          id="search"
+          label="Search by Customer Id"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          fullWidth
+        />
+      </div>
+      <TableContainer component={Paper}>
         <Table
           sx={{
             border: "3px solid #000000",
+            background: "#ffffff",
+            backgroundColor: "rgba(192,192,192,0.8)",
           }}
         >
           <TableHead>
-            <TableRow
-              sx={{
-                border: "3px solid #000000",
-              }}
-            >
+            <TableRow sx={{ border: "3px solid #000000" }}>
               <TableCell
                 sx={{
-                  border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
                   textAlign: "center",
                 }}
               >
-                ORDER NUMBER
+                Customer ID
               </TableCell>
               <TableCell
                 sx={{
-                  border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
                   textAlign: "center",
                 }}
               >
-                CUSTOMER NAME
+                Customer Name
               </TableCell>
               <TableCell
                 sx={{
-                  border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
                   textAlign: "center",
                 }}
               >
-                CUSTOMER INQUERY
+                Customer Inquiry
               </TableCell>
               <TableCell
                 sx={{
-                  border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
                   textAlign: "center",
                 }}
               >
-                INQUERY DATE
+                Inquiry Date
               </TableCell>
               <TableCell
                 sx={{
-                  border: "3px solid #000000",
                   fontSize: "18px",
                   fontWeight: "900",
                   textAlign: "center",
                 }}
               >
-                ACTIONS
+                Actions
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.length > 0 ? (
-              rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{
-                    "&:last-child td,&:last-child th": { border: 0 },
-                    border: "2px solid #000000",
-                  }}
-                >
-                  <TableCell
-                    component={"th"}
-                    scope="row"
-                    sx={{
-                      fontSize: "15px",
-                      textAlign: "center",
-                      fontWeight: "900",
-                    }}
-                  >
-                    {row.id}
-                  </TableCell>
-                  <TableCell
-                    component={"th"}
-                    scope="row"
-                    sx={{
-                      fontSize: "15px",
-                      textAlign: "center",
-                      fontWeight: "900",
-                    }}
-                  >
-                    {row.cname}
-                  </TableCell>
-                  <TableCell
-                    component={"th"}
-                    scope="row"
-                    sx={{
-                      fontSize: "15px",
-                      textAlign: "center",
-                      fontWeight: "900",
-                    }}
-                  >
-                    {row.inquery}
-                  </TableCell>
-                  <TableCell
-                    component={"th"}
-                    scope="row"
-                    sx={{
-                      fontSize: "15px",
-                      textAlign: "center",
-                      fontWeight: "900",
-                    }}
-                  >
+            {filteredRows.length > 0 ? (
+              filteredRows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell align="center">{row.id}</TableCell>
+                  <TableCell align="center">{row.cname}</TableCell>
+                  <TableCell align="center">{row.inquery}</TableCell>
+                  <TableCell align="center">
                     {row.date ? row.date.split("T")[0] : ""}
                   </TableCell>
-                  <TableCell>
-                    <button
-                      className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-                      sx={{ margin: "0px 10px" }}
+                  <TableCell align="center">
+                    <Button
+                      className="btn4"
+                      variant="contained"
+                      color="primary"
                       onClick={() =>
                         selectedUser({
                           id: row.id,
@@ -146,24 +139,21 @@ const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
                       }
                     >
                       Update
-                    </button>
-                    <button
-                      className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                      sx={{
-                        margin: "10px 20px",
-                      }}
+                    </Button>
+                    <Button
+                      className="btn6"
+                      variant="contained"
+                      color="primary"
                       onClick={() => deleteUser({ id: row.id })}
                     >
                       Delete
-                    </button>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow
-                sx={{ "&:last-child td,&:last-child th": { border: 0 } }}
-              >
-                <TableCell component={"th"} scope="row">
+              <TableRow>
+                <TableCell colSpan={5} align="center">
                   No Data
                 </TableCell>
               </TableRow>
@@ -171,11 +161,13 @@ const TicketsTable = ({ rows, selectedUser, deleteUser }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <div className="mt-10 w-full flex justify-center">
+        <Button variant="contained" color="primary" onClick={handleDownloadPdf}>
+          Download PDF
+        </Button>
+      </div>
     </div>
   );
 };
-export default TicketsTable;
 
-
-
-
+export default TicketTable;

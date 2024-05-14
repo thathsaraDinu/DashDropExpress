@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import TicketTable from "./ticketTable";
+import TicketForm from "./ticketform";
 import MainMenu from "../../MainMenu";
 import FooterMain from "../../FooterMain";
-import TicketForm from "./ticketform";
-import TicketsTable from "./ticketTable";
 
 const Ticket = () => {
   const [users, setUsers] = useState([]);
@@ -43,7 +43,7 @@ const Ticket = () => {
         setIsEdit(false);
       })
       .catch((error) => {
-        console.error("Error adding ticket:", error);
+        console.error("Error adding user:", error);
       });
   };
 
@@ -79,16 +79,13 @@ const Ticket = () => {
   };
 
   return (
-    <div
-      style={{ backgroundImage: "url('/pexels-mart-production-7706373.jpg')" }}
-      className="backgroundimage"
-    >
+    <div className="">
       <MainMenu></MainMenu>
+      <img src="./pexels-pavel-danilyuk-6407556.jpg" style={{position:"absolute", zIndex:"-100",  objectFit: "cover", height:"1300px"}}></img>
       <Box
         sx={{
           width: "calc(100% - 100px)",
           margin: "auto",
-          
         }}
       >
         <TicketForm
@@ -98,7 +95,7 @@ const Ticket = () => {
           data={selectedUser}
           isEdit={isEdit}
         />
-        <TicketsTable
+        <TicketTable
           rows={users}
           selectedUser={(data) => {
             setSelectedUser(data);
@@ -108,7 +105,7 @@ const Ticket = () => {
             window.confirm("Are you Sure?") && deleteUser(data)
           }
         />
-      </Box>{" "}
+      </Box>
       <FooterMain></FooterMain>
     </div>
   );
