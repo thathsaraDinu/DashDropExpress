@@ -36,7 +36,7 @@ const getUserById = (req, res) => {
 
 const getUserByEmail = (req, res) => {
   const email = req.query.email;
-  
+
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
@@ -65,22 +65,34 @@ const addUser = async (req, res, next) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
- // Query the database to find the last user of each type
-    const lastAdmin = await User.findOne({ usertype: "Admin" }).sort({ _id: -1 });
-    const lastDriver = await User.findOne({ usertype: "Driver" }).sort({ _id: -1 });
-    const lastCustomer = await User.findOne({ usertype: "Customer" }).sort({ _id: -1 });
+    // Query the database to find the last user of each type
+    const lastAdmin = await User.findOne({ usertype: "Admin" }).sort({
+      _id: -1,
+    });
+    const lastDriver = await User.findOne({ usertype: "Driver" }).sort({
+      _id: -1,
+    });
+    const lastCustomer = await User.findOne({ usertype: "Customer" }).sort({
+      _id: -1,
+    });
 
-    // Generate the next user ID 
+    // Generate the next user ID
     let nextUserID;
     switch (usertype) {
       case "Admin":
-        nextUserID = lastAdmin ? parseInt(lastAdmin.userid.substring(1)) + 1 : 1;
+        nextUserID = lastAdmin
+          ? parseInt(lastAdmin.userid.substring(1)) + 1
+          : 1;
         break;
       case "Driver":
-        nextUserID = lastDriver ? parseInt(lastDriver.userid.substring(1)) + 1 : 1;
+        nextUserID = lastDriver
+          ? parseInt(lastDriver.userid.substring(1)) + 1
+          : 1;
         break;
       case "Customer":
-        nextUserID = lastCustomer ? parseInt(lastCustomer.userid.substring(1)) + 1 : 1;
+        nextUserID = lastCustomer
+          ? parseInt(lastCustomer.userid.substring(1)) + 1
+          : 1;
         break;
       default:
         nextUserID = 1; // Default to 1 if no previous user of the same type exists
@@ -88,7 +100,7 @@ const addUser = async (req, res, next) => {
 
     // Generate the next user ID with the appropriate prefix
     const prefix = usertype.charAt(0).toUpperCase();
-    const userid = `${prefix}${nextUserID.toString().padStart(4, '0')}`;
+    const userid = `${prefix}${nextUserID.toString().padStart(4, "0")}`;
 
     const newUser = new User({
       userid,
@@ -99,8 +111,6 @@ const addUser = async (req, res, next) => {
       usertype,
       password: hashedPassword, // Store hashed password in the database
     });
-
-    
 
     const savedUser = await newUser.save();
 
@@ -142,7 +152,6 @@ const updateUser = async (req, res) => {
       address,
       usertype,
     };
-    
 
     // If password is provided, add it to the updateFields
     if (hashedPassword) {
@@ -158,6 +167,27 @@ const updateUser = async (req, res) => {
     return res
       .status(500)
       .json({ message: "An error occurred while updating user" });
+  }
+};
+
+const checkPassword = async (req, res) => {
+  const id = req.params.id;
+  const { oldpassword } = req.body;
+  console.log(oldpassword);
+  try {
+    const existingUser = await User.findById({ _id: id });
+      const isPasswordValid = await bcrypt.compare(
+        oldpassword,
+        existingUser.password
+      );
+
+    if (!isPasswordValid)
+      return res.status(401).json({ message: "Password is incorrect" });
+    else return res.status(200).json({ message: "password is right" });
+  } catch {
+    return res
+      .status(500)
+      .json({ message: "An error occurred while logging in" });
   }
 };
 
@@ -286,7 +316,6 @@ const verifyOTP = async (req, res) => {
             console.log(existingemail);
             const token = jwt.sign(
               {
-                
                 usertypetoken: existingusertype,
                 username: existingUsername,
                 useremail: existingemail,
@@ -314,22 +343,20 @@ const verifyOTP = async (req, res) => {
 
 const uploadProfilePhoto = async (req, res) => {
   try {
-     const id = req.params.id;
+    const id = req.params.id;
 
-     const user = await User.findById({ _id: id });
-     if(user){
-      console.log("exists")
-     }
-    const formData = req.body; 
+    const user = await User.findById({ _id: id });
+    if (user) {
+      console.log("exists");
+    }
+    const formData = req.body;
     if (!formData) {
-      console.log("no file")
+      console.log("no file");
       // If no file is uploaded
       return res.status(400).send("No file uploaded.");
     }
-    
-      console.log("formData" + formData)
-    
-   
+
+    console.log("formData" + formData);
 
     // Encode the image as Base64
     const encodedImage = formData.buffer.toString("base64");
@@ -347,7 +374,7 @@ const uploadProfilePhoto = async (req, res) => {
   }
 };
 
-
+exports.checkPassword = checkPassword;
 exports.uploadProfilePhoto = uploadProfilePhoto;
 exports.getUsers = getUsers;
 exports.addUser = addUser;

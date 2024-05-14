@@ -67,4 +67,10 @@ app.post("/uploadprofilephoto/:id", (req, res) => {
   });
 });
 
+app.post("/checkpassword/:id", (req, res) => {
+  controller.checkPassword(req.body, (callback) => {
+    res.send(callback);
+  });
+});
+
 module.exports = app;
