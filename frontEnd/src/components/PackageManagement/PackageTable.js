@@ -1,27 +1,35 @@
-import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useState } from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const PackageTable = ({ rows, selectedPackage, deletePackage }) => {
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [
+        [
+          "Customer ID",
+          "Customer Name",
+          "Package Type",
+          "Package Weight",
+        ],
+      ],
+      body: rows.map((row) => [
+        row.id,
+        row.customerName,
+        row.packageType,
+        row.packageWeight,
+      ]),
+    });
+    doc.save("Package_Table.pdf");
+  };
+
   const [search, setSearch] = useState("");
+
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        borderRadius: "8px",
-        marginBottom: "20px",
-      }}
-    >
-      <div className="flex justify-end bg-gray-600 ">
+    <TableContainer component={Paper} sx={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', marginBottom: '20px' }}>
+      <div className="flex justify-end bg-gray-600">
         <div className="w-80 float-right ">
           <label
             htmlFor="default-search"
@@ -60,103 +68,82 @@ const PackageTable = ({ rows, selectedPackage, deletePackage }) => {
       </div>
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
-          <TableRow sx={{ backgroundColor: "#ff0000" }}>
+          <TableRow sx={{ backgroundColor: '#ff0000' }}>
             <TableCell>ID</TableCell>
             <TableCell>Customer Name</TableCell>
             <TableCell>Package Type</TableCell>
-            <TableCell> Package Weight</TableCell>
+            <TableCell>Package Weight</TableCell>
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.length > 0 ? (
-            rows
-              .filter((row) => {
-                return search.toLowerCase() === ""
-                  ? row
-                  : row.customerName.toLowerCase().includes(search);
-              })
-              .map((row) => (
-                <TableRow
-                  key={row._id}
-                  sx={{
-                    "&:last-child td,&:last-child th": { border: 0 },
-                    backgroundColor: "#bebebe",
-                  }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.id}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.customerName}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.packageType}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.packageWeight}
-                  </TableCell>
-
-                  <TableCell>
-                    <Button
-                      sx={{
-                        margin: "0px 10px",
-
-                        marginBottom: "20px",
+          {rows.length > 0 ? rows
+            .filter((row) =>
+              search.toLowerCase() === "" ? row : row.customerName.toLowerCase().includes(search)
+            )
+            .map((row) => (
+              <TableRow key={row.id} sx={{ '&:last-child td,&:last-child th': { border: 0 }, backgroundColor: '#bebebe' }}>
+                <TableCell component='th' scope='row'>{row.id}</TableCell>
+                <TableCell component='th' scope='row'>{row.customerName}</TableCell>
+                <TableCell component='th' scope='row'>{row.packageType}</TableCell>
+                <TableCell component='th' scope='row'>{row.packageWeight}</TableCell>
+                <TableCell>
+                  <Button
+                    sx={{
+                      margin: '0px 10px',
+                      marginBottom: "20px",
+                      backgroundColor: "#006400",
+                      color: "#000000",
+                      marginLeft: "15px",
+                      marginTop: "20px",
+                      "&:hover": {
+                        opacity: 0.7,
                         backgroundColor: "#006400",
-                        color: "#000000",
-                        marginLeft: "15px",
-                        marginTop: "20px",
-                        "&:hover": {
-                          opacity: 0.7,
-                          backgroundColor: "#006400",
-                        },
-                      }}
-                      onClick={() =>
-                        selectedPackage({
-                          id: row.id,
-                          customerName: row.customerName,
-                          packageType: row.packageType,
-                          packageWeight: row.packageWeight,
-                        })
-                      }
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      sx={{
-                        margin: "0px 10px",
-
-                        marginBottom: "20px",
+                      },
+                    }}
+                    onClick={() => selectedPackage({
+                      id: row.id,
+                      customerName: row.customerName,
+                      packageType: row.packageType,
+                      packageWeight: row.packageWeight
+                    })}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    sx={{
+                      margin: '0px 10px',
+                      marginBottom: "20px",
+                      backgroundColor: "#ADD8E6",
+                      color: "#000000",
+                      marginLeft: "15px",
+                      marginTop: "20px",
+                      "&:hover": {
+                        opacity: 0.7,
                         backgroundColor: "#ADD8E6",
-                        color: "#000000",
-                        marginLeft: "15px",
-                        marginTop: "20px",
-                        "&:hover": {
-                          opacity: 0.7,
-                          backgroundColor: "#ADD8E6",
-                        },
-                      }}
-                      onClick={() => deletePackage({ id: row.id })}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-          ) : (
-            <TableRow
-              key="no-data"
-              sx={{ "&:last-child td,&:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                No Data
-              </TableCell>
-            </TableRow>
-          )}
+                      },
+                    }}
+                    onClick={() => deletePackage({ id: row.id })}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )) : (
+              <TableRow key="no-data" sx={{ '&:last-child td,&:last-child th': { border: 0 } }}>
+                <TableCell colSpan={5} align="center">No Data</TableCell>
+              </TableRow>
+            )
+          }
         </TableBody>
       </Table>
+      <div className="text-center mt-4">
+        <Button variant="contained" color="primary" onClick={handleDownloadPdf}>
+          Download PDF
+        </Button>
+      </div>
     </TableContainer>
   );
 };
+
 export default PackageTable;
