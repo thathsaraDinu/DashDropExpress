@@ -1,9 +1,36 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useState } from "react";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 
 const StudentTable = ({rows,selectedStudent,deleteStudent}) => {
     const [search, setSearch] = useState("");
+    const handleDownloadPdf = () => {
+      const doc = new jsPDF();
+      doc.autoTable({
+        head: [
+          [
+            "Vin",
+            "Registration Number",
+            "Vehicle Type",
+            "Model",
+            "Selected Year",
+            "Insurance Details",
+          ],
+        ],
+        body: rows.map((row) => [
+          row.vin,
+          row.registrationNumber,
+          row.vehicleType,
+          row.model,
+          row.selectedyear,
+          row.insuranceDetails,
+        ]),
+      });
+      doc.save("Vehicle_Details_Table.pdf");
+    };
+  
     return(
         <div className="p-10"><div className="mt-10 flex justify-end">
         <div className="w-80 float-right mb-5">
@@ -134,6 +161,11 @@ const StudentTable = ({rows,selectedStudent,deleteStudent}) => {
     </Table>
 
 </TableContainer>
+<div className="text-center mt-4">
+          <Button variant="contained" color="primary" onClick={handleDownloadPdf}>
+            Download PDF
+          </Button>
+        </div>
 </div>
     );
 };
