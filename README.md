@@ -64,5 +64,5 @@ Following some of the 30+ RESTful APIs used in this project
  | `base64` | `string` | **Required**. The uploaded image is saved in the database after converting it into base64 string file |
 
 
-![App Screenshot](Screenshots/Screenshot0)
+![App Screenshot](Screenshots/Screenshot0.png)
 
