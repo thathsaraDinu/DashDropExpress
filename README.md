@@ -11,3 +11,8 @@ it22135698@my.sliit.lk - Venura123
 it22352408@my.sliit.lk - Nipun123
 
 it22345882@my.sliit.lk - Nomin123
+
+
+| Parameter           | Type     | Description                       |
+| :------------------ | :------- | :-------------------------------- |
+| `existingUsername`, `existingemail`, `existingusertype`, `otpmod` | `string` | **Required**. Id of item to fetch |
