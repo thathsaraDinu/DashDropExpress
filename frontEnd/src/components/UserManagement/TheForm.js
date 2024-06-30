@@ -59,7 +59,7 @@ const TheForm = () => {
       alert("Please match the requested password format");
       return;
     }
-    
+
     if (password !== confpassword) {
       alert("Password and confirm password do not match");
       setConfPassword("");
@@ -223,7 +223,7 @@ const TheForm = () => {
                 <input
                   required
                   name="address"
-                  type="address"
+                  type="text"
                   placeholder="Enter the Address"
                   className="appearance-none w-full block border-b-2 border-grey outline-none focus:border-black hover:border-gray-400 py-2 px-2 py-2"
                   id="address"

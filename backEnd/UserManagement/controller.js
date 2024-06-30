@@ -17,6 +17,7 @@ let transporter = nodemailer.createTransport({
     pass: smtppass,
   },
 });
+
 const getUsers = (req, res, next) => {
   User.find()
     .then((response) => {
