@@ -10,7 +10,7 @@
     "install-all": "npm install --prefix frontend && npm install --prefix backend",
     "start": "start npm run start-frontend & start npm run start-backend",
     "start-frontend": "npm start --prefix frontend",
-    "start-backend": "npm start --prefix backend",
+    "start-backend": "npm start --prefix backend",  
     "test": "npm-run-all --parallel test-frontend test-backend",
     "test-frontend": "npm test --prefix frontend",
     "test-backend": "npm test --prefix backend"

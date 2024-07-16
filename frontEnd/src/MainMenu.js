@@ -45,7 +45,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Home</span>
               </Link>
@@ -169,7 +169,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Home</span>
               </Link>
@@ -286,7 +286,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Home</span>
               </Link>
@@ -390,7 +390,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Home</span>
               </Link>
@@ -398,7 +398,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/loginuser"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Login</span>
               </Link>
@@ -406,7 +406,7 @@ function MainMenu() {
             <li>
               <Link
                 to="/Theform"
-                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover:bg-color4 "
+                className="transition-all duration-500 ease-in-out font-sans flex md:inline-flex p-3 pl-5 pr-5 items-center hover-bg-color6 "
               >
                 <span>Sign Up</span>
               </Link>
