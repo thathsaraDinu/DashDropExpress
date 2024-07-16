@@ -19,7 +19,7 @@ const Users = () => {
 
   ///////////get users to show
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/users")
+    Axios.get("https://dashdropexpress.onrender.com/api/users")
       .then((response) => {
         setUsers(response.data?.response || []);
       })
@@ -52,11 +52,9 @@ const Users = () => {
           "Email",
           "Address",
           "User Type",
-          
         ],
       ],
       body: users.map((user) => [
-        
         user.userid,
         user.fullName,
         user.phoneNumber,
@@ -71,7 +69,7 @@ const Users = () => {
   const handleDelete = (id) => {
     if (token && tokenemail === "thathsaradinuwan@gmail.com") {
       axios
-        .delete("http://localhost:3001/api/deleteuser/" + id)
+        .delete("https://dashdropexpress.onrender.com/api/deleteuser/" + id)
         .then((response) => {
           console.log(response);
           window.location.reload();
@@ -293,10 +291,13 @@ const Users = () => {
                   >
                     Add User
                   </Link>
-                </div>  
+                </div>
               </div>
               <div className="z-10 flex justify-center ">
-                <button className="bg-blue-600 text-primary rounded-md ring-1 p-2 mb-5" onClick={handleDownloadPdf}>
+                <button
+                  className="bg-blue-600 text-primary rounded-md ring-1 p-2 mb-5"
+                  onClick={handleDownloadPdf}
+                >
                   Download PDF
                 </button>
               </div>

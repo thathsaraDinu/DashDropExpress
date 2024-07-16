@@ -12,7 +12,7 @@ const Driversfeedbackupdate = () => {
   console.log("id is" + id);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/feedbacks")
+      .get("https://dashdropexpress.onrender.com/api/feedbacks")
       .then((response) => {
         setFeedbacks(response.data?.response || []);
       })
@@ -22,13 +22,13 @@ const Driversfeedbackupdate = () => {
   }, []);
 
   return (
-
-    <div style={{
-      
-      backgroundImage: "url('/starratings2.jpg')",
-      backgroundSize: "cover",
-    }}
-    className="backgroundimage  ">
+    <div
+      style={{
+        backgroundImage: "url('/starratings2.jpg')",
+        backgroundSize: "cover",
+      }}
+      className="backgroundimage  "
+    >
       <MainMenu></MainMenu>
       <UpdateStarRatings id={id} />
 

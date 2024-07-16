@@ -3,7 +3,7 @@ import MainMenu from "../../MainMenu";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import FooterMain from "../../FooterMain";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   //const [tokenemail, setTokenEmail] = useState("");
@@ -24,10 +24,9 @@ const MyProfile = () => {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token); // Corrected function call
-      
 
       axios
-        .get("http://localhost:3001/api/getuserbyemail", {
+        .get("https://dashdropexpress.onrender.com/api/getuserbyemail", {
           params: {
             email: decodedToken.useremail, // Assuming email is defined somewhere in your component
           },
@@ -41,7 +40,7 @@ const MyProfile = () => {
           setPhoneNumber(response.data.phoneNumber);
           setEmail(response.data.email);
           setAddress(response.data.address);
-          setFile(response.data.profilephoto)
+          setFile(response.data.profilephoto);
         })
 
         .catch((error) => console.error("Axios Error : ", error));
@@ -59,9 +58,9 @@ const MyProfile = () => {
     // Convert bytes to kilobytes (1 KB = 1024 bytes)
     const fileSizeInKB = fileSizeInBytes / 1024;
 
-    if (fileSizeInKB>100) {
-      alert("Please upload a smaller image")
-      return
+    if (fileSizeInKB > 100) {
+      alert("Please upload a smaller image");
+      return;
     }
     reader.onload = () => {
       console.log(reader.result);
@@ -73,35 +72,32 @@ const MyProfile = () => {
     };
   }
 
-async function upload() {
-  await fetch("http://localhost:3001/api/uploadprofilephoto", {
-    method: "POST",
-    mode: "cors", // Set the mode to 'cors'
-    headers: {
-      "Content-Type": "application/json", // Set the Content-Type header
-    },
-    body: JSON.stringify({
-      id: id,
-      base64: file,
-    }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return res.json();
+  async function upload() {
+    await fetch("https://dashdropexpress.onrender.com/api/uploadprofilephoto", {
+      method: "POST",
+      mode: "cors", // Set the mode to 'cors'
+      headers: {
+        "Content-Type": "application/json", // Set the Content-Type header
+      },
+      body: JSON.stringify({
+        id: id,
+        base64: file,
+      }),
     })
-    .then((data) => {
-      console.log("ddd"+data);
-      alert("Image uploaded successfully") // Handle the response data
-    })
-    .catch((error) => {
-      console.error("Error:", error); // Handle any errors
-    });
-
-    
-}
-
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("ddd" + data);
+        alert("Image uploaded successfully"); // Handle the response data
+      })
+      .catch((error) => {
+        console.error("Error:", error); // Handle any errors
+      });
+  }
 
   function handleDeleteConfirmation(id) {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
@@ -116,7 +112,7 @@ async function upload() {
   //////delete function
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3001/api/deleteuser/" + id)
+      .delete("https://dashdropexpress.onrender.com/api/deleteuser/" + id)
       .then((response) => {
         console.log(response);
         window.location.reload();
@@ -151,7 +147,6 @@ async function upload() {
             <div className="absolute inset-x-0 top-5 w-90 mx-auto flex flex-row justify-center items-center">
               <label
                 style={{
-                  
                   width: "200px",
                   height: "200px",
                   backgroundImage: `url(${file})`,
@@ -176,7 +171,12 @@ async function upload() {
                   handleUpload(event);
                 }}
               />
-              <button className="h-15 ml-5 bg-blue-200 border-2 px-2" onClick={upload}>Upload Image</button>
+              <button
+                className="h-15 ml-5 bg-blue-200 border-2 px-2"
+                onClick={upload}
+              >
+                Upload Image
+              </button>
             </div>
           </div>
           <div className="border-t border-gray-200">
@@ -247,7 +247,6 @@ async function upload() {
         </div>
       </div>
       <FooterMain></FooterMain>
-      
     </div>
   );
 };

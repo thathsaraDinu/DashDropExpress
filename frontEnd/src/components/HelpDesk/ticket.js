@@ -17,7 +17,7 @@ const Ticket = () => {
   }, []);
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/api/tickets")
+    Axios.get("https://dashdropexpress.onrender.com/api/tickets")
       .then((response) => {
         setUsers(response.data.response || []);
       })
@@ -36,7 +36,7 @@ const Ticket = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/createticket", payload)
+    Axios.post("https://dashdropexpress.onrender.com/api/createticket", payload)
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -57,7 +57,7 @@ const Ticket = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/updateticket", payload)
+    Axios.post("https://dashdropexpress.onrender.com/api/updateticket", payload)
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -69,7 +69,7 @@ const Ticket = () => {
   };
 
   const deleteUser = (data) => {
-    Axios.post("http://localhost:3001/api/deleteticket", data)
+    Axios.post("https://dashdropexpress.onrender.com/api/deleteticket", data)
       .then(() => {
         getUsers();
       })
@@ -88,7 +88,6 @@ const Ticket = () => {
         sx={{
           width: "calc(100% - 100px)",
           margin: "auto",
-          
         }}
       >
         <TicketForm

@@ -20,14 +20,7 @@ const FeedbackTable = ({ rows }) => {
   const handleDownloadPdf = () => {
     const doc = new jsPDF();
     doc.autoTable({
-      head: [
-        [
-          "Customer ID",
-          "Driver Number",
-          "Ratings",
-          "Description",
-        ],
-      ],
+      head: [["Customer ID", "Driver Number", "Ratings", "Description"]],
       body: rows.map((row) => [
         row.name,
         row.drivernumber,
@@ -40,7 +33,7 @@ const FeedbackTable = ({ rows }) => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/api/deletefeedbacks/${id}`)
+      .delete(`https://dashdropexpress.onrender.com/api/deletefeedbacks/${id}`)
       .then((response) => {
         console.log(response);
         window.location.reload();
@@ -203,7 +196,11 @@ const FeedbackTable = ({ rows }) => {
           </Table>
         </TableContainer>
         <div className="text-center mt-4">
-          <Button variant="contained" color="primary" onClick={handleDownloadPdf}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleDownloadPdf}
+          >
             Download PDF
           </Button>
         </div>

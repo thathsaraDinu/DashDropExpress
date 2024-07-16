@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
-import { Grid,  Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
 const colors = {
@@ -34,7 +34,6 @@ function UpdateStarRatings() {
       alert("Please enter a valid driver number");
       return;
     }
-    
   };
 
   const handleMouseLeave = () => {
@@ -42,7 +41,7 @@ function UpdateStarRatings() {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/getfeedbackbyid/" + id)
+      .get("https://dashdropexpress.onrender.com/api/getfeedbackbyid/" + id)
       .then((response) => {
         console.log(response);
         setName(response.data.name);
@@ -56,27 +55,27 @@ function UpdateStarRatings() {
 
   const Update = (e) => {
     e.preventDefault();
-    e.preventDefault(); 
-    if(name ===""){
+    e.preventDefault();
+    if (name === "") {
       alert("Please enter Customer Name");
       return;
     }
-    if(drivernumber ===""){
+    if (drivernumber === "") {
       alert("Please enter Driver Number");
-      
+
       return;
-    }else if(drivernumber.length !== 5){
+    } else if (drivernumber.length !== 5) {
       alert("Please enter a valid Driver Number");
       setDrivernumber("");
       return;
     }
 
-     if (currentValue === 0) {
+    if (currentValue === 0) {
       alert("Please select a rating.");
       return;
     }
     axios
-      .put("http://localhost:3001/api/updatefeedbacks/" + id, {
+      .put("https://dashdropexpress.onrender.com/api/updatefeedbacks/" + id, {
         name,
         drivernumber,
         currentValue,
@@ -90,158 +89,171 @@ function UpdateStarRatings() {
   };
 
   return (
-    <div style={{
-      
-      paddingTop: "100px",
-
-    }}>
-    <form
-      container
-      
+    <div
       style={{
-        backgroundColor: "rgba(43, 149, 232,0.8)",
-        border: "3px solid #000000",
-        marginBottom: "50px",
-        marginLeft: "300px",
-        display: "block",
-        width: "600px",
-        height: "650px",
-        padding:"10px"
-        
-
+        paddingTop: "100px",
       }}
     >
-      <Grid item>
-        <Typography
-          component={"h1"}
-          sx={{
-            color: "#000000",
-            textAlign:"center",
-            marginTop: "20px",
-            fontSize: "50px",
-            display: "block",
-            fontWeight: "bold",
-            marginBottom: "30px",
-            fontFamily:"jost"
+      <form
+        container
+        style={{
+          backgroundColor: "rgba(43, 149, 232,0.8)",
+          border: "3px solid #000000",
+          marginBottom: "50px",
+          marginLeft: "300px",
+          display: "block",
+          width: "600px",
+          height: "650px",
+          padding: "10px",
+        }}
+      >
+        <Grid item>
+          <Typography
+            component={"h1"}
+            sx={{
+              color: "#000000",
+              textAlign: "center",
+              marginTop: "20px",
+              fontSize: "50px",
+              display: "block",
+              fontWeight: "bold",
+              marginBottom: "30px",
+              fontFamily: "jost",
+            }}
+          >
+            Feedback Form
+          </Typography>
+        </Grid>
 
+        <Grid
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            marginX: "40px",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          Feedback Form
-        </Typography>
-      </Grid>
+          <Typography
+            component={"label"}
+            htmlFor="name"
+            sx={{
+              color: "#000000",
+              marginRight: "20px",
+              marginTop: "20px",
+              fontSize: "20px",
+              width: "200px",
+              display: "block",
+              textAlign: "left",
+              fontWeight: "900",
+              marginBottom: "30px",
+            }}
+          >
+            Customer ID
+          </Typography>
+          <input
+            required
+            type="text"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            name="name"
+            className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+            style={{ marginBottom: "10px" }}
+          />
+        </Grid>
 
-      <Grid sx={{ display: "flex", flexDirection:"row", marginX:"40px", alignItems:"center", justifyContent:"center" }}>
-        <Typography
-          component={"label"}
-          htmlFor="name"
+        <Grid
           sx={{
-             color: "#000000",
-            marginRight: "20px",
-            marginTop: "20px",
-            fontSize: "20px",
-            width:"200px",
-            display: "block",
-            textAlign:"left",
-            fontWeight: "900",
-            marginBottom: "30px",
+            display: "flex",
+            marginX: "40px",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "20px",
           }}
         >
-          Customer ID
-        </Typography>
-        <input
-          required
-          type="text"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-          value={name} 
-          name="name"
-          className="appearance-none  w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
-          style={{ marginBottom: "10px" }}
-        />
-      </Grid>
+          <Typography
+            component={"label"}
+            htmlFor="name"
+            sx={{
+              color: "#000000",
+              marginRight: "20px",
+              marginTop: "20px",
+              fontSize: "20px",
+              width: "200px",
+              display: "block",
+              textAlign: "left",
+              fontWeight: "900",
+              marginBottom: "30px",
+            }}
+          >
+            Driver number
+          </Typography>
+          <input
+            required
+            type="text" // Changed to type number for numeric input
+            id="drivernumber"
+            onChange={(e) => setDrivernumber(e.target.value)}
+            value={drivernumber}
+            name="drivernumber"
+            className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
+            style={{ marginBottom: "10px" }}
+            onBlur={handleChangeDriverNumber}
+          />
+        </Grid>
+        <div style={styles.container}>
+          <h2> React Ratings </h2>
+          <div style={styles.stars}>
+            {stars.map((_, index) => {
+              return (
+                <FaStar
+                  key={index}
+                  size={24}
+                  onClick={() => handleClick(index + 1)}
+                  onMouseOver={() => handleMouseOver(index + 1)}
+                  onMouseLeave={handleMouseLeave}
+                  color={
+                    (hoverValue || currentValue) > index
+                      ? colors.orange
+                      : colors.grey
+                  }
+                  style={{
+                    marginRight: 10,
+                    cursor: "pointer",
+                  }}
+                  value={currentValue}
+                />
+              );
+            })}
+          </div>
+          <textarea
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="What's your experience?"
+            style={styles.textarea}
+            value={description}
+          />
 
-      <Grid sx={{ display: "flex", marginX:"40px",flexDirection:"row", alignItems:"center", justifyContent:"center", marginBottom:"20px" }}>
-        <Typography
-          component={"label"}
-          htmlFor="name"
-          sx={{
-            color: "#000000",
-            marginRight: "20px",
-            marginTop: "20px",
-            fontSize: "20px",
-            width:"200px",
-            display: "block",
-            textAlign:"left",
-            fontWeight: "900",
-            marginBottom: "30px",
-          }}
-        >
-          Driver number
-        </Typography>
-        <input
-           required
-           type="text" // Changed to type number for numeric input
-           id="drivernumber"
-           onChange={(e) => setDrivernumber(e.target.value)}
-           value={drivernumber}
-           name="drivernumber"
-           className="appearance-none w-full block border-2 border-grey outline-none focus:border-black hover:border-gray-400 px-2 py-2"
-           style={{ marginBottom: "10px" }}
-           onBlur={handleChangeDriverNumber}
-        />
-      </Grid>
-      <div style={styles.container}>
-        <h2> React Ratings </h2>
-        <div style={styles.stars}>
-          {stars.map((_, index) => {
-            return (
-              <FaStar
-                key={index}
-                size={24}
-                onClick={() => handleClick(index + 1)}
-                onMouseOver={() => handleMouseOver(index + 1)}
-                onMouseLeave={handleMouseLeave}
-                color={
-                  (hoverValue || currentValue) > index
-                    ? colors.orange
-                    : colors.grey
-                }
-                style={{
-                  marginRight: 10,
-                  cursor: "pointer",
-                }}
-                value={currentValue}
-              />
-            );
-          })}
+          <button
+            onClick={Update}
+            style={{
+              border: "1px solid #a9a9a9",
+              borderRadius: 5,
+              width: 100,
+              padding: 10,
+              backgroundColor: "#3A09E7",
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+              cursor: "pointer",
+              transition: "background-color 0.3s ease",
+            }}
+            className="button"
+          >
+            Update
+          </button>
         </div>
-        <textarea
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="What's your experience?"
-          style={styles.textarea}
-          value={description}
-        />
-
-        <button
-          onClick={Update}
-          style={{
-            border: "1px solid #a9a9a9",
-            borderRadius: 5,
-            width: 100,
-            padding: 10,
-            backgroundColor: "#3A09E7",
-            color: "white",
-            fontSize: 16,
-            fontWeight: "bold",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease",
-          }}
-          className="button"
-        >
-          Update
-        </button>
-      </div>
-    </form>
+      </form>
     </div>
   );
 }

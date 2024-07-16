@@ -18,7 +18,7 @@ const UserDelivery = () => {
   }, []);
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/api/delivery")
+    Axios.get("https://dashdropexpress.onrender.com/api/delivery")
       .then((response) => {
         setUsers(response.data.response || []);
       })
@@ -41,7 +41,10 @@ const UserDelivery = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/createdelivery", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/createdelivery",
+      payload
+    )
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -66,7 +69,10 @@ const UserDelivery = () => {
       date: data.date,
     };
 
-    Axios.post("http://localhost:3001/api/updatedelivery", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/updatedelivery",
+      payload
+    )
       .then(() => {
         getUsers();
         setSubmitted(false);
@@ -78,7 +84,7 @@ const UserDelivery = () => {
   };
 
   const deleteUser = (data) => {
-    Axios.post("http://localhost:3001/api/deletedelivery", data)
+    Axios.post("https://dashdropexpress.onrender.com/api/deletedelivery", data)
       .then(() => {
         getUsers();
       })
@@ -88,7 +94,7 @@ const UserDelivery = () => {
   };
 
   return (
-    <div >
+    <div>
       <MainMenu></MainMenu>
 
       <div className="pt-1 mb-10 ">

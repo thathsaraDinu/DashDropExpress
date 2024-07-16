@@ -14,7 +14,7 @@ const DriverDelivery = () => {
   }, []);
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/api/delivery")
+    Axios.get("https://dashdropexpress.onrender.com/api/delivery")
       .then((response) => {
         setUsers(response.data.response || []);
       })
@@ -23,16 +23,11 @@ const DriverDelivery = () => {
       });
   };
 
- 
   return (
     <div>
       <MainMenu></MainMenu>
       <div className="pb-20">
-        <img
-          className="image2"
-          src="/pic8.jpg"
-          alt="background"
-        ></img>
+        <img className="image2" src="/pic8.jpg" alt="background"></img>
         <Box
           sx={{
             width: "calc(100% - 100px)",

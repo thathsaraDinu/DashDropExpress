@@ -22,7 +22,7 @@ const Student = () => {
   }, []);
 
   const getStudents = () => {
-    Axios.get("http://localhost:3001/api/students")
+    Axios.get("https://dashdropexpress.onrender.com/api/students")
       .then((response) => {
         setStudents(response.data?.response || []);
       })
@@ -40,7 +40,10 @@ const Student = () => {
       selectedyear: data.selectedyear,
       insuranceDetails: data.insuranceDetails,
     };
-    Axios.post("http://localhost:3001/api/createstudent", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/createstudent",
+      payload
+    )
       .then(() => {
         getStudents();
         setSubmited(false);
@@ -60,7 +63,10 @@ const Student = () => {
       selectedyear: data.selectedyear,
       insuranceDetails: data.insuranceDetails,
     };
-    Axios.post("http://localhost:3001/api/updatestudent", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/updatestudent",
+      payload
+    )
       .then(() => {
         getStudents();
         setSubmited(false);
@@ -71,7 +77,7 @@ const Student = () => {
       });
   };
   const deleteStudent = (data) => {
-    Axios.post("http://localhost:3001/api/deletestudent", data)
+    Axios.post("https://dashdropexpress.onrender.com/api/deletestudent", data)
       .then(() => {
         getStudents();
       })

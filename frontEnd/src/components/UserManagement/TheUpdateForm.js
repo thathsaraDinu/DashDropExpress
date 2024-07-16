@@ -39,7 +39,7 @@ const TheUpdateForm = () => {
   /////get the user information before updating function
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/getuserbyid/" + id)
+      .get("https://dashdropexpress.onrender.com/api/getuserbyid/" + id)
       .then((response) => {
         console.log(response);
         setUserID(response.data.userid);
@@ -64,23 +64,25 @@ const TheUpdateForm = () => {
       setEmail("");
       return; // Stop execution if passwords don't match
     }
-    
+
     e.preventDefault();
     if (page === "pass") {
       axios
-        .post("http://localhost:3001/api/checkpassword/" + id, { oldpassword })
+        .post("https://dashdropexpress.onrender.com/api/checkpassword/" + id, {
+          oldpassword,
+        })
         .then((result) => {
-          console.log(password)
+          console.log(password);
           if (password === "") {
             alert("Please Enter the new password");
             return;
           }
-           const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-           const isValidPassword = regex.test(password);
-           if (!isValidPassword) {
-             alert("Please match the requested password format");
-             return;
-           }
+          const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+          const isValidPassword = regex.test(password);
+          if (!isValidPassword) {
+            alert("Please match the requested password format");
+            return;
+          }
 
           if (password !== confpassword) {
             alert("Password and confirm password do not match");
@@ -88,7 +90,7 @@ const TheUpdateForm = () => {
             return; // Stop execution if passwords don't match
           }
           axios
-            .put("http://localhost:3001/api/updateuser/" + id, {
+            .put("https://dashdropexpress.onrender.com/api/updateuser/" + id, {
               fullName,
               phoneNumber,
               email,
@@ -119,14 +121,13 @@ const TheUpdateForm = () => {
     }
 
     if (page === "profile" || page === null) {
-     
       if (password !== confpassword) {
         alert("Password and confirm password do not match");
         setConfPassword("");
         return; // Stop execution if passwords don't match
       }
       axios
-        .put("http://localhost:3001/api/updateuser/" + id, {
+        .put("https://dashdropexpress.onrender.com/api/updateuser/" + id, {
           fullName,
           phoneNumber,
           email,

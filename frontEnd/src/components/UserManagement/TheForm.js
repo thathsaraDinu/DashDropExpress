@@ -66,7 +66,7 @@ const TheForm = () => {
       return; // Stop execution if passwords don't match
     }
     axios
-      .post("http://localhost:3001/api/createuser", {
+      .post("https://dashdropexpress.onrender.com/api/createuser", {
         fullName,
         phoneNumber,
         email,
@@ -362,12 +362,7 @@ const TheForm = () => {
               textAlign: "center",
             }}
           >
-            <div
-              style={{
-                
-              }}
-              className="text-4xl font-serif text-primary"
-            >
+            <div style={{}} className="text-4xl font-serif text-primary">
               Set sail with StellarShip Courier! <br></br>
               <br />
               Swift and Stellar deliveries

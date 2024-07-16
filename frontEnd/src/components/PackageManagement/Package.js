@@ -17,7 +17,7 @@ const Package = () => {
   }, []);
 
   const getPackages = () => {
-    Axios.get("http://localhost:3001/api/package")
+    Axios.get("https://dashdropexpress.onrender.com/api/package")
       .then((response) => {
         setPackages(response.data?.response || []);
       })
@@ -33,7 +33,10 @@ const Package = () => {
       packageType: selectedItem,
       packageWeight: data.packageWeight,
     };
-    Axios.post("http://localhost:3001/api/createPackage", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/createPackage",
+      payload
+    )
       .then(() => {
         getPackages();
         setSubmited(false);
@@ -51,7 +54,10 @@ const Package = () => {
       packageType: selectedItem,
       packageWeight: data.packageWeight,
     };
-    Axios.post("http://localhost:3001/api/updatePackage", payload)
+    Axios.post(
+      "https://dashdropexpress.onrender.com/api/updatePackage",
+      payload
+    )
       .then(() => {
         getPackages();
         setSubmited(false);
@@ -62,7 +68,7 @@ const Package = () => {
       });
   };
   const deletePackage = (data) => {
-    Axios.post("http://localhost:3001/api/deletePackage", data)
+    Axios.post("https://dashdropexpress.onrender.com/api/deletePackage", data)
       .then(() => {
         getPackages();
       })

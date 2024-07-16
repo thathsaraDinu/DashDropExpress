@@ -21,7 +21,7 @@ function Login() {
     try {
       console.log(existingUsername, existingemail, existingusertype);
       axios
-        .post("http://localhost:3001/api/verifyOTP", {
+        .post("https://dashdropexpress.onrender.com/api/verifyOTP", {
           existingUsername,
           existingemail,
           existingusertype,
@@ -62,7 +62,7 @@ function Login() {
     setWaitMessage(true);
     try {
       await axios
-        .post("http://localhost:3001/api/loginuser", {
+        .post("https://dashdropexpress.onrender.com/api/loginuser", {
           email,
           password,
         })
