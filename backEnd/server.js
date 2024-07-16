@@ -14,12 +14,7 @@ const Orders = require("./OrderManagement/router");
 
 const { MONGODB_URI } = require("./config");
 
-app.use(express.static(path.join(__dirname, "../frontEnd/build")));
 
-// Handles any requests that don't match the ones above
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontEnd/build", "index.html"));
-});
 
 app.use(express.json());
 
