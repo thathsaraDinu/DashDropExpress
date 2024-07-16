@@ -34,12 +34,12 @@ function MainMenu() {
   return (
     <div className="z-1000">
       {token && usertypetoken === "Admin" ? (
-        <nav className="w-full z-20 bg-secondary opacity-80 opacity menumain px-4 py-2 text-primary">
+        <nav className="w-full z-20 bg-color6   menumain  text-secondary">
           <img
-            src="/dashdrop-express-high-resolution-logo-transparent.png"
+            src="/dashdrop-express-high-resolution-logo-transparent2.png"
             style={{ width: "200px", fontFamily: "Georgia, serif" }}
             alt="logo"
-            className="text-2xl "
+            className="text-2xl px-4 py-3 "
           ></img>
           <ul className="menuetc ">
             <li>
@@ -190,7 +190,6 @@ function MainMenu() {
                 <span>Place an Order</span>
               </Link>
             </li>
-            
 
             <li>
               <Link
@@ -377,12 +376,15 @@ function MainMenu() {
           </ul>
         </nav>
       ) : (
-        <nav className="w-full z-20 bg-primary opacity-80 opacity menumain px-4 py-2 text-primary">
+        <nav className="w-full z-20 bg-color6   menumain  text-secondary">
           <img
-            src="/dashdrop-express-high-resolution-logo-transparent.png"
-            style={{ width: "200px", fontFamily: "Georgia, serif" }}
+            src="/dashdrop-express-high-resolution-logo-transparent2.png"
+            style={{
+              width: "200px",
+              fontFamily: "Georgia, serif",
+            }}
             alt="logo"
-            className="text-2xl "
+            className="text-2xl px-4 py-3"
           ></img>
           <ul className="menuetc ">
             <li>

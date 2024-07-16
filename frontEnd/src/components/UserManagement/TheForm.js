@@ -352,6 +352,9 @@ const TheForm = () => {
           <div
             className="sloganregister"
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               position: "relative",
               height: "500px",
               width: "650px",
@@ -361,14 +364,16 @@ const TheForm = () => {
           >
             <div
               style={{
-                position: "absolute",
-                right: "0",
+                
               }}
               className="text-4xl font-serif text-primary"
             >
               Set sail with StellarShip Courier! <br></br>
               <br />
               Swift and Stellar deliveries
+            </div>
+            <div>
+              <img style={{ width: "600px" }} src="/141.png"></img>
             </div>
           </div>
         </div>

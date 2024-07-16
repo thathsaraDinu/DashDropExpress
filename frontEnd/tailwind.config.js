@@ -5,11 +5,12 @@ module.exports = {
     extend: {
       backgroundColor: {
         primary: "#0F004A", // Change 'primary' to your preferred className name
-        secondary: "#030637", // Add or modify other colors as needed
+        secondary: "#03063744", // Add or modify other colors as needed
         ternary: "#720455",
         color4: "#3C0753",
         color5: "#720455",
-       
+        color6: "#FFFFFF55",
+
         selectuser: "rgba(200, 200, 255, 0.6)",
         color7: "#7d73ff",
       },
