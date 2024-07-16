@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 3001;
+
 const host = "localhost";
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
@@ -14,7 +14,7 @@ const Orders = require("./OrderManagement/router");
 
 const { MONGODB_URI } = require("./config");
 
-
+const port = process.env.PORT || 3001; 
 
 app.use(express.json());
 
