@@ -3,54 +3,61 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-var host;
+// Importing routers
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
 const router2 = require("./Starratings/router");
-const ticket = require("./HelpDesk/router")
+const ticket = require("./HelpDesk/router");
 const vehicle = require("./FleetManagement/router");
-const package = require("./PackageManagement/router");
+const packageRouter = require("./PackageManagement/router");
 const Orders = require("./OrderManagement/router");
 
+// Importing MongoDB URI from config
 const { MONGODB_URI } = require("./config");
 
-const port = process.env.PORT || 3001; 
+// Setting port based on environment variable or defaulting to 3001
+const port = process.env.PORT || 3001;
 
-if(port == 3001)
-  host = "localhost";
-else
-  host = "0.0.0.0";
+// Setting host based on port
+const host = port === 3001 ? "localhost" : "0.0.0.0";
 
+// Middleware
+app.use(express.json()); // Replace bodyParser with express.json() for body parsing
+app.use(cors()); // Enable CORS for all routes
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-app.use(express.json());
-
-app.use(cors());
-const bodyParser = require("body-parser");
-app.use(bodyParser.json({ limit: "100mb" }));
-
-const uri = MONGODB_URI;
-const connect = async () => {
+// Connect to MongoDB
+const connectDB = async () => {
   try {
-    await mongoose.connect(uri);
-    console.log("connected to MongoDB");
+    await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true, // Add this option to avoid deprecation warnings
+    });
+    console.log("Connected to MongoDB");
   } catch (error) {
-    console.log("MongoDB error", error);
+    console.error("MongoDB connection error:", error);
+    process.exit(1); // Exit process on connection error
   }
 };
 
-connect();
+// Call connectDB function to establish MongoDB connection
+connectDB();
 
-app.listen(port, host, (err) => {
-  if (err) throw err;
-  console.log(`Node server is listening to ${server.address().port}`);
-
-});
-
+// Routes
 app.use("/api", router);
 app.use("/api", router1);
 app.use("/api", router2);
 app.use("/api", ticket);
 app.use("/api", vehicle);
-app.use("/api", package);
+app.use("/api", packageRouter);
 app.use("/api", Orders);
 
+// Start server
+app.listen(port, host, (err) => {
+  if (err) {
+    console.error("Server start error:", err);
+    process.exit(1); // Exit process on server start error
+  }
+  console.log(`Node server is listening on http://${host}:${port}`);
+});
