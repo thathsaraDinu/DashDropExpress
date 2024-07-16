@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const host = "localhost";
+var host;
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
 const router2 = require("./Starratings/router");
@@ -15,6 +15,12 @@ const Orders = require("./OrderManagement/router");
 const { MONGODB_URI } = require("./config");
 
 const port = process.env.PORT || 3001; 
+
+if(port == 3001)
+  host = "localhost";
+else
+  host = "0.0.0.0";
+
 
 app.use(express.json());
 
@@ -34,8 +40,10 @@ const connect = async () => {
 
 connect();
 
-const server = app.listen(port, host, () => {
+app.listen(port, host, (err) => {
+  if (err) throw err;
   console.log(`Node server is listening to ${server.address().port}`);
+
 });
 
 app.use("/api", router);
