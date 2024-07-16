@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-var host;
+
 const router = require("./UserManagement/router");
 const router1 = require("./DeliveryManagement/router");
 const router2 = require("./Starratings/router");
