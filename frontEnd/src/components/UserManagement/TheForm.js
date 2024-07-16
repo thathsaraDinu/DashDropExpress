@@ -373,7 +373,7 @@ const TheForm = () => {
               Swift and Stellar deliveries
             </div>
             <div>
-              <img style={{ width: "600px" }} src="/141.png"></img>
+              <img style={{ width: "600px" }} src="/141.png" alt="img"></img>
             </div>
           </div>
         </div>
